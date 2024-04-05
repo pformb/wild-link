@@ -7,6 +7,8 @@ const server = require("http").Server(app);
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 
+// ---- Code originally from environment.js ----
+
 // const path = require("path");
 
 // const ENV = process.env.NODE_ENV || "development";
