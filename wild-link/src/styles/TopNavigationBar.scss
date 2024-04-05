@@ -24,7 +24,7 @@
 
   &:hover {
     color: transparent;
-    background: linear-gradient(90deg, rgb(119, 119, 119) 0%, rgba(77, 79, 90, 0.894) 49%, rgb(235, 236, 242) 100%);
+    background: linear-gradient(90deg, rgb(182, 248, 169) 0%, rgba(171, 246, 111, 0.894) 49%, rgb(97, 246, 10) 100%);
     background-clip: text;
     -webkit-background-clip: text;
   }
@@ -40,5 +40,17 @@
 
 .top-nav-bar__about-us {
 margin-left: 15px;
+}
+
+.top-nav-bar__login-register {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 1000px;
+  align-items: flex-end;
+}
+
+.top-nav-bar__register {
+  margin-left: 15px;
 }
 

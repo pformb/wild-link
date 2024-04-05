@@ -1,4 +1,6 @@
+import HomePage from '../components/HomePage';
 import TopNavigation from '../components/TopNavigation';
+
 
 const HomeRoute = (props) => {
   // const { 
@@ -8,6 +10,7 @@ const HomeRoute = (props) => {
   return (
     <div className="home-route">
       <TopNavigation />
+      <HomePage />
     </div>
   );
 };

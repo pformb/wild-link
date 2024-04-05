@@ -13,6 +13,10 @@ const TopNavigation = () => {
         <span className="top-nav-bar__patient-stories">Patient Stories</span>
         <span className="top-nav-bar__about-us">About Us</span>
         </div>
+        <div className="top-nav-bar__login-register">
+          <span className="top-nav-bar__login">Login</span>
+          <span className="top-nav-bar__register">Register</span>
+        </div>
         </div>
   );
 };
