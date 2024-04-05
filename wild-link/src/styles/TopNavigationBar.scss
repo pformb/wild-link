@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+.top-nav-bar {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  padding: 8px;
+  align-items: center;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+  height: 72px;
+}
+
+.top-nav-bar__logo {
+  font-weight: 500;
+  font-size: 38px;
+  color: #ffffff;
+  text-underline-position: auto;
+  margin-left: 24px;
+  margin-top: 25px;
+  cursor: pointer;
+  font-family: 'Luckiest Guy', cursive;
+
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(119, 119, 119) 0%, rgba(77, 79, 90, 0.894) 49%, rgb(235, 236, 242) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+}
+
+.top-nav-bar__links{
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.top-nav-bar__about-us {
+margin-left: 15px;
+}
+
