@@ -1,7 +1,7 @@
 
 import RegistrationPage from '../components/RegistrationPage';
 
-const RegistrationRoute = (props) => { 
+const RegisterRoute = (props) => { 
 
   // const { 
     
@@ -14,4 +14,4 @@ const RegistrationRoute = (props) => {
   );
 };
 
-  export default RegistrationRoute;
+  export default RegisterRoute;

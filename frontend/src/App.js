@@ -1,13 +1,12 @@
 
 import './App.css';
 import LoginRoute from './routes/LoginRoute';
- import RegistrationRoute from './routes/RegistrationRoute';
-
+import RegisterRoute from './routes/RegisterRoute';
 function App() {
   return (
     <div className="App">
       <LoginRoute />
-      <RegistrationRoute />
+      <RegisterRoute />
     </div>
   );
 }
