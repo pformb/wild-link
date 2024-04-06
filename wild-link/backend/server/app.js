@@ -1,21 +1,12 @@
 const express = require("express");
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const server = require("http").Server(app);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Wild Link API!');
+});
+
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
-
-// ---- Code originally from environment.js ----
-
-// const path = require("path");
-
-// const ENV = process.env.NODE_ENV || "development";
-// const PATH = path.resolve(__dirname, ".env." + ENV);
-
-// require("dotenv").config({ path: PATH });
-
-// module.exports = ENV;
-
-// Path: wild-link/backend/src/index.js
