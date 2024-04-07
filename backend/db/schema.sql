@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS age_ranges;
 CREATE TABLE organizations (
 id SERIAL PRIMARY KEY NOT NULL,
 organization_name VARCHAR(255) NOT NULL,
+website_url VARCHAR(255) NOT NULL,
 first_name VARCHAR(255) NOT NULL,
 last_name VARCHAR(255) NOT NULL,
 phone_number VARCHAR(20) NOT NULL,
@@ -40,6 +41,7 @@ id SERIAL PRIMARY KEY NOT NULL,
 name VARCHAR(255) NOT NULL,
 scientific_name VARCHAR(255) NOT NULL,
 description TEXT NOT NULL,
+image VARCHAR(255) NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
@@ -109,6 +111,7 @@ CREATE TABLE donations (
 id SERIAL PRIMARY KEY NOT NULL,
 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
 organization_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE SET NULL,
+patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE SET NULL,
 donation_amount INTEGER NOT NULL,
 donation_date DATE NOT NULL,
 created_at TIMESTAMP NOT NULL,
