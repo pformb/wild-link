@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS organizations;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS donations;
-DROP TABLE IF EXISTS patients;
-DROP TABLE IF EXISTS species;
-DROP TABLE IF EXISTS conditions;
-DROP TABLE IF EXISTS treatments;
+DROP TABLE IF EXISTS patient_images;
 DROP TABLE IF EXISTS patient_conditions;
 DROP TABLE IF EXISTS patient_treatments;
-DROP TABLE IF EXISTS patient_images;
+DROP TABLE IF EXISTS patients;
 DROP TABLE IF EXISTS age_ranges;
+DROP TABLE IF EXISTS treatments;
+DROP TABLE IF EXISTS conditions;
+DROP TABLE IF EXISTS species;
+DROP TABLE IF EXISTS organizations;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE organizations (
 id SERIAL PRIMARY KEY NOT NULL,
