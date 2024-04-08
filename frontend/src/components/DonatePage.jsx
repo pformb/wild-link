@@ -7,7 +7,7 @@ const DonatePage = () => {
     <div className="donate-page">
       <TopNavigation />
       <div className="donate-form">
-      <h1 className="donate-header">Donate</h1>
+      <h2 className="donate-header">Donate</h2>
       <div className="donation-amount">
   <h2>Donation Amount</h2>
   <input type="radio" id="amount2" name="donationAmount" value="2" />
