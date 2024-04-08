@@ -79,6 +79,7 @@ release_date DATE,
 is_released BOOLEAN DEFAULT FALSE,
 is_archived BOOLEAN DEFAULT FALSE,
 age_range_id INTEGER NOT NULL REFERENCES age_ranges(id) ON DELETE SET NULL,
+story TEXT NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
