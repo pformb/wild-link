@@ -44,6 +44,7 @@ margin-left: 15px;
 }
 
 .top-nav-bar__login-register {
+  text-decoration: none;
   color: white;
   font-size: 20px;
   cursor: pointer;
@@ -52,6 +53,13 @@ margin-left: 15px;
 }
 
 .top-nav-bar__register {
+  text-decoration: none;
   margin-left: 15px;
+  color: white;
+}
+
+.top-nav-bar__login {
+  text-decoration: none;
+  color: white;
 }
 
