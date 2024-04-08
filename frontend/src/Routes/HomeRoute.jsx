@@ -3,12 +3,11 @@ import TopNavigation from '../components/TopNavigation';
 
 
 const HomeRoute = (props) => {
-  // const { 
-  // } = props;
+  const { returnHome } = props;
 
   return (
     <div className="home-route">
-      <TopNavigation />
+      <TopNavigation returnHome={returnHome} />
       <HomePage />
     </div>
   );
