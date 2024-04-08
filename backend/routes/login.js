@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcrypt");
 const login = require("../models/login");
 
 module.exports = db => { 
@@ -7,11 +8,11 @@ module.exports = db => {
     if (!account) {
       account = await login.findByEmail(db, "organizations", req.body.email);
     }
-    if (account) {
+    if (account && (await bcrypt.compare(req.body.password, account.password))) {
       res.json({ exists: true });
     } else {
       // Account not found
-      res.status(404).json({ exists: false, message: "Account not found." });
+      res.status(400).send("Error 400: Email or Password does not match our records, please check the email and password.");
     }
   });
 
