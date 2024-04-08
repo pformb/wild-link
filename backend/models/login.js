@@ -5,7 +5,10 @@ const findByEmail = async (db, table, email) => {
     `SELECT * FROM ${table} WHERE email = $1`,
     [email]
   );
-  return rows[0];
+  if (rows.length > 0) {
+    return { ...rows[0], role: table };
+  }
+  return null;
 };
 
 module.exports = { findByEmail };
