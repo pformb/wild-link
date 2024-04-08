@@ -1,13 +1,12 @@
 import HomePage from '../components/HomePage';
 import TopNavigation from '../components/TopNavigation';
 
-
-const HomeRoute = (props) => {
-  const { returnHome } = props;
+const HomeRoute = () => {
+  
 
   return (
     <div className="home-route">
-      <TopNavigation returnHome={returnHome} />
+      <TopNavigation />
       <HomePage />
     </div>
   );

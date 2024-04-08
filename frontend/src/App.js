@@ -4,13 +4,15 @@ import './App.css';
 
 function App() {
   const { 
-    returnHome
+    returnHome,
+    fetchLogin
   } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute 
       returnHome={returnHome}
+      fetchLogin={fetchLogin}
       />
     </div>
   );
