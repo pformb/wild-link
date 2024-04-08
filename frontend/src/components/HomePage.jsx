@@ -1,4 +1,5 @@
 import '../styles/HomePage.scss';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   
@@ -40,7 +41,7 @@ const HomePage = () => {
       environmental awareness and conservation ethics within the community,
       fostering a deeper connection to nature.
     </p>
-    <h3>Donate!</h3>
+    <Link to="/donate" className="home-page__donate">Donate Now</Link>
   </div>
   <div class="content-right">
     <h2>Rehaber Needing Public Support?</h2>
