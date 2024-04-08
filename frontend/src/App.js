@@ -1,8 +1,11 @@
 
+import HomeRoute from './routes/HomeRoute';
 import './App.css';
+
 function App() {
   return (
     <div className="App">
+      <HomeRoute />
     </div>
   );
 }

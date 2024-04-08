@@ -1,0 +1,119 @@
+DROP TABLE IF EXISTS donations;
+DROP TABLE IF EXISTS patient_images;
+DROP TABLE IF EXISTS patient_conditions;
+DROP TABLE IF EXISTS patient_treatments;
+DROP TABLE IF EXISTS patients;
+DROP TABLE IF EXISTS age_ranges;
+DROP TABLE IF EXISTS treatments;
+DROP TABLE IF EXISTS conditions;
+DROP TABLE IF EXISTS species;
+DROP TABLE IF EXISTS organizations;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE organizations (
+id SERIAL PRIMARY KEY NOT NULL,
+organization_name VARCHAR(255) NOT NULL,
+website_url VARCHAR(255) NOT NULL,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+phone_number VARCHAR(20) NOT NULL,
+email VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+is_deleted BOOLEAN DEFAULT FALSE,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY NOT NULL,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE species (
+id SERIAL PRIMARY KEY NOT NULL,
+name VARCHAR(255) NOT NULL,
+scientific_name VARCHAR(255) NOT NULL,
+description TEXT NOT NULL,
+image VARCHAR(255) NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE conditions (
+id SERIAL PRIMARY KEY NOT NULL,
+condition_name VARCHAR(255) NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE treatments (
+id SERIAL PRIMARY KEY NOT NULL,
+treatment_name VARCHAR(255) NOT NULL,
+treatment_cost INTEGER NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE age_ranges (
+id SERIAL PRIMARY KEY NOT NULL,
+range_name VARCHAR(255) NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE patients (
+id SERIAL PRIMARY KEY NOT NULL,
+organization_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+patient_case VARCHAR(255) NOT NULL,
+species_id INTEGER NOT NULL REFERENCES species(id) ON DELETE CASCADE,
+location_found VARCHAR(255) NOT NULL,
+date_admitted DATE NOT NULL,
+release_date DATE,
+is_released BOOLEAN DEFAULT FALSE,
+is_archived BOOLEAN DEFAULT FALSE,
+age_range_id INTEGER NOT NULL REFERENCES age_ranges(id) ON DELETE SET NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE patient_conditions (
+id SERIAL PRIMARY KEY NOT NULL,
+condition_id INTEGER NOT NULL REFERENCES conditions(id) ON DELETE CASCADE,
+patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE patient_treatments (
+id SERIAL PRIMARY KEY NOT NULL,
+treatment_id INTEGER NOT NULL REFERENCES treatments(id) ON DELETE CASCADE,
+patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE patient_images (
+id SERIAL PRIMARY KEY NOT NULL,
+patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+image_url VARCHAR(255) NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE donations (
+id SERIAL PRIMARY KEY NOT NULL,
+user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
+organization_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE SET NULL,
+patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE SET NULL,
+donation_amount INTEGER NOT NULL,
+donation_date DATE NOT NULL,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL
+);

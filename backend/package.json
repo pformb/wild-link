@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "dbreset": "psql -U linker -d wildlink_development < ./db/schema/schema.sql && psql -U linker -d wildlink_development < ./db/schema/development.sql"
   },
   "keywords": [],
   "author": "",
