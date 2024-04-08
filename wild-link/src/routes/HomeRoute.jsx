@@ -4,7 +4,6 @@ import TopNavigation from '../components/TopNavigation';
 
 const HomeRoute = (props) => {
   // const { 
-    
   // } = props;
 
   return (
