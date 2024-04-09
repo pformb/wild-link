@@ -4,6 +4,7 @@ import LoginPage from './components/LoginPage.jsx'
 import DonatePage from './components/DonatePage.jsx'
 import RegistrationPage from './components/RegistrationPage.jsx'
 import PatientStoriesPage from './components/PatientStoriesPage.jsx'
+import ContactUsPage from './components/ContactUsPage.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
@@ -24,6 +25,7 @@ function App() {
     <Route path="/register" element={<RegistrationPage />} />
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
+    <Route path="/contactus" element={<ContactUsPage />} />
     
     </Routes>
     </BrowserRouter>
