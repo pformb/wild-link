@@ -2,7 +2,7 @@ import '../styles/PatientStoriesPage.scss';
 import TopNavigation from '../components/TopNavigation';
 import OrganizationCard from '../components/OrganizationCard';
 
-const PatientStoriesPage = () => {
+const PatientStoriesPage = ({ orgData }) => {
   return (
     <div className="patient-stories">
       <TopNavigation />
@@ -13,3 +13,9 @@ const PatientStoriesPage = () => {
 }
 
 export default PatientStoriesPage;
+
+
+// Remove OrganizationCard and enter paste the following after API request:
+// {orgData.map(org => (
+//   <OrganizationCard key={org.id} organization={org} />
+// ))}
