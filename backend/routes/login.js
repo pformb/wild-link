@@ -22,7 +22,6 @@ module.exports = db => {
   router.post("/logout", async (req, res) => {
     req.session = null
     res.json({ message: "Logout successful" });
-    console.log(req.session);
   });
   return router;
 };

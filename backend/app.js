@@ -2,6 +2,7 @@ const express = require("express");
 require('dotenv').config({ path: '.env.development' });
 const db = require("./db");
 const login = require("./routes/login");
+const organizations = require("./routes/organizations");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
@@ -25,5 +26,6 @@ app.get('/api', (req, res) => {
 });
 
 app.use("/api", login(db));
+app.use("/api", organizations(db));
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
