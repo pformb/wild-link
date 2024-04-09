@@ -8,7 +8,7 @@ module.exports = (db) => {
     if (allOrganizations) {
       res.json(allOrganizations)
     } else {
-      res.status(400).send("No organizations found in database.");
+      res.status(404).send("No organizations found in database.");
     }
   });
 
@@ -18,7 +18,7 @@ module.exports = (db) => {
     if (organization) {
       res.json(organization)
     } else {
-      res.status(400).send("Organization does not exist");
+      res.status(404).send("Organization does not exist");
     }
   });
 

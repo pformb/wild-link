@@ -1,13 +1,18 @@
 const express = require("express");
 require('dotenv').config({ path: '.env.development' });
 const db = require("./db");
-const login = require("./routes/login");
-const organizations = require("./routes/organizations");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
+// Routes
+const login = require("./routes/login");
+const organizations = require("./routes/organizations");
+const patients = require("./routes/patients");
+const donations = require("./routes/donations");
+const users = require("./routes/users");
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const server = require("http").Server(app);
 
 app.use(express.json());
@@ -27,5 +32,8 @@ app.get('/api', (req, res) => {
 
 app.use("/api", login(db));
 app.use("/api", organizations(db));
+app.use("/api", patients(db));
+// app.use("/api", donations(db));
+// app.use("/api", users(db));
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
