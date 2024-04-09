@@ -3,6 +3,7 @@ import HomeRoute from './routes/HomeRoute';
 import LoginPage from './components/LoginPage.jsx'
 import DonatePage from './components/DonatePage.jsx'
 import RegistrationPage from './components/RegistrationPage.jsx'
+import PatientStoriesPage from './components/PatientStoriesPage.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegistrationPage />} />
     <Route path="/donate" element={<DonatePage />} />
+    <Route path="/patientstories" element={<PatientStoriesPage />} />
     
     </Routes>
     </BrowserRouter>

@@ -8,7 +8,7 @@ const TopNavigation = () => {
       <Link to="/home" className="top-nav-bar__logo">Wild Link</Link>
       
       <div className="top-nav-bar__links">
-        <span className="top-nav-bar__patient-stories">Patient Stories</span>
+        <Link to="/patientstories" className="top-nav-bar__patient-stories">Patient Stories</Link>
         <span className="top-nav-bar__about-us">About Us</span>
         <Link to="/donate" className="top-nav-bar__donate">Donate</Link>
         </div>
