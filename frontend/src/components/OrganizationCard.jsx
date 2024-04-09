@@ -1,16 +1,20 @@
 import '../styles/OrganizationCard.scss';
 
 
-const OrganizationCard = () => {
+const OrganizationCard = ({id, name, location, website}) => {
   return (
     <div className="organization-card">
       <img 
       className="organization-prof-pic" 
       src="/mock-organization-prof-pic.png" 
       alt="home" />
-      <h2 className="organization-name">Organization Name</h2>
+      <h2 className="organization-name">{name}</h2>
+      <p className="organization-location">{location}</p>
+      <p className="organization-website">{website}</p>
+
+      {/* <h2 className="organization-name">Organization Name</h2>
       <p className="organization-location">Organization Location</p>
-      <p className="organization-website">Organization Website</p>
+      <p className="organization-website">Organization Website</p> */}
       <button className="btn-view-org">View</button>
       
     </div>
