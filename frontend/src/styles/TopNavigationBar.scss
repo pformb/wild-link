@@ -96,6 +96,8 @@ margin-left: 20px;
 }
 
 .top-nav-bar__patient-stories {
+  text-decoration: none;
+  color: white;
   &:hover {
     color: transparent;
     background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
