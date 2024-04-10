@@ -2,12 +2,16 @@
 import React, { useState } from 'react';
 import  '../styles/RegistrationPage.scss';
 import TopNavigation from '../components/TopNavigation';
+import { useNavigate } from 'react-router-dom';
 
 
 //mock user data
 let users = [];
 
 const RegistrationPage = () => {
+  //redirect url
+  const navigate = useNavigate();
+
   //manage user data in state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -64,6 +68,7 @@ const RegistrationPage = () => {
     setConfirmPassword('');
 
     alert(`You have sucessfully registered. Welcome to Wild Link! `);
+    navigate('/home');
   }
 
   return (
