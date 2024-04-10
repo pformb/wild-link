@@ -19,19 +19,20 @@ module.exports = (db) => {
   });
   
   //GET PATIENT BY ID
-  router.get("/patients/:patientId", async (req, res) => {
+  router.get("/organizations/:orgId/patients/:patientId", async (req, res) => {
     const patientId = req.params.patientId;
-    const patient = await patients.getPatientById(db, patientId);
+    const patientFound = await patients.getPatientById(db, patientId);
 
-    if (patient.length === 0) {
+    if (patientFound.length === 0) {
       return res.status(404).send("Patient not found");
     }
+    const patient = patientFound[0];
     patient.image = patient.image.startsWith("http") ? patient.image : `/stock-photos/${patient.image}`;
     res.json(patient)
   });
   
   //GET ALL PATIENT DATA AND CONDITION/TREATMENT DATA FOR EDIT FORM
-  router.get("/patients/:patientId/edit", async (req, res) => {
+  router.get("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
     const patientId = req.params.patientId;
     try {
       const patientDetails = await patients.getAllPatientDataById(
@@ -65,7 +66,7 @@ module.exports = (db) => {
   ///POST REQUESTS///
 
   //POST EDIT PATIENT DATA
-  router.post("/patients/:patientId/edit", async (req, res) => {
+  router.post("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
     console.log("POST REQUEST RECIEVED");
     const patientId = req.params.patientId;
     const { patientDetails, patientConditions = [], patientTreatments = [] } = req.body;
@@ -74,10 +75,37 @@ module.exports = (db) => {
     const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
     try {
       await patients.updatePatientInformation(db, patientId, patientDetails, conditionIds, treatmentIds)
-      res.send("Patient Successfully Updated");
+      res.send("Patient Updated");
     } catch (error) {
       res.status(500).send("Server Error: unable to update Patient");
     }
   });
+
+  //POST CREATE PATIENT
+  router.post("/organizations/:orgId/patients/new", async (req, res) => {
+    const orgId = req.params.orgId;
+    const { patientDetails, patientConditions = [], patientTreatments = [] } = req.body;
+    // CONVERT EXTRACT FROM NESTED OBJECTS TO MAKE ARRAYS
+    const conditionIds = patientConditions.map(condition => condition.condition_id);
+    const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
+    try {
+      await patients.createPatient(db, orgId, patientDetails, conditionIds, treatmentIds)
+      res.send("Patient Created");
+    } catch (error) {
+      res.status(500).send("Server Error: unable to create Patient");
+    }
+  });
+
+  //POST DELETE/ACHIVE PATIENT
+  router.post("/organizations/:orgId/patients/:patientId/archive", async (req, res) => {
+    const patientId = req.params.patientId;
+    try {
+      await patients.archivePatient(db, patientId);
+      res.send("Patient Archived");
+    } catch (error) {
+      res.status(500).send("Server Error: unable to archive Patient");
+    }
+  });
+
   return router;
 };
