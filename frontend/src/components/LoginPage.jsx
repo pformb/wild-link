@@ -17,6 +17,31 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    /* Fetch req ready to be implemented 
+
+    let error.message = 'Login Failure: Invalid username or, password';
+
+    try {
+      const response = await fetch('http://localhost:3001/login', { 
+        method: 'POST'
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username, password})
+      });
+
+      if (!response.ok) {
+        throw new Error('error.message');
+
+        const data = await response.json();
+
+        alert(`Welcome back, ${data.username}!`);
+      }catch (error) {
+        alert(error.message);
+  }
+ */
+
+
     let userExists = users.find(user => user.username === username && user.password === password);
 
     if (!userExists) {
