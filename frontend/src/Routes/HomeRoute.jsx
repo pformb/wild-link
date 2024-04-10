@@ -1,12 +1,12 @@
 import HomePage from '../components/HomePage';
-import TopNavigation from '../components/TopNavigation';
+// import TopNavigation from '../components/TopNavigation';
 
 const HomeRoute = () => {
   
 
   return (
     <div className="home-route">
-      <TopNavigation />
+      {/* <TopNavigation /> */}
       <HomePage />
     </div>
   );

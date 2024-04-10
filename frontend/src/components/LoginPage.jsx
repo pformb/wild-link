@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import  '../styles/LoginPage.scss';
-import TopNavigation from '../components/TopNavigation';
+// import TopNavigation from '../components/TopNavigation';
 
 
 //mock user data
@@ -56,7 +56,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <TopNavigation />
+      {/* <TopNavigation /> */}
         <div className="login-page__content">
           <h1>Please Login Here to Continue</h1>
           </div>

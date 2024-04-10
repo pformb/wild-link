@@ -30,8 +30,6 @@ const TopNavigation = () => {
             <Link to="/register" className="top-nav-bar__register">Register</Link>
             </>
           )}
-        {/* <Link to="/login" className="top-nav-bar__login">Login</Link>
-        <Link to="/register" className="top-nav-bar__register">Register</Link> */}
         </div>
         </div>
   );
