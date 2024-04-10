@@ -18,6 +18,11 @@ const RegistrationPage = () => {
 
     /* Fetch req ready to be implemented
 
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
     let error.message = 'Registration Failure: This user already exists in our system, please try again';
 
     try {
