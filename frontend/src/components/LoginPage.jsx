@@ -57,22 +57,26 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <TopNavigation />
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input 
-         type="text"
-         placeholder="Username"
-         value={username}
-         onChange={(e) => setUsername(e.target.value)}
-          />
-        <input
-         type="password"
-         placeholder="Password"
-         value={password}
-         onChange={(e) => setPassword(e.target.value)} 
-         />
-        <button type="submit">Login</button>
-      </form>
+        <div className="login-page__content">
+          <h1>Please Login to Continue</h1>
+          </div>
+           <div classname="login-form">
+              <form onSubmit={handleSubmit}>
+                <input 
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                  />
+                <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} 
+                />
+                <button type="submit">Login</button>
+            </form>
+          </div>
     </div>
   );
 }
