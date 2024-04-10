@@ -18,14 +18,14 @@
   font-size: 38px;
   color: #ffffff;
   text-underline-position: auto;
-  margin-left: 24px;
+  margin-left: 5px;
   margin-top: 25px;
   cursor: pointer;
   font-family: 'Luckiest Guy', cursive;
 
   &:hover {
     color: transparent;
-    background: linear-gradient(90deg, rgb(182, 248, 169) 0%, rgba(171, 246, 111, 0.894) 49%, rgb(97, 246, 10) 100%);
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
     background-clip: text;
     -webkit-background-clip: text;
   }
@@ -36,11 +36,20 @@
   color: white;
   font-size: 20px;
   cursor: pointer;
-  margin-left: 25px;
+  margin-left: 50px;
+  padding: 30px;
+  margin-top: 15px;
+  
 }
 
 .top-nav-bar__about-us {
-margin-left: 15px;
+margin-left: 20px;
+&:hover {
+  color: transparent;
+  background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
 }
 
 .top-nav-bar__login-register {
@@ -48,18 +57,66 @@ margin-left: 15px;
   color: white;
   font-size: 20px;
   cursor: pointer;
-  margin-left: 1000px;
+  margin-left: 700px;
   align-items: flex-end;
+  margin-top: 15px;
 }
 
 .top-nav-bar__register {
   text-decoration: none;
   margin-left: 15px;
   color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
 }
 
 .top-nav-bar__login {
   text-decoration: none;
   color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+.top-nav-bar__donate {
+  text-decoration: none;
+  margin-left: 25px;
+  color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+.top-nav-bar__patient-stories {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+.top-nav-bar__contactus {
+  text-decoration: none;
+  color: white;
+  margin-left: 25px;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
 }
 

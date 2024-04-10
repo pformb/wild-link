@@ -6,10 +6,14 @@ const TopNavigation = () => {
   return (
     <div className="top-nav-bar">
       <Link to="/home" className="top-nav-bar__logo">Wild Link</Link>
+      
       <div className="top-nav-bar__links">
-        <span className="top-nav-bar__patient-stories">Patient Stories</span>
+        <Link to="/patientstories" className="top-nav-bar__patient-stories">Patient Stories</Link>
         <span className="top-nav-bar__about-us">About Us</span>
+        <Link to="/donate" className="top-nav-bar__donate">Donate</Link>
+        <Link to="/contactus" className="top-nav-bar__contactus">Contact Us</Link>
         </div>
+
         <div className="top-nav-bar__login-register">
         <Link to="/login" className="top-nav-bar__login">Login</Link>
         <Link to="/register" className="top-nav-bar__register">Register</Link>
