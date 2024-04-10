@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const TopNavigation = ({loggedIn, setLoggedIn, username}) => {
   //manage user data in state to render lo button
+  console.log(username, loggedIn);
 
   const handleLogout = () => {
     setLoggedIn(false);

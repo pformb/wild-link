@@ -66,7 +66,7 @@ const navigate = useNavigate();
         <div className="login-page__content">
           <h1>Please Login Here to Continue</h1>
           </div>
-           <div classname="login-form">
+           <div className="login-form">
               <form onSubmit={handleSubmit}>
                 <input 
                 type="text"
