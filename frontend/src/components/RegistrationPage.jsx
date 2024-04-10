@@ -69,7 +69,8 @@ const RegistrationPage = () => {
   return (
     <div className="registration-page">
       <TopNavigation />
-      <h1>Register</h1>
+     <div className="registration-page__content">
+      <h1>Please Register Here to Continue</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />
@@ -77,6 +78,7 @@ const RegistrationPage = () => {
         <button type="submit">Register</button>
       </form>
     </div>
+  </div>
   );
 }
 
