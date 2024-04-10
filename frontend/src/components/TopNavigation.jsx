@@ -23,7 +23,7 @@ const TopNavigation = ({loggedIn, setLoggedIn, username}) => {
         <div className="top-nav-bar__login-register">
         {loggedIn ? (
           <>
-            <span>Welcome, {username}!</span>
+            <span className="top-nav-bar__login-message">{username}!</span>
             <button onClick={handleLogout} className="top-nav-bar__logout">Logout</button>
           </>
         ) : (
