@@ -1,8 +1,10 @@
 import '../styles/OrganizationCard.scss';
+import { Link } from 'react-router-dom';
 
 
 const OrganizationCard = ({id, name, location, website}) => {
   return (
+    
     <div className="organization-card">
       <img 
       className="organization-prof-pic" 
@@ -12,10 +14,9 @@ const OrganizationCard = ({id, name, location, website}) => {
       <p className="organization-location">{location}</p>
       <p className="organization-website">{website}</p>
 
-      {/* <h2 className="organization-name">Organization Name</h2>
-      <p className="organization-location">Organization Location</p>
-      <p className="organization-website">Organization Website</p> */}
+      <Link to="/patientslist">
       <button className="btn-view-org">View</button>
+      </Link>
       
     </div>
   );

@@ -1,5 +1,4 @@
-
-.organization-card {
+.patient-card {
   margin: 44px;
   padding: 20px;
   border: 1px solid lightgray;
@@ -17,17 +16,33 @@
   }
 }
 
-
-.organization-prof-pic {
-  margin-top: 10px;
-  height: 150px;
-  width: 150px;
-  border: 1px solid black;
-  border-radius: 12px 12px 12px 12px;
+.patient-prof-pic {
+  margin-top: 5px;
+  height: 100px;
+  width: 100px;
+  border-radius: 12px;
   object-fit: cover;
-} 
+}
 
-.btn-view-org {
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  line-height: .01; /* Adjust the line-height value as desired */
+  font-size: 13px;
+}
+
+.patient-name {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.patient-info {
+  margin: 2px 0;
+}
+
+.btn-view-pat {
   margin-top: 5px;
   height: 20px;
   width: 75px;
@@ -39,7 +54,6 @@
   font-size: 1rem;
 }
 
-.btn-view-org:hover {
+.btn-view-pat:hover {
   background-color: #45a049;
 }
-
