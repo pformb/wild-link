@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import  '../styles/LoginPage.scss';
-// import TopNavigation from '../components/TopNavigation';
+import { useNavigate } from 'react-router-dom';
 
+//https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430#:~:text=It%20provides%20a%20declarative%20API,the%20useHistory%20and%20useLocation%20hooks.
 
 //mock user data
 let users = [
@@ -10,7 +11,10 @@ let users = [
   { username: 'user3', password: 'password3' }
 ];
 
-const LoginPage = () => {
+const LoginPage = ({setLoggedIn }) => {
+//redirect url
+const navigate = useNavigate();
+
   //manage user data in state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -51,12 +55,13 @@ const LoginPage = () => {
       return;
     }
     
+    setLoggedIn(true);
     alert(`Welcome back, ${username}!`);
+    navigate('/home');
   }
 
   return (
     <div className="login-page">
-      {/* <TopNavigation /> */}
         <div className="login-page__content">
           <h1>Please Login Here to Continue</h1>
           </div>

@@ -21,14 +21,14 @@ function App() {
     
     <div className="App"> 
     <BrowserRouter>
-    {/* need to pass the state to top nav so passing it in app but not routes shows 2 navs though*/}
+    {/*  top nav now here to lift state for loggedIn, commented out <Topnavigation/> in Home and Login for testing*/}
     < TopNavigation loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
 
     <Routes>
       
     <Route index element={<HomeRoute />} />
     <Route path="/home" element={<HomeRoute />} />
-    <Route path="/login" element={<LoginPage />} />
+    <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
     <Route path="/register" element={<RegistrationPage />} />
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
