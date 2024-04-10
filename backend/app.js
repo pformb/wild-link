@@ -1,6 +1,7 @@
 const express = require("express");
 require('dotenv').config({ path: '.env.development' });
 const db = require("./db");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
@@ -15,7 +16,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const server = require("http").Server(app);
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(cookieParser());
 app.use(
   session({

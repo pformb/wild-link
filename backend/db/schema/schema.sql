@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS donations;
-DROP TABLE IF EXISTS patient_images;
 DROP TABLE IF EXISTS patient_conditions;
 DROP TABLE IF EXISTS patient_treatments;
 DROP TABLE IF EXISTS patients;
@@ -80,6 +79,7 @@ is_released BOOLEAN DEFAULT FALSE,
 is_archived BOOLEAN DEFAULT FALSE,
 age_range_id INTEGER NOT NULL REFERENCES age_ranges(id) ON DELETE SET NULL,
 story TEXT NOT NULL,
+image VARCHAR(255),
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
@@ -96,14 +96,6 @@ CREATE TABLE patient_treatments (
 id SERIAL PRIMARY KEY NOT NULL,
 treatment_id INTEGER NOT NULL REFERENCES treatments(id) ON DELETE CASCADE,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
-created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
-);
-
-CREATE TABLE patient_images (
-id SERIAL PRIMARY KEY NOT NULL,
-patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
-image_url VARCHAR(255) NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
