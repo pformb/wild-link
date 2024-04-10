@@ -16,6 +16,31 @@ const RegistrationPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    /* Fetch req ready to be implemented
+
+    let error.message = 'Registration Failure: This user already exists in our system, please try again';
+
+    try {
+       const response = await fetch('http://localhost:3001/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        if (!response.ok) {
+          throw new Error('error.message');
+        }
+
+        const data = await response.json();
+
+        alert(`You have sucessfully registered. Welcome to Wild Link!`);
+    } catch (error) {
+        alert(error.message);
+    }
+
+    */
     
     let userExists = users.find(user => user.username === username);
 
