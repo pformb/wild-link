@@ -85,6 +85,17 @@ margin-left: 20px;
   }
 }
 
+.top-nav-bar__logout {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
 .top-nav-bar__donate {
   text-decoration: none;
   margin-left: 25px;
