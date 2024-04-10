@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import  '../styles/RegistrationPage.scss';
+import TopNavigation from '../components/TopNavigation';
 
 
 //mock user data
@@ -17,11 +18,6 @@ const RegistrationPage = () => {
     e.preventDefault();
 
     /* Fetch req ready to be implemented
-
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
 
     let error.message = 'Registration Failure: This user already exists in our system, please try again';
 
@@ -72,6 +68,7 @@ const RegistrationPage = () => {
 
   return (
     <div className="registration-page">
+      <TopNavigation />
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Username" />

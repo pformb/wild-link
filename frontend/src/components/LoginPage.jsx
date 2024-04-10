@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import  '../styles/LoginPage.scss';
+import TopNavigation from '../components/TopNavigation';
+
 
 //mock user data
 let users = [
@@ -54,6 +56,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+      <TopNavigation />
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <input 
