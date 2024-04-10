@@ -22,7 +22,7 @@ function App() {
     <div className="App"> 
     <BrowserRouter>
     {/* need to pass the state to top nav so passing it in app but not routes shows 2 navs though*/}
-    {/* < TopNavigation loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> */}
+    < TopNavigation loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
 
     <Routes>
       
