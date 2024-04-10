@@ -56,6 +56,7 @@ const navigate = useNavigate();
     }
     
     setLoggedIn(true);
+    setUsername(username) 
     alert(`Welcome back, ${username}!`);
     navigate('/home');
   }
