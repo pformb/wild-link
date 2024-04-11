@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const bcrypt = require("bcrypt");
 const login = require("../models/login");
+const { validatePassword } = require("../models/validatePassword");
 
 module.exports = db => { 
   router.post("/login", async (req, res) => {
@@ -8,7 +8,8 @@ module.exports = db => {
     if (!account) {
       account = await login.findByEmail(db, "organizations", req.body.email);
     }
-    if (account && (await bcrypt.compare(req.body.password, account.password))) {
+    const passwordCheck = await validatePassword(db, account.role, account.id, req.body.password) 
+    if (account && passwordCheck) {
       req.session.userId = account.id;
       req.session.name = account.first_name;
       req.session.role = account.role;

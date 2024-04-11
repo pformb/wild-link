@@ -2,7 +2,7 @@
 
 const findByEmail = async (db, table, email) => {
   const { rows } = await db.query(
-    `SELECT * FROM ${table} WHERE email = $1`,
+    `SELECT id, first_name, email FROM ${table} WHERE email = $1`,
     [email]
   );
   if (rows.length > 0) {

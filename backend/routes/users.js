@@ -29,8 +29,8 @@ module.exports = (db) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       await users.registerUser(db, userData, hashedPassword);
       res.status(200).send("User Created");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to create user", error);
+    } catch {
+      res.status(500).send("Server Error: unable to create user");
     }
   });
 
@@ -47,8 +47,8 @@ module.exports = (db) => {
       }
       await users.updateUser(db, userId, userData);
       res.status(200).send("User Updated");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to update user", error);
+    } catch {
+      res.status(500).send("Server Error: unable to update user");
     }
   });
 

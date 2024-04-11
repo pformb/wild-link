@@ -45,8 +45,8 @@ module.exports = (db) => {
     try {
       await donations.createDonation(db, userId, donation);
       res.status(200).send("Donation Success");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to process donation", error);
+    } catch {
+      res.status(500).send("Server Error: unable to process donation");
     }
   });
 

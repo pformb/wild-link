@@ -73,8 +73,8 @@ module.exports = (db) => {
     try {
       await patients.updatePatientInformation(db, patientId, patientDetails, conditionIds, treatmentIds)
       res.status(200).send("Patient Updated");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to update Patient", error);
+    } catch {
+      res.status(500).send("Server Error: unable to update Patient");
     }
   });
 
@@ -88,8 +88,8 @@ module.exports = (db) => {
     try {
       await patients.createPatient(db, orgId, patientDetails, conditionIds, treatmentIds)
       res.status(200).send("Patient Created");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to create Patient", error);
+    } catch {
+      res.status(500).send("Server Error: unable to create Patient");
     }
   });
 
@@ -99,8 +99,8 @@ module.exports = (db) => {
     try {
       await patients.archivePatient(db, patientId);
       res.status(200).send("Patient Archived");
-    } catch (error) {
-      res.status(500).send("Server Error: unable to archive Patient", error);
+    } catch {
+      res.status(500).send("Server Error: unable to archive Patient");
     }
   });
 
