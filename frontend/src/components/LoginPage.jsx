@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 //https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430#:~:text=It%20provides%20a%20declarative%20API,the%20useHistory%20and%20useLocation%20hooks.
 
+//https://jessywlee.medium.com/apply-http-post-method-and-fetch-function-to-user-login-js-react-d74a2c19ab7d
+
 //mock user data
 let users = [
   { username: 'user1', password: 'pas$word1' },

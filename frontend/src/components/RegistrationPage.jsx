@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import  '../styles/RegistrationPage.scss';
-import TopNavigation from '../components/TopNavigation';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -67,13 +66,12 @@ const RegistrationPage = () => {
     setPassword('');
     setConfirmPassword('');
 
-    alert(`You have sucessfully registered. Welcome to Wild Link! `);
+    alert(`You have sucessfully registered. Please login to continue! `);
     navigate('/home');
   }
 
   return (
     <div className="registration-page">
-      <TopNavigation />
      <div className="registration-page__content">
       <h1>Please Register Here to Continue</h1>
       <form onSubmit={handleSubmit}>
