@@ -90,8 +90,8 @@ VALUES
   (6, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
-INSERT INTO donations (user_id, organization_id, patient_id, donation_amount, donation_date, created_at, updated_at)
+INSERT INTO donations (user_id, organization_id, patient_id, donation_in_cents, created_at, updated_at)
 VALUES
-  (1, 1, 1, 10000, '2024-04-02', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  (2, 1, 3, 5000, '2024-03-16', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  (3, 1, 2, 2500, '2024-03-24', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+  (1, 1, 1, 10000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (2, 1, 3, 5000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (3, 1, 2, 2500, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

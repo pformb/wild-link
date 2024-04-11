@@ -1,6 +1,6 @@
 // patients.js Contains all patient data queries
 
-/// RETRIEVE PATIENT DATA ///
+/// FETCH PATIENT DATA ///
 const getAllPatientsByOrg = async (db, orgId) => {
   const { rows } = await db.query(
     `SELECT patients.id, patients.patient_case, patients.date_admitted, patients.release_date, patients.is_released, patients.is_archived, patients.created_at, species.name AS species, COALESCE(patients.image, species.image) AS image FROM patients 

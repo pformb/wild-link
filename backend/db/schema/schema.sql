@@ -105,8 +105,7 @@ id SERIAL PRIMARY KEY NOT NULL,
 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
 organization_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE SET NULL,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE SET NULL,
-donation_amount INTEGER NOT NULL,
-donation_date DATE NOT NULL,
+donation_in_cents INTEGER NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );

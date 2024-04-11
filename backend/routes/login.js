@@ -12,7 +12,7 @@ module.exports = db => {
       req.session.userId = account.id;
       req.session.name = account.first_name;
       req.session.role = account.role;
-      res.json({ message: "Login successful" });
+      res.status(200).send("Login successful");
     } else {
       // Account not found
       res.status(400).send("Error 400: Email or Password does not match our records, please check the email and password.");
@@ -21,7 +21,7 @@ module.exports = db => {
   
   router.post("/logout", async (req, res) => {
     req.session = null
-    res.json({ message: "Logout successful" });
+    res.status(200).send("Logout successful");
   });
   return router;
 };

@@ -60,7 +60,7 @@ module.exports = (db) => {
         allAgeRanges,
       });
     } catch (error) {
-      res.status(404).send("Patient not found");
+      res.status(404).send("Patient not found", error);
     }
   });
   ///POST REQUESTS///
@@ -75,9 +75,9 @@ module.exports = (db) => {
     const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
     try {
       await patients.updatePatientInformation(db, patientId, patientDetails, conditionIds, treatmentIds)
-      res.send("Patient Updated");
+      res.status(200).send("Patient Updated");
     } catch (error) {
-      res.status(500).send("Server Error: unable to update Patient");
+      res.status(500).send("Server Error: unable to update Patient", error);
     }
   });
 
@@ -90,9 +90,9 @@ module.exports = (db) => {
     const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
     try {
       await patients.createPatient(db, orgId, patientDetails, conditionIds, treatmentIds)
-      res.send("Patient Created");
+      res.status(200).send("Patient Created");
     } catch (error) {
-      res.status(500).send("Server Error: unable to create Patient");
+      res.status(500).send("Server Error: unable to create Patient", error);
     }
   });
 
@@ -101,9 +101,9 @@ module.exports = (db) => {
     const patientId = req.params.patientId;
     try {
       await patients.archivePatient(db, patientId);
-      res.send("Patient Archived");
+      res.status(200).send("Patient Archived");
     } catch (error) {
-      res.status(500).send("Server Error: unable to archive Patient");
+      res.status(500).send("Server Error: unable to archive Patient", error);
     }
   });
 
