@@ -77,20 +77,22 @@ const getAllAgeRanges = async (db) => {
 /// UPDATE & CREATE PATIENTS ///
 
 const updatePatientDetails = async (db, patientId, patientDetails) => {
+  const values = [];
+  const columns = [];
+
+  for (const [key, value] of Object.entries(patientDetails)) {
+    columns.push(key);
+    values.push(value);
+  }
+  if (values.length === 0) {
+    throw new Error("No valid fields provided for update");
+  }
+  const setColumns = columns.map((column, index) => `${column} = $${index + 1}`).join(', ');
+
   try {
   await db.query(
-      `UPDATE patients SET patient_case = $1, species_id = $2, location_found = $3, 
-      date_admitted = $4, release_date = $5, is_released = $6, age_range_id = $7,
-      story = $8, image = $9, updated_at = CURRENT_TIMESTAMP WHERE id = $10`,
-      [patientDetails.patient_case,
-      patientDetails.species_id,
-      patientDetails.location_found,
-      patientDetails.date_admitted,
-      patientDetails.release_date || null,
-      patientDetails.is_released,
-      patientDetails.age_range_id,
-      patientDetails.story,
-      patientDetails.image || null,
+      `UPDATE patients SET ${setColumns}, updated_at = CURRENT_TIMESTAMP WHERE id = $${columns.length + 1}`,
+      [...values,
       patientId]
   );
   } catch (error) {

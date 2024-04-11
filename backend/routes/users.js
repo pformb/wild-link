@@ -33,5 +33,24 @@ module.exports = (db) => {
       res.status(500).send("Server Error: unable to create user", error);
     }
   });
+
+  //Edit USER
+  router.patch("/users/:userId", async (req, res) => {
+    const userId = req.params.userId;
+    let { userData } = req.body;
+    let password = userData.password;
+    try {
+      // If Password is updated
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        userData.password = hashedPassword;
+      }
+      await users.updateUser(db, userId, userData);
+      res.status(200).send("User Updated");
+    } catch (error) {
+      res.status(500).send("Server Error: unable to update user", error);
+    }
+  });
+
   return router;
 };

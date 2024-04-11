@@ -64,8 +64,7 @@ module.exports = (db) => {
   ///POST REQUESTS///
 
   //POST EDIT PATIENT DATA
-  router.post("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
-    console.log("POST REQUEST RECIEVED");
+  router.patch("/organizations/:orgId/patients/:patientId", async (req, res) => {
     const patientId = req.params.patientId;
     const { patientDetails, patientConditions = [], patientTreatments = [] } = req.body;
     // CONVERT EXTRACT FROM NESTED OBJECTS TO MAKE ARRAYS
@@ -95,7 +94,7 @@ module.exports = (db) => {
   });
 
   //POST DELETE/ACHIVE PATIENT
-  router.post("/organizations/:orgId/patients/:patientId/archive", async (req, res) => {
+  router.patch("/organizations/:orgId/patients/:patientId", async (req, res) => {
     const patientId = req.params.patientId;
     try {
       await patients.archivePatient(db, patientId);
