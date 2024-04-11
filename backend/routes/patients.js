@@ -35,21 +35,19 @@ module.exports = (db) => {
   router.get("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
     const patientId = req.params.patientId;
     try {
-      const patientDetails = await patients.getAllPatientDataById(
-        db,
-        patientId
-      );
-      const patientConditions = await patients.getPatientConditions(
-        db,
-        patientId
-      );
-      const patientTreatments = await patients.getPatientTreatments(
-        db,
-        patientId
-      );
-      const allConditions = await patients.getAllConditions(db);
-      const allTreatments = await patients.getAllTreatments(db);
-      const allAgeRanges = await patients.getAllAgeRanges(db);
+      
+      const editFormData = await Promise.all([
+        patients.getAllPatientDataById(db, patientId),
+        patients.getPatientConditions(db, patientId),
+        patients.getPatientTreatments(db, patientId),
+        patients.getAllConditions(db),
+        patients.getAllTreatments(db),
+        patients.getAllAgeRanges(db)
+      ]);
+
+      if (!results.every((result) => result && result.length > 0)) {
+        return res.status(404).send("Error Form data is missing");
+      }
 
       res.json({
         patientDetails,
@@ -60,7 +58,7 @@ module.exports = (db) => {
         allAgeRanges,
       });
     } catch (error) {
-      res.status(404).send("Patient not found", error);
+      res.status(500).send("Server Error: data not found", error);
     }
   });
   ///POST REQUESTS///

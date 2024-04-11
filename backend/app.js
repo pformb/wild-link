@@ -38,6 +38,6 @@ app.use("/api", login(db));
 app.use("/api", organizations(db));
 app.use("/api", patients(db));
 app.use("/api", donations(db));
-// app.use("/api", users(db));
+app.use("/api", users(db));
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

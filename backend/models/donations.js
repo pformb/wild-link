@@ -33,8 +33,8 @@ const createDonation = async (db, userId, donation) => {
         VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
       [userId, 
       donation.organizationId,
-      donation.patient_id,
-      donation.donation_in_cents]
+      donation.patientId,
+      donation.donationInCents]
     );
   } catch (error) {
     console.error("Error creating donation:", error);

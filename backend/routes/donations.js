@@ -8,7 +8,6 @@ module.exports = (db) => {
 
   //GET ALL DONATIONS BY USER
   router.get("/users/:userId/donations", async (req, res) => {
-    console.log("In request");
     const userId = req.params.userId;
     const userDonations = await donations.getAllDonationsByUser(db, userId);
     if (userDonations.length === 0) {
@@ -47,7 +46,7 @@ module.exports = (db) => {
       await donations.createDonation(db, userId, donation);
       res.status(200).send("Donation Success");
     } catch (error) {
-      res.status(500).send("Server Error: unable to archive Patient", error);
+      res.status(500).send("Server Error: unable to process donation", error);
     }
   });
 

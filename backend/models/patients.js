@@ -29,7 +29,7 @@ const getAllPatientDataById = async (db, patientId) => {
     WHERE patients.id = $1`,
     [patientId]
   );
-  return rows[0];
+  return rows;
 }
 
 const getPatientConditions = async (db, patientId) => {
