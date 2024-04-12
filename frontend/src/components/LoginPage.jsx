@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 //https://jessywlee.medium.com/apply-http-post-method-and-fetch-function-to-user-login-js-react-d74a2c19ab7d
 
 const LoginPage = ({setLoggedIn }) => {
+
 //redirect url
 const navigate = useNavigate();
 
@@ -30,6 +31,8 @@ const navigate = useNavigate();
       });
 
       if (!response.ok) {
+        console.log('email', email);
+        console.log('password', password);
         throw new Error('Invalid email or password');
       }
 
