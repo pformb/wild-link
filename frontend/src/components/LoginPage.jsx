@@ -21,7 +21,7 @@ const navigate = useNavigate();
     // Fetch req ready to be implemented 
 
     try {
-      const response = await fetch('http://localhost:3001/login', { 
+      const response = await fetch('http://localhost:3001/api/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,6 +34,7 @@ const navigate = useNavigate();
       }
 
         const data = await response.json();
+
         setLoggedIn(true);
         alert(`Welcome back, ${data.first_name}!`);
         navigate('/home');
@@ -54,12 +55,16 @@ const navigate = useNavigate();
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                id="email"
+                name="email"
                   />
                 <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} 
+                id="password"
+                name="password"
                 />
                 <button type="submit">Login</button>
             </form>

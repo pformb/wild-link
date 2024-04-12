@@ -111,4 +111,4 @@ patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE SET NULL,
 donation_in_cents INTEGER NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
-);
+);psql -h localhost -d wildlink_development -U linker3 -p 5432
