@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS donations;
-DROP TABLE IF EXISTS patient_images;
 DROP TABLE IF EXISTS patient_conditions;
 DROP TABLE IF EXISTS patient_treatments;
 DROP TABLE IF EXISTS patients;
@@ -32,6 +31,7 @@ last_name VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 address VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
+is_deleted BOOLEAN DEFAULT FALSE,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
@@ -79,6 +79,8 @@ release_date DATE,
 is_released BOOLEAN DEFAULT FALSE,
 is_archived BOOLEAN DEFAULT FALSE,
 age_range_id INTEGER NOT NULL REFERENCES age_ranges(id) ON DELETE SET NULL,
+story TEXT NOT NULL,
+image VARCHAR(255),
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );
@@ -88,7 +90,8 @@ id SERIAL PRIMARY KEY NOT NULL,
 condition_id INTEGER NOT NULL REFERENCES conditions(id) ON DELETE CASCADE,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
 created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
+updated_at TIMESTAMP NOT NULL,
+UNIQUE(patient_id, condition_id)
 );
 
 CREATE TABLE patient_treatments (
@@ -96,15 +99,8 @@ id SERIAL PRIMARY KEY NOT NULL,
 treatment_id INTEGER NOT NULL REFERENCES treatments(id) ON DELETE CASCADE,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
 created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
-);
-
-CREATE TABLE patient_images (
-id SERIAL PRIMARY KEY NOT NULL,
-patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
-image_url VARCHAR(255) NOT NULL,
-created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
+updated_at TIMESTAMP NOT NULL,
+UNIQUE(patient_id, treatment_id)
 );
 
 CREATE TABLE donations (
@@ -112,8 +108,7 @@ id SERIAL PRIMARY KEY NOT NULL,
 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
 organization_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE SET NULL,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE SET NULL,
-donation_amount INTEGER NOT NULL,
-donation_date DATE NOT NULL,
+donation_in_cents INTEGER NOT NULL,
 created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL
 );

@@ -1,5 +1,5 @@
 // import { useApplicationData } from '../src/hooks/useApplicationData.js';
-import HomeRoute from './routes/HomeRoute';
+import HomeRoute from './routes/HomeRoute.jsx';
 import LoginPage from './components/LoginPage.jsx'
 import DonatePage from './components/DonatePage.jsx'
 import RegistrationPage from './components/RegistrationPage.jsx'
