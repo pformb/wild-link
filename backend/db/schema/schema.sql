@@ -90,7 +90,8 @@ id SERIAL PRIMARY KEY NOT NULL,
 condition_id INTEGER NOT NULL REFERENCES conditions(id) ON DELETE CASCADE,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
 created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
+updated_at TIMESTAMP NOT NULL,
+UNIQUE(patient_id, condition_id)
 );
 
 CREATE TABLE patient_treatments (
@@ -98,7 +99,8 @@ id SERIAL PRIMARY KEY NOT NULL,
 treatment_id INTEGER NOT NULL REFERENCES treatments(id) ON DELETE CASCADE,
 patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
 created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
+updated_at TIMESTAMP NOT NULL,
+UNIQUE(patient_id, treatment_id)
 );
 
 CREATE TABLE donations (
