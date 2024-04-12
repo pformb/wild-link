@@ -6,62 +6,41 @@ import { useNavigate } from 'react-router-dom';
 
 //https://jessywlee.medium.com/apply-http-post-method-and-fetch-function-to-user-login-js-react-d74a2c19ab7d
 
-//mock user data
-let users = [
-  { username: 'user1', password: 'pas$word1' },
-  { username: 'user2', password: 'password2' },
-  { username: 'user3', password: 'password3' }
-];
-
 const LoginPage = ({setLoggedIn }) => {
 //redirect url
 const navigate = useNavigate();
 
   //manage user data in state
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   //form submission
-  const handleSubmit = (e) => {
+  const handleSubmit =  async(e) => {
     e.preventDefault();
 
-    /* Fetch req ready to be implemented 
-
-    let error.message = 'Login Failure: Invalid username or, password';
+    // Fetch req ready to be implemented 
 
     try {
       const response = await fetch('http://localhost:3001/login', { 
-        method: 'POST'
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({email, password})
       });
 
       if (!response.ok) {
-        throw new Error('error.message');
+        throw new Error('Invalid email or password');
+      }
 
         const data = await response.json();
-
-        alert(`Welcome back, ${data.username}!`);
+        setLoggedIn(true);
+        alert(`Welcome back, ${data.first_name}!`);
+        navigate('/home');
       }catch (error) {
-        alert(error.message);
+        alert('Invalid email or password');
   }
- */
-
-
-    let userExists = users.find(user => user.username === username && user.password === password);
-
-    if (!userExists) {
-      alert('Invalid username or password');
-      return;
-    }
-    
-    setLoggedIn(true);
-    setUsername(username) 
-    alert(`Welcome back, ${username}!`);
-    navigate('/home');
-  }
+};
 
   return (
     <div className="login-page">
@@ -72,9 +51,9 @@ const navigate = useNavigate();
               <form onSubmit={handleSubmit}>
                 <input 
                 type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                   />
                 <input
                 type="password"

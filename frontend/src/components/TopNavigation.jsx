@@ -2,7 +2,7 @@ import '../styles/TopNavigationBar.scss';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const TopNavigation = ({loggedIn, setLoggedIn, username}) => {
+const TopNavigation = ({loggedIn, setLoggedIn, email}) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -24,7 +24,7 @@ const TopNavigation = ({loggedIn, setLoggedIn, username}) => {
         <div className="top-nav-bar__login-register">
         {loggedIn ? (
           <>
-            <span className="top-nav-bar__login-message">{username}</span>
+            <span className="top-nav-bar__login-message">{email}</span>
             <button onClick={handleLogout} className="top-nav-bar__logout">Logout</button>
           </>
         ) : (
