@@ -18,33 +18,43 @@ const navigate = useNavigate();
   //form submission
   const handleSubmit =  async(e) => {
     e.preventDefault();
-
-    // Fetch req ready to be implemented 
-
+  
+    const loginData = {email, password};
+    console.log('Sending:', loginData);
+  
     try {
       const response = await fetch('http://localhost:3001/api/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify(loginData)
       });
-
+  
       if (!response.ok) {
-        console.log('email', email);
-        console.log('password', password);
+        console.log('Response not OK:', response);
         throw new Error('Invalid email or password');
       }
-
+  
+      // Check if the response is JSON
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.indexOf('application/json') !== -1) {
         const data = await response.json();
-
+        console.log('Received:', data);
         setLoggedIn(true);
         alert(`Welcome back, ${data.first_name}!`);
         navigate('/home');
-      }catch (error) {
-        alert('Invalid email or password');
-  }
-};
+      } else {
+        const data = await response.text();
+        console.log('Received:', data);
+        alert(data);
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Invalid email or password');
+    }
+  };
 
   return (
     <div className="login-page">
@@ -57,7 +67,7 @@ const navigate = useNavigate();
                 type="text"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 id="email"
                 name="email"
                   />
@@ -65,7 +75,7 @@ const navigate = useNavigate();
                 type="password"
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} 
+                onChange={e => setPassword(e.target.value)} 
                 id="password"
                 name="password"
                 />
@@ -77,3 +87,43 @@ const navigate = useNavigate();
 }
 
 export default LoginPage;
+
+
+// const handleSubmit =  async(e) => {
+//   e.preventDefault();
+
+//   const loginData = {email, password};
+//   console.log('Sending:', loginData);
+
+//   // Fetch req ready to be implemented 
+
+//   try {
+//     const response = await fetch('http://localhost:3001/api/login', { 
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({email, password})
+//     });
+
+//     if (!response.ok) {
+//       console.log('Response not OK:', response);
+//       throw new Error('Invalid email or password');
+//     }
+
+//     if (response.status === 401) {
+//       throw new Error('Invalid email or password');
+//     } else if (response.status >= 500) {
+//       throw new Error('Server error');
+//     }
+//       const data = await response.json();
+//       console.log('Received:', data);
+
+//       setLoggedIn(true);
+//       alert(`Welcome back, ${data.first_name}!`);
+//       navigate('/home');
+//     }catch (error) {
+//       console.error('Error:', error);
+//       alert('Invalid email or password');
+// }
+// };
