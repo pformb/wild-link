@@ -10,7 +10,7 @@ module.exports = (db) => {
   router.get("/organizations", async (req, res) => {
     let allOrganizations = await organizations.getAllOrganizations(db);
     if (allOrganizations.length === 0) {
-      return res.status(404).send("No Organizations Found");
+      return res.status(404).json({ message: "No Organizations Found"});
     }
     res.json(allOrganizations);
   });
@@ -20,7 +20,7 @@ module.exports = (db) => {
     const orgId = req.params.orgId;
     const organization = await organizations.getOrganizationById(db, orgId);
     if (organization.length === 0) {
-      return res.status(404).send("Organization Not Found"); 
+      return res.status(404).json({ message: "Organization Not Found"}); 
     }
     res.json(organization);
   });
@@ -30,7 +30,7 @@ module.exports = (db) => {
     const orgId = req.params.orgId;
     const orgProfile = await organizations.getOrganizationProfile(db, orgId);
     if (orgProfile.length === 0) {
-      return res.status(404).send("Organization Not Found")
+      return res.status(404).json({ message: "Organization Not Found"})
     }
     res.json(orgProfile);
   });
@@ -47,9 +47,9 @@ module.exports = (db) => {
         orgData.password = hashedPassword;
       }
       await organizations.updateOrganizationProfile(db, orgId, orgData);
-      res.status(200).send("Organization Updated");
+      res.status(200).json({ message: "Organization Updated"});
     } catch {
-      res.status(500).send("Server Error: unable to update organization");
+      res.status(500).json({ error: "Server Error: unable to update organization"});
     }
   });
 

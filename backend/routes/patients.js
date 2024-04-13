@@ -14,7 +14,7 @@ module.exports = (db) => {
       })
       res.json(orgPatients)
     } else {
-      res.status(404).send("No patients found.");
+      res.status(404).json({ message: "No patients found."});
     }
   });
   
@@ -24,7 +24,7 @@ module.exports = (db) => {
     const patientFound = await patients.getPatientById(db, patientId);
 
     if (patientFound.length === 0) {
-      return res.status(404).send("Patient not found");
+      return res.status(404).json({ message: "No patient found."});
     }
     const patient = patientFound[0];
     patient.image = patient.image.startsWith("http") ? patient.image : `/stock-photos/${patient.image}`;
@@ -46,7 +46,7 @@ module.exports = (db) => {
       ]);
 
       if (!results.every((result) => result && result.length > 0)) {
-        return res.status(404).send("Error Form data is missing");
+        return res.status(404).json({ error: "Error Form data is missing"});
       }
 
       res.json({
@@ -58,7 +58,7 @@ module.exports = (db) => {
         allAgeRanges,
       });
     } catch (error) {
-      res.status(500).send("Server Error: data not found", error);
+      res.status(500).json({ error: "Server Error: data not found"});
     }
   });
   ///POST REQUESTS///
@@ -72,9 +72,9 @@ module.exports = (db) => {
     const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
     try {
       await patients.updatePatientInformation(db, patientId, patientDetails, conditionIds, treatmentIds)
-      res.status(200).send("Patient Updated");
+      res.status(200).json({ message: "Patient Updated"});
     } catch {
-      res.status(500).send("Server Error: unable to update Patient");
+      res.status(500).json({ error: "Server Error: unable to update Patient"});
     }
   });
 
@@ -87,9 +87,9 @@ module.exports = (db) => {
     const treatmentIds = patientTreatments.map(treatment => treatment.treatment_id);
     try {
       await patients.createPatient(db, orgId, patientDetails, conditionIds, treatmentIds)
-      res.status(200).send("Patient Created");
+      res.status(200).json({message: "Patient Created"});
     } catch {
-      res.status(500).send("Server Error: unable to create Patient");
+      res.status(500).json({ error: "Server Error: unable to create Patient"});
     }
   });
 
@@ -98,9 +98,9 @@ module.exports = (db) => {
     const patientId = req.params.patientId;
     try {
       await patients.archivePatient(db, patientId);
-      res.status(200).send("Patient Archived");
+      res.status(200).json({ message: "Patient Archived"});
     } catch {
-      res.status(500).send("Server Error: unable to archive Patient");
+      res.status(500).json({ message: "Server Error: unable to archive Patient"});
     }
   });
 

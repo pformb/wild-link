@@ -11,7 +11,7 @@ module.exports = (db) => {
     const userId = req.params.userId;
     const userDonations = await donations.getAllDonationsByUser(db, userId);
     if (userDonations.length === 0) {
-      return res.status(404).send("No Donations Found");
+      return res.status(404).json({ message: "No Donations Found"});
     }
     res.json(userDonations);
   });
@@ -21,7 +21,7 @@ module.exports = (db) => {
     const orgId = req.params.orgId;
     const orgDonations = await donations.getAllDonationsByOrg(db, orgId);
     if (orgDonations.length === 0) {
-      return res.status(404).send("No Donations Found");
+      return res.status(404).json({ message: "No Donations Found"});
     }
     res.json(orgDonations);
   });
@@ -31,7 +31,7 @@ module.exports = (db) => {
     const donationId = req.params.donationId;
     const donation = await donations.getDonationById(db, donationId);
     if (donation.length === 0) {
-      return res.status(404).send("No Donation Found");
+      return res.status(404).json({ message: "No Donation Found"});
     }
     res.json(donation);
   });
@@ -44,9 +44,9 @@ module.exports = (db) => {
     const { donation } = req.body
     try {
       await donations.createDonation(db, userId, donation);
-      res.status(200).send("Donation Success");
+      res.status(200).json({ message: "Donation Success"});
     } catch {
-      res.status(500).send("Server Error: unable to process donation");
+      res.status(500).json({ error: "Server Error: unable to process donation"});
     }
   });
 
