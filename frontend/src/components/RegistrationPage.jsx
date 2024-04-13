@@ -75,11 +75,11 @@ const RegistrationPage = () => {
      <div className="registration-page__content">
       <h1>Please Register Here to Continue</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="First Name" />
-        <input type="text" placeholder="Last Name" />
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Address" />
-        <input type="password" placeholder="Password" />
+        <input type="text" placeholder="First Name"/>
+        <input type="text" placeholder="Last Name"/>
+        <input type="text" placeholder="Email"/>
+        <input type="text" placeholder="Address"/>
+        <input type="password" placeholder="Password"/>
         <input type="password" placeholder="Confirm Password" />
         <button type="submit">Register</button>
       </form>
