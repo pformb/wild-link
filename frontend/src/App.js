@@ -36,7 +36,7 @@ function App() {
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
-    <Route path="/organizations" element={<OrgManagement />} />
+    <Route path="/organizations" element={<OrgManagement setLoggedIn={setLoggedIn} email={email} />} />
     <Route pathe="/users" element={<UserManagement />} />
     
     </Routes>
