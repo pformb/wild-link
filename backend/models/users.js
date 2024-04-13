@@ -1,5 +1,7 @@
 // users.js Contains all user data queries
 
+const { user } = require("pg/lib/defaults");
+
 //GET USER INFORMATION
 const getUser = async (db, userId) => {
   const { rows } = await db.query(
@@ -16,7 +18,9 @@ const registerUser = async (db, userData, hashedPassword) => {
       `INSERT INTO users (first_name, last_name, email, address, password, created_at, updated_at) 
         VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
       [
-        userData.first_name,
+        // userData.firstName,
+        // userData.lastName,
+        userData.first_name, //null value accessing as property of object?
         userData.last_name,
         userData.email,
         userData.address,

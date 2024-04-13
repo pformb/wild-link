@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
   } catch {
     res.status(500).send("Server Error: unable to create user");
   }
-})
+});
 
   // router.post("/register", async (req, res) => {
   //   const { userData } = req.body;
