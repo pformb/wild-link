@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 //https://jessywlee.medium.com/apply-http-post-method-and-fetch-function-to-user-login-js-react-d74a2c19ab7d
 
-const LoginPage = ({setLoggedIn }) => {
+const LoginPage = ({ setLoggedIn }) => {
 
 //redirect url
 const navigate = useNavigate();
@@ -20,7 +20,6 @@ const navigate = useNavigate();
     e.preventDefault();
   
     const loginData = {email, password};
-    console.log('Sending:', loginData);
   
     try {
       const response = await fetch('http://localhost:3001/api/login', { 
@@ -40,8 +39,9 @@ const navigate = useNavigate();
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.indexOf('application/json') !== -1) {
         const data = await response.json();
-        console.log('Received:', data);
+        console.log('Received:', setLoggedIn, data);
         setLoggedIn(true);
+        console.log('Set Logged In:', setLoggedIn);
         alert(`Welcome back, ${data.first_name}!`);
         navigate('/home');
       } else {
@@ -87,43 +87,3 @@ const navigate = useNavigate();
 }
 
 export default LoginPage;
-
-
-// const handleSubmit =  async(e) => {
-//   e.preventDefault();
-
-//   const loginData = {email, password};
-//   console.log('Sending:', loginData);
-
-//   // Fetch req ready to be implemented 
-
-//   try {
-//     const response = await fetch('http://localhost:3001/api/login', { 
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({email, password})
-//     });
-
-//     if (!response.ok) {
-//       console.log('Response not OK:', response);
-//       throw new Error('Invalid email or password');
-//     }
-
-//     if (response.status === 401) {
-//       throw new Error('Invalid email or password');
-//     } else if (response.status >= 500) {
-//       throw new Error('Server error');
-//     }
-//       const data = await response.json();
-//       console.log('Received:', data);
-
-//       setLoggedIn(true);
-//       alert(`Welcome back, ${data.first_name}!`);
-//       navigate('/home');
-//     }catch (error) {
-//       console.error('Error:', error);
-//       alert('Invalid email or password');
-// }
-// };

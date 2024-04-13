@@ -16,13 +16,13 @@ function App() {
   // orgData={orgData} Pass to PatientStoriesPage
 
   const [loggedIn, setLoggedIn] = useState(false);
+  console.log(loggedIn); 
   const [email, setEmail] = useState('');
 
   return (
     
     <div className="App"> 
     <BrowserRouter>
-    {/*  top nav now here to lift state for loggedIn, commented out <Topnavigation/> in Home and Login for testing*/}
     < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
 
     <Routes>

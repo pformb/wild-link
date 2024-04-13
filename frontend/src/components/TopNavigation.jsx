@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TopNavigation = ({loggedIn, setLoggedIn, email}) => {
   const navigate = useNavigate();
+  console.log('TopNavigation:', loggedIn, email);
 
   const handleLogout = () => {
     setLoggedIn(false);

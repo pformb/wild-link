@@ -1,11 +1,7 @@
 
 import RegistrationPage from '../components/RegistrationPage';
 
-const RegisterRoute = (props) => { 
-
-  // const { 
-    
-  // } = props;
+const RegisterRoute = () => { 
 
   return (
     <div className="registration-route">
