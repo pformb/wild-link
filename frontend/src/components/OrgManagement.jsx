@@ -120,34 +120,4 @@ Additional Features to add to OrgManagement?
 //   handle Donations to Organization
 
 //   const trackDonations = (orgId) => {}
-
-
-Donations to Organization as a Modal
-- Track donations to the logged in organization
-- View specific donation to the logged organization, when clicking a donation, a modal will pop up with the donation details, and a close button
-
-might need to make a new component for this
-
-const DonationsModal = ({ donations }) => {
-  return (
-    <div className="DonationsModal">
-      <h2>Donations</h2>
-      <ul>
-        {donations.map((donation) => (
-          <li key={donation.id}>
-            <p>Donation ID: {donation.id}</p>
-            <p>Donor: {donation.donor}</p>
-            <p>Case Number: {donation.caseNumber}</p>
-            <p>Amount: {donation.amount}</p>
-            <p>Date: {donation.date}</p>
-            <img src={donation.photo} alt="Donation" />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default DonationsModal;
-
 */
