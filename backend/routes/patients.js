@@ -36,17 +36,33 @@ module.exports = (db) => {
     const patientId = req.params.patientId;
     try {
       
-      const editFormData = await Promise.all([
+      const [
+        patientDetails,
+        patientConditions,
+        patientTreatments,
+        allConditions,
+        allTreatments,
+        allAgeRanges,
+      ] = await Promise.all([
         patients.getAllPatientDataById(db, patientId),
         patients.getPatientConditions(db, patientId),
         patients.getPatientTreatments(db, patientId),
         patients.getAllConditions(db),
         patients.getAllTreatments(db),
-        patients.getAllAgeRanges(db)
+        patients.getAllAgeRanges(db),
       ]);
 
-      if (!results.every((result) => result && result.length > 0)) {
-        return res.status(404).json({ error: "Error Form data is missing"});
+      if (
+        patientDetails.length === 0 ||
+        allConditions.length === 0 ||
+        allTreatments.length === 0 ||
+        allAgeRanges.length === 0 ||
+        patientConditions.length === 0 ||
+        patientTreatments.length === 0
+      ) {
+        return res
+          .status(404)
+          .json({ error: "Error: Form data is missing or incomplete." });
       }
 
       res.json({
@@ -58,6 +74,7 @@ module.exports = (db) => {
         allAgeRanges,
       });
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: "Server Error: data not found"});
     }
   });
