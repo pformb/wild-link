@@ -6,6 +6,8 @@ import RegistrationPage from './components/RegistrationPage.jsx'
 import PatientStoriesPage from './components/PatientStoriesPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
+import OrgManagement from './components/OrgManagement.jsx';
+import UserManagement from './components/UserManagement.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
@@ -34,6 +36,8 @@ function App() {
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
+    <Route path="/organizations" element={<OrgManagement />} />
+    <Route pathe="/users" element={<UserManagement />} />
     
     </Routes>
     </BrowserRouter>
