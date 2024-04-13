@@ -37,7 +37,7 @@ function App() {
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
     <Route path="/organizations" element={<OrgManagement setLoggedIn={setLoggedIn} email={email} />} />
-    <Route pathe="/users" element={<UserManagement />} />
+    <Route path="/users" element={<UserManagement />} />
     
     </Routes>
     </BrowserRouter>
