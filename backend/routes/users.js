@@ -22,17 +22,32 @@ module.exports = (db) => {
   ///POST REQUESTS///
 
   //CREATE USER
-  router.post("/register", async (req, res) => {
-    const { userData } = req.body;
-    const password = userData.password;
-    try {
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
-      await users.registerUser(db, userData, hashedPassword);
-      res.status(200).send("User Created");
-    } catch {
-      res.status(500).send("Server Error: unable to create user");
-    }
-  });
+router.post("/register", async (req, res) => {
+  const userData = req.body;
+  if (!userData || !userData.password) {
+    return res.status(400).send("Invalid Request: Missing user password or data");
+  }
+  const password = userData.password;
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    await users.registerUser(db, userData, hashedPassword);
+    res.status(200).send("User Created");
+  } catch {
+    res.status(500).send("Server Error: unable to create user");
+  }
+})
+
+  // router.post("/register", async (req, res) => {
+  //   const { userData } = req.body;
+  //   const password = userData.password;
+  //   try {
+  //     const hashedPassword = await bcrypt.hash(password, saltRounds);
+  //     await users.registerUser(db, userData, hashedPassword);
+  //     res.status(200).send("User Created");
+  //   } catch {
+  //     res.status(500).send("Server Error: unable to create user");
+  //   }
+  // });
 
   //Edit USER
   router.patch("/users/:userId", async (req, res) => {

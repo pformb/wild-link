@@ -75,12 +75,12 @@ const RegistrationPage = () => {
      <div className="registration-page__content">
       <h1>Please Register Here to Continue</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="First Name"/>
-        <input type="text" placeholder="Last Name"/>
-        <input type="text" placeholder="Email"/>
-        <input type="text" placeholder="Address"/>
-        <input type="password" placeholder="Password"/>
-        <input type="password" placeholder="Confirm Password" />
+        <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
+        <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)}/>
+        <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="text" placeholder="Address" value={address} onChange={e=> setAddress(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}  />
         <button type="submit">Register</button>
       </form>
     </div>
