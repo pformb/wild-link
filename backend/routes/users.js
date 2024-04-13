@@ -14,7 +14,7 @@ module.exports = (db) => {
     const userId = req.params.userId;
     const userData = await users.getUser(db, userId);
     if (userData.length === 0) {
-      return res.status(404).send("User Not Found");
+      return res.status(404).json({message: "User Not Found"});
     }
     res.json(userData);
   });
@@ -25,29 +25,17 @@ module.exports = (db) => {
 router.post("/register", async (req, res) => {
   const userData = req.body;
   if (!userData || !userData.password) {
-    return res.status(400).send("Invalid Request: Missing user password or data");
+    return res.status(400).json({message: "Invalid Request: Missing user password or data"});
   }
   const password = userData.password;
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     await users.registerUser(db, userData, hashedPassword);
-    res.status(200).send("User Created");
+    res.status(200).json({message:"User Created"});
   } catch {
-    res.status(500).send("Server Error: unable to create user");
+    res.status(500).json({message: "Server Error: unable to create user"});
   }
 });
-
-  // router.post("/register", async (req, res) => {
-  //   const { userData } = req.body;
-  //   const password = userData.password;
-  //   try {
-  //     const hashedPassword = await bcrypt.hash(password, saltRounds);
-  //     await users.registerUser(db, userData, hashedPassword);
-  //     res.status(200).send("User Created");
-  //   } catch {
-  //     res.status(500).send("Server Error: unable to create user");
-  //   }
-  // });
 
   //Edit USER
   router.patch("/users/:userId", async (req, res) => {
@@ -61,9 +49,9 @@ router.post("/register", async (req, res) => {
         userData.password = hashedPassword;
       }
       await users.updateUser(db, userId, userData);
-      res.status(200).send("User Updated");
+      res.status(200).json({message: "User Updated"});
     } catch {
-      res.status(500).send("Server Error: unable to update user");
+      res.status(500).json({message: "Server Error: unable to update user"});
     }
   });
 

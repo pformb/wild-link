@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import  '../styles/RegistrationPage.scss';
 import { useNavigate } from 'react-router-dom';
 
-const RegistrationPage = () => {
+const RegistrationPage = ({setLoggedIn}) => {
   //redirect url
   const navigate = useNavigate();
 
@@ -40,26 +40,24 @@ const RegistrationPage = () => {
     })
     .then(response => {
       if (!response.ok) {
+        console.log('Response not OK:', response);
         throw new Error('Registration failed');
       }
-    // Check if the response is JSON
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.indexOf('application/json') !== -1) {
       return response.json();
+  })
+  .then(data => {
+    if (data.message === 'User Created') {
+      console.log('Registration successful', data);
+      setLoggedIn(true);
+      navigate('/home');
     } else {
-      return response.text();
+      alert(data.message);
     }
   })
-    //   return response.json();
-    // })
-    .then(data => {
-      console.log('Registration successful', data);
-      navigate('/home');
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  };
+  .catch(error => {
+    console.error('Registration Error:', error);
+  });
+};
 
   return (
     <div className="registration-page">
