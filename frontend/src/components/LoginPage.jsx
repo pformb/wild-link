@@ -15,6 +15,18 @@ const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
+  /*const data = await response.json();
+if (data.success) {
+  // Login successful
+  setLoggedIn(true);
+  alert(`Welcome back, ${data.first_name}!`);
+  navigate('/home');
+} else {
+  // Login failed
+  alert(data.message);
+} */
+
   //form submission
   const handleSubmit =  async(e) => {
     e.preventDefault();
@@ -35,26 +47,53 @@ const navigate = useNavigate();
         throw new Error('Invalid email or password');
       }
   
+// Check if the response is JSON
+const contentType = response.headers.get('content-type');
+if (contentType && contentType.indexOf('application/json') !== -1) {
+  const data = await response.json();
+  console.log('Received:', data);
+  if (data.success) {
+    // Login successful
+    setLoggedIn(true);
+    alert(`Welcome back, ${data.first_name}!`);
+    navigate('/home');
+  } else {
+    // Login failed
+    alert(data.message);
+  }
+} else {
+  const data = await response.text();
+  console.log('Received:', data);
+  alert(data);
+  navigate('/home');
+}
+} catch (error) {
+console.error('Error:', error);
+alert('Invalid email or password');
+}
+};
+
+
       // Check if the response is JSON
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.indexOf('application/json') !== -1) {
-        const data = await response.json();
-        console.log('Received:', setLoggedIn, data);
-        setLoggedIn(true);
-        console.log('Set Logged In:', setLoggedIn);
-        alert(`Welcome back, ${data.first_name}!`);
-        navigate('/home');
-      } else {
-        const data = await response.text();
-        console.log('Received:', data);
-        alert(data);
-        navigate('/home');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Invalid email or password');
-    }
-  };
+  //     const contentType = response.headers.get('content-type');
+  //     if (contentType && contentType.indexOf('application/json') !== -1) {
+  //       const data = await response.json();
+  //       console.log('Received:', setLoggedIn, data);
+  //       setLoggedIn(true);
+  //       console.log('Set Logged In:', setLoggedIn);
+  //       alert(`Welcome back, ${data.first_name}!`);
+  //       navigate('/home');
+  //     } else {
+  //       const data = await response.text();
+  //       console.log('Received:', data);
+  //       alert(data);
+  //       navigate('/home');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     alert('Invalid email or password');
+  //   }
+  // };
 
   return (
     <div className="login-page">

@@ -16,11 +16,12 @@ module.exports = db => {
           req.session.userId = account.id;
           req.session.name = account.first_name;
           req.session.role = account.role;
-          return res.status(200).send("Login successful");
+          return res.status(200).json({ success: true, message: "login successful", first_name: account.first_name})
+          // return res.status(200).send("Login successful");
         }
       }
       // Account not found or password incorrect
-      res.status(400).send("Error 400: Email or Password does not match our records, please check the email and password.");
+      res.status(400).json("Error 400: Email or Password does not match our records, please check the email and password.");
     });
 //     let account = await login.findByEmail(db, "users", req.body.email);
 //     if (!account) {
@@ -40,7 +41,7 @@ module.exports = db => {
   
   router.post("/logout", async (req, res) => {
     req.session = null
-    res.status(200).send("Logout successful");
+    res.status(200).json({success: true, message: "Logout successful"});
   });
   return router;
  };
