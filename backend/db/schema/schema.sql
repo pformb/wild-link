@@ -13,6 +13,7 @@ CREATE TABLE organizations (
 id SERIAL PRIMARY KEY NOT NULL,
 organization_name VARCHAR(255) NOT NULL,
 website_url VARCHAR(255) NOT NULL,
+image VARCHAR(255),
 first_name VARCHAR(255) NOT NULL,
 last_name VARCHAR(255) NOT NULL,
 phone_number VARCHAR(20) NOT NULL,

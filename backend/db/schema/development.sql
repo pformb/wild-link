@@ -1,5 +1,5 @@
-INSERT INTO organizations (organization_name, website_url, first_name, last_name, phone_number, email, address, password, is_deleted, created_at, updated_at)
-VALUES ('MARS Wildlife Rescue Centre', 'www.marswildliferescue.com', 'Gyl', 'Andersen', '250-337-2021', 'gyl@marswildliferescue.com', '1331 Williams Beach Road,
+INSERT INTO organizations (organization_name, website_url, image, first_name, last_name, phone_number, email, address, password, is_deleted, created_at, updated_at)
+VALUES ('MARS Wildlife Rescue Centre', 'www.marswildliferescue.com', 'https://marswildliferescue.com/wp-content/uploads/2017/08/MARS-LOGO-transparent-background.png', 'Gyl', 'Andersen', '250-337-2021', 'gyl@marswildliferescue.com', '1331 Williams Beach Road,
 Merville, British Columbia', '$2b$10$8mG8IaIVhP2NNdkzr1mQTO6nSLfQ2QJFbsCdncmL3Mm5gKEDeTIhy', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 

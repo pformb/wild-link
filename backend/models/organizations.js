@@ -3,7 +3,7 @@
 //GET ALL ORGANIZATIONS
 const getAllOrganizations = async (db) => {
  const { rows } = await db.query(
-   `SELECT organization_name, website_url, phone_number, address FROM organizations WHERE is_deleted = false `
+   `SELECT organization_name, website_url, image, phone_number, address FROM organizations WHERE is_deleted = false `
  );
  return rows;
 };
@@ -11,7 +11,7 @@ const getAllOrganizations = async (db) => {
 //GET ORGANIZATION BY ID
 const getOrganizationById = async (db, orgId) => {
   const { rows } = await db.query(
-    `SELECT organization_name, website_url, phone_number, address FROM organizations WHERE id = $1 AND is_deleted = false`,
+    `SELECT organization_name, website_url, image, phone_number, address FROM organizations WHERE id = $1 AND is_deleted = false`,
     [orgId]
   );
   return rows;
@@ -20,7 +20,7 @@ const getOrganizationById = async (db, orgId) => {
 //GET ORGANIZATION PROFILE
 const getOrganizationProfile = async (db, orgId) => {
   const { rows } = await db.query(
-    `SELECT organization_name, website_url, first_name, last_name, phone_number, email, address FROM organizations WHERE id = $1 AND is_deleted = false`,
+    `SELECT organization_name, website_url, image, first_name, last_name, phone_number, email, address FROM organizations WHERE id = $1 AND is_deleted = false`,
     [orgId]
   );
   return rows;
