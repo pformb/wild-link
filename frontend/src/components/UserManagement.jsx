@@ -18,6 +18,9 @@ const UserManagement = () => {
   const [confirm_password, setConfirmPassword] = useState('');
   const [userData, setUserData] = useState([]); //unsure yet if this is needed
   
+  //Donation Card specific states
+  // const [donation, setDonation] = useState([]);
+
 //fetch specific user data to render Admin Dashboard
   // useEffect(() => {
   //   fetch('/api/users/${orgId}')
