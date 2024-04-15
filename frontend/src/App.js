@@ -18,20 +18,20 @@ function App() {
   // orgData={orgData} Pass to PatientStoriesPage
 
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn); 
   const [email, setEmail] = useState('');
+  const [userType, setUserType] = useState(''); // 'user' or 'organization'
 
   return (
     
     <div className="App"> 
     <BrowserRouter>
-    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUserType={setUserType}/>
 
     <Routes>
       
     <Route index element={<HomeRoute />} />
     <Route path="/home" element={<HomeRoute />} />
-    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} />} />
+    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} setUserType={setUserType}/>} />
     <Route path="/register" element={<RegistrationPage setLoggedIn={setLoggedIn}/>} />
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
