@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 export const usePatientForm = () => {
   const { orgId, patientId } = useParams();
   const editForm = patientId && patientId !== "new";
-
+  //Starting States
   const [formData, setFormData] = useState({
     patientDetails: {
     organization_id: orgId,
@@ -22,8 +22,8 @@ export const usePatientForm = () => {
     patientConditions: [],
     patientTreatments: [],
   });
-  const [originalData, setOriginalData] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState({
     speciesOptions: [],
     conditionOptions: [],
@@ -31,7 +31,9 @@ export const usePatientForm = () => {
     ageRangeOptions: [],
   });
 
+  //useEffect to populate data
   useEffect(() => {
+    //Checks which form to make correct api data request
     const endpoint = editForm
       ? `/api/organizations/${orgId}/patients/${patientId}/edit`
       : `/api/organizations/${orgId}/patients/new`;
@@ -40,6 +42,7 @@ export const usePatientForm = () => {
       try {
         const response = await fetch(endpoint);
         const data = await response.json();
+        //create select options
         setOptions({
           speciesOptions: data.allSpecies.map((species) => ({
             value: species.id,
@@ -47,11 +50,11 @@ export const usePatientForm = () => {
             image: `/stock-photos/${species.image}`,
           })),
           conditionOptions: data.allConditions.map((condition) => ({
-            value: String(condition.id),
+            value: condition.id,
             label: condition.condition_name,
           })),
           treatmentOptions: data.allTreatments.map((treatment) => ({
-            value: String(treatment.id),
+            value: treatment.id,
             label: treatment.treatment_name,
           })),
           ageRangeOptions: data.allAgeRanges.map((ageRange) => ({
@@ -76,24 +79,8 @@ export const usePatientForm = () => {
             story: patient.story,
             image: patient.image || "",
             },
-            patientConditions: data.patientConditions.map(cond => String(cond.condition_id)), // Convert to string
-            patientTreatments: data.patientTreatments.map(treat => String(treat.treatment_id)), // Convert to string
-          });
-          //TO BE USED TO CHECK FOR CHANGES UPON SUBMIT
-          setOriginalData({
-            patientDetails: {
-            species_id: patient.species_id,
-            age_range_id: patient.age_range_id,
-            patient_case: patient.patient_case,
-            location_found: patient.location_found,
-            date_admitted: patient.date_admitted,
-            release_date: patient.release_date || "",
-            is_released: patient.is_released,
-            story: patient.story,
-            image: patient.image,
-            },
-            patientConditions: data.patientConditions.map(cond => String(cond.condition_id)), // Convert ID to string if necessary
-            patientTreatments: data.patientTreatments.map(treat => String(treat.treatment_id)), // Same conversion
+            patientConditions: data.patientConditions.map(cond => cond.condition_id),
+            patientTreatments: data.patientTreatments.map(treat => treat.treatment_id),
           });
         }
       } catch (error) {
@@ -103,7 +90,7 @@ export const usePatientForm = () => {
 
     fetchData();
   }, [orgId, patientId, editForm]);
-
+  //tracks input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -113,7 +100,7 @@ export const usePatientForm = () => {
       },
     }));
   };
-
+  //tracks checkbox changes
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setFormData((prevFormData) => ({
@@ -124,7 +111,7 @@ export const usePatientForm = () => {
       },
     }));
   };
-
+  //tracks changes in single select drop downs
   const handleSelectChange = (selectedOption, actionMeta) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -134,29 +121,105 @@ export const usePatientForm = () => {
       },
     }));
   };
+  //tracks changes in multi select drop downs
+  const handleMultiSelectChange = (selectedOptions, { name }) => {
+    const updatedOptions = selectedOptions.map((option) => option.value); // Capture only the values (IDs)
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: updatedOptions, // This should be an array of IDs
+    }));
+  };
+  //validates form data required by db and patient story generation
+  const validateForm = () => {
+    const { patient_case, date_admitted, species_id, location_found, age_range_id } = formData.patientDetails;
+    const conditionsValid = formData.patientConditions.length > 0;
+    const treatmentsValid = formData.patientTreatments.length > 0;
 
-const handleMultiSelectChange = (selectedOptions, { name }) => {
-  const updatedOptions = selectedOptions.map((option) => option.value); // Capture only the values (IDs)
-  setFormData((prevFormData) => ({
-    ...prevFormData,
-    [name]: updatedOptions, // This should be an array of IDs
-  }));
-};
+    return patient_case && date_admitted && species_id && location_found && age_range_id && conditionsValid && treatmentsValid;
+  };
 
 
+  //handles story generation request
+  const handleGenerateStory = async () => {
+    if (!validateForm()) {
+      alert('Please fill in all required fields and select at least one condition and one treatment.');
+      return;
+    }
+    setIsLoading(true);
+    const { patientDetails, patientConditions, patientTreatments } = formData;
+    //create arrays of patientCondition, patientTreatment, species, and age_range names instead of ids
+    const conditionNames = patientConditions.map(id => 
+        options.conditionOptions.find(option => option.value === id)?.label || ""
+    );
+    const treatmentNames = patientTreatments.map(id => 
+        options.treatmentOptions.find(option => option.value === id)?.label || ""
+    );
+    const speciesName = options.speciesOptions.find(species => species.value === patientDetails.species_id)?.label || "Unknown Species";
+    const ageRangeName = options.ageRangeOptions.find(range => range.value === patientDetails.age_range_id)?.label || "Unknown Age Range";
+
+    const changedDetails = {
+      ...patientDetails,
+      species_name: speciesName,
+      age_range: ageRangeName,
+      story: undefined,
+      species_id: undefined,
+      age_range_id: undefined,
+    };
+    const storyRequestData = {
+      patientDetails: changedDetails,
+      patientConditions: conditionNames,
+      patientTreatments: treatmentNames,
+    };
+    try {
+        const response = await fetch('/api/generate-story', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(storyRequestData)
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Failed to generate story");
+
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            patientDetails: {
+                ...prevFormData.patientDetails,
+                story: data.story
+            }
+        }));
+
+        alert('Story generated successfully!');
+    } catch (error) {
+        console.error("Error generating story:", error);
+        alert(error.message);
+    } finally {
+        setIsLoading(false);
+    }
+  }
+
+  //submits form to database
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!validateForm() || formData.patientDetails.story === "") {
+      alert('Please fill in all required fields and select at least one condition and one treatment.');
+      return;
+    }
     const endpoint = editForm
       ? `/api/organizations/${orgId}/patients/${patientId}/edit`
       : `/api/organizations/${orgId}/patients/new`;
     const method = editForm ? "PATCH" : "POST";
-    const submittedData = {
-      patientDetails: formData.patientDetails,
-      patientConditions: formData.patientConditions.map(id => ({ condition_id: id })),  // Format as array of objects
-      patientTreatments: formData.patientTreatments.map(id => ({ treatment_id: id })),  // Format as array of objects
-    };
-    console.log("Submitting:", submittedData); // See what's being submitted
 
+    const { release_date, ...otherDetails } = formData.patientDetails;
+    const updatedPatientDetails = {
+      ...otherDetails,
+      release_date: release_date === "" ? null : release_date, // Convert empty string to null
+    };
+  
+    const submittedData = {
+      patientDetails: updatedPatientDetails,
+      patientConditions: formData.patientConditions,
+      patientTreatments: formData.patientTreatments,
+    };
+    
     if (
       Object.keys(submittedData.patientDetails).length === 0 &&
       submittedData.patientConditions.length === 0 &&
@@ -192,7 +255,8 @@ const handleMultiSelectChange = (selectedOptions, { name }) => {
     handleCheckboxChange,
     handleSelectChange,
     handleMultiSelectChange,
+    handleGenerateStory,
+    isLoading,
     options,
   };
 };
-

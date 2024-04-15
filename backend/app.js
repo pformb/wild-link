@@ -11,6 +11,7 @@ const organizations = require("./routes/organizations");
 const patients = require("./routes/patients");
 const donations = require("./routes/donations");
 const users = require("./routes/users");
+const story = require("./routes/story");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,5 +40,6 @@ app.use("/api", organizations(db));
 app.use("/api", patients(db));
 app.use("/api", donations(db));
 app.use("/api", users(db));
+app.use("/api", story());
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

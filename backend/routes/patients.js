@@ -67,9 +67,7 @@ module.exports = (db) => {
   });
 
   //GET ALL PATIENT DATA AND CONDITION/TREATMENT DATA FOR EDIT FORM
-  router.get(
-    "/organizations/:orgId/patients/:patientId/edit",
-    async (req, res) => {
+  router.get("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
       const patientId = req.params.patientId;
       try {
         const [
@@ -151,29 +149,20 @@ module.exports = (db) => {
   });
 
   //PATCH EDIT PATIENT DATA
-  router.patch(
-    "/organizations/:orgId/patients/:patientId",
-    async (req, res) => {
+  router.patch("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
       const patientId = req.params.patientId;
       const {
         patientDetails,
         patientConditions = [],
         patientTreatments = [],
       } = req.body;
-      // CONVERT EXTRACT FROM NESTED OBJECTS TO MAKE ARRAYS
-      const conditionIds = patientConditions.map(
-        (condition) => condition.condition_id
-      );
-      const treatmentIds = patientTreatments.map(
-        (treatment) => treatment.treatment_id
-      );
       try {
         await patients.updatePatientInformation(
           db,
           patientId,
           patientDetails,
-          conditionIds,
-          treatmentIds
+          patientConditions,
+          patientTreatments
         );
         res.status(200).json({ message: "Patient Updated" });
       } catch {
