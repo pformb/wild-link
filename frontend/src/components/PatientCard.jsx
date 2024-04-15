@@ -6,9 +6,9 @@ const PatientCard = ({ id, name, location_found, image_url, condition_name, trea
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -24,13 +24,8 @@ const PatientCard = ({ id, name, location_found, image_url, condition_name, trea
           alt={name} />
           <h2 className="patient-name">{name}</h2>
         <div className="patient-details">
-          <p className="patient-location">Location Found: {location_found}</p>
-          <p className="patient-condition">Condition: {condition_name}</p>
-          <p className="patient-treatment">Treatment: {treatment_name}</p>
-          <p className="patient-cost">Treatment Cost: ${treatment_cost}</p>
-          <p className="patient-age">Age Range: {age_range}</p>
-          <p className="patient-admitted">Date Admitted: {date_admitted}</p>
-          <p className="patient-status">Status: {is_released ? 'Released' : 'Admitted'}</p>
+
+          <h3 className="patient-status">Status: {is_released ? 'Released' : 'Admitted'}</h3>
           <BasicModal open={isModalOpen} onClose={handleCloseModal} />
           
         </div>
@@ -40,5 +35,12 @@ const PatientCard = ({ id, name, location_found, image_url, condition_name, trea
 }
 
 export default PatientCard;
+
+// <p className="patient-location">Location Found: {location_found}</p>
+// <p className="patient-condition">Condition: {condition_name}</p>
+// <p className="patient-treatment">Treatment: {treatment_name}</p>
+// <p className="patient-cost">Treatment Cost: ${treatment_cost}</p>
+// <p className="patient-age">Age Range: {age_range}</p>
+// <p className="patient-admitted">Date Admitted: {date_admitted}</p>
 
 

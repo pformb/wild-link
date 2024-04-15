@@ -100,11 +100,13 @@ const PatientsListPage = ({ orgData }) => {
   return (
     <div className="patients-list">
       <TopNavigation />
+      <div className="patients-list-page">
       {patients.map(pat => (
       <PatientCard key={pat.id} {...pat} />
       ))}
 
       {/* <OrganizationCard /> */}
+      </div>
     </div>
   );
 }
