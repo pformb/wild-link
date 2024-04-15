@@ -7,6 +7,7 @@ import DonationsCard from './DonationsCard';
 
 const OrgManagement = () => {
   const { orgId } = useParams();
+  console.log('orgId:', orgId);
   const [orgData, setOrgData] = useState({
     organization_name: '',
     first_name: '',
@@ -18,15 +19,50 @@ const OrgManagement = () => {
     confirm_password: ''
   });
 
+  //fetch specific organization data to render Admin Dashboard
+  // useEffect(() => {
+  //   fetch(`/api/organizations/${orgId}/profile`)
+  //   .then(response => response.json())
+  //   .then(data => setOrgData(data));
+  // }, [orgId]);
+
   useEffect(() => {
-    fetch(`/api/organizations/${orgId}/profile`)
-    .then(response => response.json())
-    .then(data => setOrgData(data));
+    const fetchOrgProfile = async () => {
+      try {
+        const response = await fetch(`/api/organizations/${orgId}/profile`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setOrgData(data);
+      } catch (error) {
+        console.error('Error fetching organization profile:', error);
+      }
+    };
+  
+    fetchOrgProfile();
   }, [orgId]);
+
+  // const onHandleSubmit = (event) => {
+  //   event.preventDefault();
+
+
+  //   //submit the form data
+  //   fetch(`/api/organizations/${orgId}/profile`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(orgData),
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => setOrgData(data));
+  // };
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
-
+  
+    //submit the form data
     fetch(`/api/organizations/${orgId}/profile`, {
       method: 'PATCH',
       headers: {
@@ -34,10 +70,17 @@ const OrgManagement = () => {
       },
       body: JSON.stringify(orgData),
     })
-    .then(response => response.json())
-    .then(data => setOrgData(data));
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => setOrgData(data))
+    .catch(error => console.error('Error updating organization profile:', error));
   };
 
+  //handle Edit Organization Information
   const onHandleChange = (event) => {
     setOrgData({
       ...orgData,
