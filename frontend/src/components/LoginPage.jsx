@@ -44,6 +44,9 @@ if (contentType && contentType.indexOf('application/json') !== -1) {
     // Login successful
     setLoggedIn(true);
     setUserType(data.userType);
+      if (data.userType === 'organization') {
+        setOrgId(data.orgId); // Set orgId here
+      }
     alert(`Welcome back, ${data.first_name}!`);
     navigate('/home');
   } else {

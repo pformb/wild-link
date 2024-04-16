@@ -1,7 +1,7 @@
 //Try 2 
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../styles/OrgManagement.scss';
 import DonationsCard from './DonationsCard';
 

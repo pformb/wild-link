@@ -23,10 +23,11 @@ const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
         </div>
 
         <div className="top-nav-bar__login-register">
+
         {loggedIn ? (
           <>
             <span className="top-nav-bar__login-message">{email}</span>
-            {userType === 'user' ? (
+            {orgId === null ? (
                <Link to="/users" className="top-nav-bar__dashboard">View Profile</Link>
             ) : (
               <Link to={`/organizations/${orgId}/profile`} className="top-nav-bar__dashboard">View Profile</Link>

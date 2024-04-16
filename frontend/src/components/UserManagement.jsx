@@ -1,13 +1,15 @@
 import React from 'react';
 //import { useApplicationData } from '../hooks/useApplicationData.js';
 import { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useParams, BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../styles/UserManagement.scss';
 
 const UserManagement = () => {
+  const { userId } = useParams();
   //Org specific states
   // const [user_name, setOrgName] = useState('');
+  console.log('UserManagement:', userId);
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');

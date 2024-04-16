@@ -21,7 +21,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState(''); // 'user' or 'organization'
-  const [orgId, setOrgId] = useState(null);
+  const [orgId, setOrgId] = useState('');
+  const [usersId, setUsersId] = useState('');
 
   return (
     
@@ -41,7 +42,7 @@ function App() {
     <Route path="/organizations/:orgId/patients/new" element={<PatientForm />} />
     <Route path="/organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
     <Route path="/organizations/:orgId/profile" element={<OrgManagement setLoggedIn={setLoggedIn} email={email} />} />
-    <Route path="/users" element={<UserManagement />} />
+    <Route path="/users/:usersId" element={<UserManagement usersId={usersId} />} />
     
     </Routes>
     </BrowserRouter>
