@@ -4,9 +4,10 @@ import LoginPage from './components/LoginPage.jsx'
 import DonatePage from './components/DonatePage.jsx'
 import RegistrationPage from './components/RegistrationPage.jsx'
 import PatientStoriesPage from './components/PatientStoriesPage.jsx'
+import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
-import PatientForm from './components/PatientForm.jsx';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
@@ -19,6 +20,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   console.log(loggedIn); 
   const [email, setEmail] = useState('');
+
 
   return (
     
@@ -35,9 +37,9 @@ function App() {
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
-    <Route path="/organizations/:orgId/patients/new" element={<PatientForm />} />
-    <Route path="/organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
+    <Route path="/:orgId/patients" element={<PatientsListPage />} />
     
+
     </Routes>
     </BrowserRouter>
     </div>
