@@ -1,11 +1,9 @@
 import  '../styles/DonatePage.scss';
-import TopNavigation from '../components/TopNavigation';
 
 const DonatePage = () => {
   return (
     
     <div className="donate-page">
-      <TopNavigation />
       <div className="donate-form">
       <h2 className="donate-header">Donate</h2>
       <div className="donation-amount">

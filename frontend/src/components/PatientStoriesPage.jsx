@@ -1,5 +1,4 @@
 import '../styles/PatientStoriesPage.scss';
-import TopNavigation from '../components/TopNavigation';
 import OrganizationCard from '../components/OrganizationCard';
 
 

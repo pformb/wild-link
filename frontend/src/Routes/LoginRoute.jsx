@@ -2,11 +2,7 @@
 import LoginPage from '../components/LoginPage';
 import '../styles/LoginPage.scss';
 
-const LoginRoute = (props) => { 
-
-  // const { 
-    
-  // } = props;
+const LoginRoute = () => { 
 
   return (
     <div className="login-route">

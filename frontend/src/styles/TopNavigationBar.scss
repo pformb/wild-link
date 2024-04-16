@@ -54,6 +54,7 @@ margin-left: 20px;
 }
 
 .top-nav-bar__login-register {
+  display: flex;
   text-decoration: none;
   color: white;
   font-size: 20px;
@@ -61,6 +62,20 @@ margin-left: 20px;
   margin-left: 560px;
   align-items: flex-end;
   margin-top: 15px;
+  padding: 15px;
+  font-size: 20px;
+  margin-left: 500px;
+  // align-items: flex-end;
+}
+
+.top-nav-bar__login-message {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  border:#ffffff;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .top-nav-bar__register {
@@ -78,6 +93,17 @@ margin-left: 20px;
 .top-nav-bar__login {
   text-decoration: none;
   color: white;
+  &:hover {
+    color: transparent;
+    background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+.top-nav-bar__logout {
+  text-decoration: none;
+  color:rgb(58, 158, 1);
   &:hover {
     color: transparent;
     background: linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%);
