@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
+import PatientForm from './components/PatientForm.jsx';
 
 function App() {
   // const { orgData } = useApplicationData();
@@ -38,7 +39,8 @@ function App() {
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
     <Route path="/:orgId/patients" element={<PatientsListPage />} />
-    
+    <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
+    <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
 
     </Routes>
     </BrowserRouter>

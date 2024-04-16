@@ -3,45 +3,11 @@ import Select from 'react-select'
 import { usePatientForm } from "../hooks/usePatientForm";
 import {TextField, Checkbox, Grid, Box, Button, Typography } from "@mui/material"
 import makeAnimated from 'react-select/animated';
+import customSelectStyles from "../styles/selectStyles";
 
 const PatientForm = () => {
   const { formData, handleSubmit, handleInputChange, handleCheckboxChange, handleSelectChange, handleMultiSelectChange, handleGenerateStory, isLoading, options } = usePatientForm();
   const animatedComponents = makeAnimated();
-
-  const customSelectStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      minHeight: "56px",
-      fontFamily: "Arial, sans-serif",
-      borderColor: state.isFocused ? "#ccc" : "#ccc",
-      boxShadow: state.isFocused ? "0 0 0 1px #ccc" : "none",
-      "&:hover": {
-        borderColor: state.isFocused ? "#aaa" : "#ccc",
-      },
-      marginTop: '12px',
-    }),
-    valueContainer: (provided, state) => ({
-      ...provided,
-      padding: "18.5px 14px",
-    }),
-    input: (provided, state) => ({
-      ...provided,
-      margin: 0,
-      padding: 0,
-    }),
-    placeholder: (provided, state) => ({
-      ...provided,
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      color: "#aaa",
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      color: state.isFocused ? "black" : "black",
-      overflow: "visible",
-    }),
-  };
 
   return (
     <Box sx={{ width: "80%", mx: "auto", boxShadow: 3, p: 3 }}>
