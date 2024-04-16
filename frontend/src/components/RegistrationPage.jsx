@@ -170,6 +170,8 @@ const RegistrationPage = ({setLoggedIn}) => {
 
 export default RegistrationPage;
 
+//Old Css styling 
+
 // import React, { useState } from 'react';
 // import  '../styles/RegistrationPage.scss';
 // import { useNavigate } from 'react-router-dom';
