@@ -24,7 +24,12 @@ const getPatientById = async (db, patientId) => {
 
 const getAllPatientDataById = async (db, patientId) => {
   const { rows } = await db.query(
-    `SELECT patients.*, age_ranges.range_name AS age_range FROM patients
+    `SELECT patients.id, patients.organization_id, patients.patient_case, 
+    patients.species_id, patients.location_found,
+    TO_CHAR(patients.date_admitted, 'YYYY-MM-DD') AS date_admitted,
+    TO_CHAR(patients.release_date, 'YYYY-MM-DD') AS release_date,
+    patients.is_released, patients.is_archived, patients.age_range_id,
+    patients.story, patients.image, age_ranges.range_name AS age_range FROM patients
     JOIN age_ranges ON patients.age_range_id = age_ranges.id
     WHERE patients.id = $1`,
     [patientId]
@@ -52,7 +57,7 @@ const getPatientTreatments = async (db, patientId) => {
   return rows;
 }
 
-/// RETRIEVE CONDITIONS, TREATMENTS, AGES DATA FOR FORMS ///
+/// RETRIEVE CONDITIONS, TREATMENTS, AGES, SPECIES DATA FOR FORMS ///
 const getAllConditions = async (db) => {
   const { rows } = await db.query(
     `SELECT * FROM conditions`
@@ -70,6 +75,13 @@ const getAllTreatments = async (db) => {
 const getAllAgeRanges = async (db) => {
   const { rows } = await db.query(
     `SELECT * FROM age_ranges`
+  )
+  return rows;
+}
+
+const getAllSpecies = async (db) => {
+  const { rows } = await db.query(
+    `SELECT * FROM species`
   )
   return rows;
 }
@@ -266,6 +278,7 @@ module.exports = {
   getAllConditions,
   getAllTreatments,
   getAllAgeRanges,
+  getAllSpecies,
   updatePatientInformation,
   createPatient,
   archivePatient,

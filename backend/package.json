@@ -15,7 +15,8 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "http-errors": "^2.0.0",
-    "i": "^0.3.7"
+    "i": "^0.3.7",
+    "openai": "^4.33.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

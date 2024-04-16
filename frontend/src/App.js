@@ -8,6 +8,7 @@ import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
 import OrgManagement from './components/OrgManagement.jsx';
 import UserManagement from './components/UserManagement.jsx';
+import PatientForm from './components/PatientForm.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
@@ -37,6 +38,8 @@ function App() {
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
+    <Route path="/organizations/:orgId/patients/new" element={<PatientForm />} />
+    <Route path="/organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
     <Route path="/organizations/:orgId/profile" element={<OrgManagement setLoggedIn={setLoggedIn} email={email} />} />
     <Route path="/users" element={<UserManagement />} />
     
