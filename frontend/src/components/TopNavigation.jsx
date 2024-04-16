@@ -49,57 +49,6 @@ const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
 };
 
 export default TopNavigation;
-
-
-// import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-// import { Link as RouterLink } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-
-// const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
-//   const navigate = useNavigate();
-
-//   const handleLogout = () => {
-//     setLoggedIn(false);
-//     navigate('/home');
-//   };
-
-//   return (
-//     <AppBar position="static" style={{ backgroundColor: '#333333', boxShadow: '0 4px 6px -6px #222', height: '72px' }}>
-//       <Toolbar>
-//         <Typography variant="h6" style={{ flexGrow: 1, fontFamily: "'Luckiest Guy', cursive", fontSize: '38px' }}>
-//           <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>
-//         </Typography>
-
-//         <Button color="inherit"><RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white' }}>Patient Stories</RouterLink></Button>
-//         <Button color="inherit">About Us</Button>
-//         <Button color="inherit"><RouterLink to="/donate" style={{ textDecoration: 'none', color: 'white' }}>Donate</RouterLink></Button>
-//         <Button color="inherit"><RouterLink to="/contactus" style={{ textDecoration: 'none', color: 'white' }}>Contact Us</RouterLink></Button>
-
-//         {loggedIn ? (
-//           <>
-//             <Typography variant="h6">{email}</Typography>
-//             {orgId === null ? (
-//               <Button color="inherit"><RouterLink to="/users" style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
-//             ) : (
-//               <Button color="inherit"><RouterLink to={`/organizations/${orgId}/profile`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
-//             )}
-//             <Button color="inherit" onClick={handleLogout}>Logout</Button>
-//           </>
-//         ) : (
-//           <>
-//             <Button color="inherit"><RouterLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</RouterLink></Button>
-//             <Button color="inherit"><RouterLink to="/register" style={{ textDecoration: 'none', color: 'white' }}>Register</RouterLink></Button>
-//           </>
-//         )}
-//       </Toolbar>
-//     </AppBar>
-//   );
-// };
-
-// export default TopNavigation;
-
-
-// import '../styles/TopNavigationBar.scss';
 // import { Link } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
