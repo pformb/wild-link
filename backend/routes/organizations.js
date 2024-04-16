@@ -35,7 +35,7 @@ module.exports = (db) => {
     res.json(orgProfile);
   });
 
-  //UPDATE ORGANIZATION PROFILE
+  // UPDATE ORGANIZATION PROFILE OG
   router.patch("/organizations/:orgId/profile", async (req, res) => {
     const orgId = req.params.orgId;
     // let { orgData } = req.body;
@@ -53,6 +53,5 @@ module.exports = (db) => {
       res.status(500).json({ error: "Server Error: unable to update organization"});
     }
   });
-
-  return router;
+return router;
 };
