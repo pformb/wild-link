@@ -88,25 +88,28 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
 
   //handle Edit Organization Information
   const onHandleChange = (event) => {
-    // setOrgData({
-    //   ...orgData,
-    //   [event.target.name]: event.target.value
-    // });
+    setOrgData({
+      ...orgData,
+      [event.target.name]: event.target.value
+    });
   };
 
+  //prevent react from thrown an error due to component control and undefined || ''
   return (
     <div className="OrgManagement">
-      <h1>Organization Admin Dashboard</h1>
+      <h1 display="flex" justify-content="center">Organization Admin Dashboard</h1>
       <div className="org-mgmt">
         <div className="org-mgmt__content">
-        <Box width="50vw" display="flex" justifyContent="center">
-          <form onSubmit={onHandleSubmit}>
+          <Box display="flex" justifyContent="center">
             <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <form onSubmit={onHandleSubmit}>
+                  <Grid container spacing={3}>
               <Grid item xs={6}>
                 <TextField
                   name="organization_name"
                   label="Organization Name"
-                  value={orgData.organization_name}
+                  value={orgData.organization_name || ''}
                   onChange={onHandleChange}
                   fullWidth
                 />
@@ -115,7 +118,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="first_name"
                 label="First Name"
-                value={orgData.first_name}
+                value={orgData.first_name || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -124,7 +127,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="last_name"
                 label="Last Name"
-                value={orgData.last_name}
+                value={orgData.last_name || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -133,7 +136,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="email"
                 label="email"
-                value={orgData.email}
+                value={orgData.email || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -142,7 +145,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="address"
                 label="address"
-                value={orgData.address}
+                value={orgData.address || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -151,7 +154,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="phone"
                 label="phone"
-                value={orgData.phone}
+                value={orgData.phone || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -160,7 +163,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="password"
                 label="password"
-                value={orgData.password}
+                value={orgData.password || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
@@ -169,29 +172,33 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
               <TextField
                 name="confirm_password"
                 label="confrim password"
-                value={orgData.confirm_password}
+                value={orgData.confirm_password || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
             </Grid>
-              <Grid item xs={6}>
-              <Box display="flex" justifyContent="center" mt={2}>
-                <Button type="submit" variant="contained" color="primary">
-                  Edit Organization Information
-                </Button>
-              </Box>
-              </Grid>
+            <Grid item xs={6}>
+                    <Box display="flex" justifyContent="center" mt={2}>
+                      <Button type="submit" variant="contained" color="primary">
+                        Edit
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </form>
             </Grid>
-          </form>
-          </Box>
-          {donation ? (
-              <DonationsTable donation={donation} />
-            ) : (
-              <CircularProgress />
-            )}
-        </div>
+            <Grid item xs={6}>
+              {donation ? (
+                <DonationsTable donation={donation} />
+              ) : (
+                <CircularProgress />
+              )}
+            </Grid>
+          </Grid>
+        </Box>
       </div>
     </div>
+  </div>
   );
 };
 
