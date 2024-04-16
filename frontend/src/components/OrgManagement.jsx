@@ -1,11 +1,12 @@
 //Try 2 
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/OrgManagement.scss';
 import DonationsCard from './DonationsCard';
 
 const OrgManagement = () => {
+  // const navigate = useNavigate();
   const { orgId } = useParams();
   console.log('orgId:', orgId);
   const [orgData, setOrgData] = useState({
@@ -18,13 +19,6 @@ const OrgManagement = () => {
     password: '',
     confirm_password: ''
   });
-
-  //fetch specific organization data to render Admin Dashboard
-  // useEffect(() => {
-  //   fetch(`/api/organizations/${orgId}/profile`)
-  //   .then(response => response.json())
-  //   .then(data => setOrgData(data));
-  // }, [orgId]);
 
   useEffect(() => {
     const fetchOrgProfile = async () => {
@@ -39,25 +33,39 @@ const OrgManagement = () => {
         console.error('Error fetching organization profile:', error);
       }
     };
-  
     fetchOrgProfile();
   }, [orgId]);
 
-  // const onHandleSubmit = (event) => {
-  //   event.preventDefault();
+  // useEffect(() => {
+  //   const fetchOrgProfile = async () => {
+  //     try {
+  //       const response = await fetch(`/api/organizations/${orgId}/profile`);
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const data = await response.json();
+  //       setOrgData(data);
+  //     } catch (error) {
+  //       console.error('Error fetching organization profile:', error);
+  //     }
+  //   };
+  //   fetchOrgProfile();
+  // }, [orgId]);
 
+  useEffect(() => {
+    const fetchSession = async () => {
+      const response = await fetch('/api/session');
+      if (response.ok) {
+        const data = await response.json();
+        // Now you have access to the userId
+        const userId = data.userId;
+      } else {
+        console.error('Not logged in');
+      }
+    }
+    fetchSession();
+  }, []);
 
-  //   //submit the form data
-  //   fetch(`/api/organizations/${orgId}/profile`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(orgData),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => setOrgData(data));
-  // };
 
   const onHandleSubmit = (event) => {
     event.preventDefault();

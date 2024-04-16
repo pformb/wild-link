@@ -20,18 +20,19 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState(''); // 'user' or 'organization'
+  const [orgId, setOrgId] = useState(null);
 
   return (
     
     <div className="App"> 
     <BrowserRouter>
-    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUserType={setUserType}/>
+    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userType={setUserType} orgId={orgId}/>
 
     <Routes>
       
     <Route index element={<HomeRoute />} />
     <Route path="/home" element={<HomeRoute />} />
-    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} setUserType={setUserType}/>} />
+    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} setUserType={setUserType} setOrgId={setOrgId}/>} />
     <Route path="/register" element={<RegistrationPage setLoggedIn={setLoggedIn}/>} />
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />

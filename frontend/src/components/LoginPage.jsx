@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 //https://jessywlee.medium.com/apply-http-post-method-and-fetch-function-to-user-login-js-react-d74a2c19ab7d
 
-const LoginPage = ({ setLoggedIn, setUserType }) => {
+const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId }) => {
   
 //redirect url
 const navigate = useNavigate();
