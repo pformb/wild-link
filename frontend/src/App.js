@@ -38,7 +38,8 @@ function App() {
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
     <Route path="/contactus" element={<ContactUsPage />} />
-    <Route path="/patientslist" element={<PatientsListPage />} />
+    <Route path="/:orgId/patients" element={<PatientsListPage />} />
+    
 
     </Routes>
     </BrowserRouter>
