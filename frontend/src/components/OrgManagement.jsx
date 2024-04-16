@@ -1,22 +1,16 @@
 //Try 2 
-
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate, useParams } from 'react-router-dom';
-// import { TextField, Button, Grid, Paper } from '@material-ui/core';
-// // import '../styles/OrgManagement.scss';
-// import DonationsCard from './DonationsCard';
-
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import DonationsCard from './DonationsCard';
+import CircularProgress from '@mui/material/CircularProgress';
+import DonationsTable from './DonationsTable';
 
-const OrgManagement = () => {
-  // const navigate = useNavigate();
+const OrgManagement = ( isLoggedIn, usersId, userType ) => {
+  const [donation, setDonation] = useState([]);
   const { orgId } = useParams();
   console.log('orgId:', orgId);
   const [orgData, setOrgData] = useState({ //maybe send send this as the 1st object of the array in the fetch request
@@ -50,21 +44,25 @@ const OrgManagement = () => {
     // console.log('orgData:', orgData);
   }, [orgId]);
 
+  //no userId in the response
   useEffect(() => {
     const fetchSession = async () => {
       const response = await fetch('/api/session');
       console.log('response:', response);
-      if (response.ok) {
-        const data = await response.json();
-        // Now you have access to the userId
-        const userId = data.userId;
-      } else {
+      if (!response.ok) {
         console.error('Not logged in');
       }
     }
     fetchSession();
   }, []);
 
+  //fetch donations table
+  useEffect(() => {
+    fetch(`/organizations/${orgId}/donations`)
+      .then(response => response.json())
+      .then(data => setDonation(data))
+      .catch(error => console.error('Error fetching donation:', error));
+  }, [orgId]);
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
@@ -178,15 +176,19 @@ const OrgManagement = () => {
             </Grid>
               <Grid item xs={6}>
               <Box display="flex" justifyContent="center" mt={2}>
-  <Button type="submit" variant="contained" color="primary">
-    Edit Organization Information
-  </Button>
-</Box>
+                <Button type="submit" variant="contained" color="primary">
+                  Edit Organization Information
+                </Button>
+              </Box>
               </Grid>
             </Grid>
           </form>
           </Box>
-          <DonationsCard />
+          {donation ? (
+              <DonationsTable donation={donation} />
+            ) : (
+              <CircularProgress />
+            )}
         </div>
       </div>
     </div>
