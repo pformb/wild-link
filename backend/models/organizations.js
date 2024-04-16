@@ -3,7 +3,7 @@
 //GET ALL ORGANIZATIONS
 const getAllOrganizations = async (db) => {
  const { rows } = await db.query(
-   `SELECT organization_name, website_url, image, phone_number, address FROM organizations WHERE is_deleted = false `
+   `SELECT id, organization_name, website_url, image, phone_number, address FROM organizations WHERE is_deleted = false `
  );
  return rows;
 };

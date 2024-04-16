@@ -3,7 +3,7 @@
 /// FETCH PATIENT DATA ///
 const getAllPatientsByOrg = async (db, orgId) => {
   const { rows } = await db.query(
-    `SELECT patients.id, patients.patient_case, patients.date_admitted, patients.release_date, patients.is_released, patients.is_archived, patients.created_at, species.name AS species, COALESCE(patients.image, species.image) AS image FROM patients 
+    `SELECT patients.story, patients.location_found, patients.id, patients.patient_case, patients.date_admitted, patients.release_date, patients.is_released, patients.is_archived, patients.created_at, species.name AS species, COALESCE(patients.image, species.image) AS image FROM patients 
     JOIN species ON patients.species_id = species.id
     WHERE organization_id = $1 AND patients.is_archived = false
     ORDER BY patients.date_admitted`,

@@ -7,7 +7,6 @@ import PatientStoriesPage from './components/PatientStoriesPage.jsx'
 import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
-import PatientForm from './components/PatientForm.jsx';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';

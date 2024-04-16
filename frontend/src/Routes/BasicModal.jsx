@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import DateTime from 'date-and-time';
 
 const style = {
   position: 'absolute',
@@ -19,7 +20,8 @@ const style = {
 };
 
 
-export default function BasicModal() {
+export default function BasicModal({patient}) {
+  console.log('patient data modal:', patient);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,51 +44,51 @@ export default function BasicModal() {
             height: '100%' 
             }}>
               
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '50px', }}>
         <div style={{ float: 'left' }}>
           <Typography id="modal-modal-case" variant="h6" component="h2">
-                Case Number: 
+                <strong>Case Number:</strong> {patient.patient_case}
                 </Typography>
               <Typography id="modal-modal-species" variant="h6" component="h2">
-                Species: 
+                <strong>Species:</strong> {patient.species}
                 </Typography>
               <Typography id="modal-modal-date" variant="h6" component="h2">
-                Date Admitted: 
+                <strong>Date Admitted:</strong> {DateTime.format(new Date(patient.date_admitted), 'dddd, MMMM DD YYYY')}
                 </Typography>
               <Typography id="modal-modal-location" variant="h6" component="h2">
-                Location Found: 
+                <strong>Location Found:</strong> {patient.location_found}
                 </Typography>
         </div>
         <img 
-          src="https://via.placeholder.com/450x150" 
+          src={patient.image} 
           alt="Patient" 
+          height= '150'
+          width= 'auto'
           style={{ 
-            marginRight: '10px', 
+            marginRight: '50px', 
             marginLeft: '10px', 
+            borderRadius: '20px'
           }} />
       </div>
-      <div 
-      style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '50px', 
-        color: 'green'  
-        }}>
-          <Typography id="modal-modal-release" variant="h5" component="h5">
-      Released On: Date 
-      </Typography>
-    </div>
+      {patient.is_released && (
+  <div 
+    style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '50px', 
+      color: 'green',
+    }}
+  >
+    <Typography id="modal-modal-release" variant="h5" component="h5">
+      <strong>Released On:</strong> {DateTime.format(new Date(patient.release_date), 'dddd, MMMM DD YYYY')}
+    </Typography>
+    
+  </div>
+)}
   <div>
-        <Typography id="modal-modal-description" sx={{ mt: 1 }}>
-              It is a long established fact that a reader will be distracted by the readable 
-              content of a page when looking at its layout. The point of using Lorem Ipsum is 
-              that it has a more-or-less normal distribution of letters, as opposed to using 
-              'Content here, content here', making it look like readable English. Many desktop 
-              publishing packages and web page editors now use Lorem Ipsum as their default model 
-              text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. 
-              Various versions have evolved over the years, sometimes by accident, sometimes on purpose 
-              (injected humour and the like).
+        <Typography id="modal-modal-description" sx={{ mt: 1, fontSize: '14px' }}>
+          <strong>{patient.story}</strong>
               </Typography>
         </div>
       <div style={{ alignSelf: 'center', marginTop: '10px' }}>

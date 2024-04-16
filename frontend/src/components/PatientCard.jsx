@@ -23,7 +23,7 @@ const PatientCard = ({ pat }) => {
         <div className="patient-details">
 
           <h3 className="patient-status">Status: {pat.is_released ? 'Released' : 'Admitted'}</h3>
-          <BasicModal open={isModalOpen} onClose={handleCloseModal} />
+          <BasicModal patient={pat} open={isModalOpen} onClose={handleCloseModal} />
           
         </div>
       </div>
