@@ -51,7 +51,6 @@ const organizations = [
 const PatientStoriesPage = ({ orgData }) => {
   return (
     <div className="patient-stories">
-      <TopNavigation />
 
       <div className="organization-card-list">
       {organizations.map(org => (

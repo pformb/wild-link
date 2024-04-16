@@ -1,5 +1,4 @@
 import '../styles/PatientsListPage.scss';
-import TopNavigation from '../components/TopNavigation';
 import PatientCard from '../components/PatientCard';
 
 
@@ -99,7 +98,6 @@ const patients = [
 const PatientsListPage = ({ orgData }) => {
   return (
     <div className="patients-list">
-      <TopNavigation />
       <div className="patients-list-page">
       {patients.map(pat => (
       <PatientCard key={pat.id} {...pat} />
