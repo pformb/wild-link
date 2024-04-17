@@ -48,7 +48,6 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
   useEffect(() => {
     const fetchSession = async () => {
       const response = await fetch('/api/session');
-      console.log('response:', response);
       if (!response.ok) {
         console.error('Not logged in');
       }
