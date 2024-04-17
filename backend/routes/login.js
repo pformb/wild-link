@@ -18,7 +18,7 @@ module.exports = db => {
           req.session.userId = account.id;
           req.session.name = account.first_name;
           req.session.role = account.role;
-          return res.status(200).json({ success: true, message: "login successful", first_name: account.first_name, userType: userType, orgId: orgId})
+          return res.status(200).json({ success: true, message: "login successful", first_name: account.first_name, userType: userType, orgId: orgId, usersId: account.id})
         }
       }
       // Account not found or password incorrect

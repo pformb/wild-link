@@ -12,12 +12,24 @@ module.exports = (db) => {
   //GET USER BY ID
   router.get("/users/:userId", async (req, res) => {
     const userId = req.params.userId;
+    console.log('userId:', userId);
     const userData = await users.getUser(db, userId);
+    console.log('userData:', userData);
     if (userData.length === 0) {
       return res.status(404).json({message: "User Not Found"});
     }
-    res.json(userData);
+    console.log('userData:', userData);
+    res.json(userData[0]); //1st user obj not array of user objs
   });    
+
+  // router.get("/users/:userId", async (req, res) => {
+  //   const userId = req.params.userId;
+  //   const userData = await users.getUser(db, userId);
+  //   if (userData.length === 0) {
+  //     return res.status(404).json({message: "User Not Found"});
+  //   }
+  //   res.json(userData);
+  // });    
 
   ///POST REQUESTS///
 
