@@ -12,6 +12,7 @@ const patients = require("./routes/patients");
 const donations = require("./routes/donations");
 const users = require("./routes/users");
 const story = require("./routes/story");
+const authentication = require("./routes/authentication");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,7 +28,12 @@ app.use(
     secret: "wildLinkSecretKey",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
 
@@ -41,5 +47,6 @@ app.use("/api", patients(db));
 app.use("/api", donations(db));
 app.use("/api", users(db));
 app.use("/api", story());
+app.use("/api", authentication());
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
