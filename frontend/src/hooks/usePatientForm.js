@@ -208,10 +208,11 @@ export const usePatientForm = () => {
       : `/api/organizations/${orgId}/patients/new`;
     const method = editForm ? "PATCH" : "POST";
 
-    const { release_date, ...otherDetails } = formData.patientDetails;
+    const { release_date, image, ...otherDetails } = formData.patientDetails;
     const updatedPatientDetails = {
       ...otherDetails,
       release_date: release_date === "" ? null : release_date, // Convert empty string to null
+      image: image === "" ? null : image, // Convert empty string to null
     };
   
     const submittedData = {
@@ -219,7 +220,7 @@ export const usePatientForm = () => {
       patientConditions: formData.patientConditions,
       patientTreatments: formData.patientTreatments,
     };
-    
+
     if (
       Object.keys(submittedData.patientDetails).length === 0 &&
       submittedData.patientConditions.length === 0 &&
@@ -248,6 +249,7 @@ export const usePatientForm = () => {
   };
 
   return {
+    editForm,
     formData,
     setFormData,
     handleSubmit,

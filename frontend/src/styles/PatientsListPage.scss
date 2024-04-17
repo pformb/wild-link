@@ -1,14 +1,17 @@
-.patient-stories {
+.patients-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
+  
 }
 
-.organization-card-list{
+.patients-list-page {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 50px;
-  margin-left: 205px;
+  margin-left: 175px;
   margin-right: 50px;
+
 }

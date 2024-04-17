@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 .top-nav-bar {
+  width: 100%;
   display: flex;
   flex-direction: row;
   background-color: black;
@@ -58,9 +59,8 @@ margin-left: 20px;
   color: white;
   font-size: 20px;
   cursor: pointer;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  margin-left: 560px;
+  align-items: flex-end;
   margin-top: 15px;
   padding: 15px;
   font-size: 20px;
