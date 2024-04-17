@@ -1,6 +1,7 @@
 
 
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
@@ -18,18 +21,21 @@ const defaultTheme = createTheme();
 const RegistrationPage = ({setLoggedIn}) => {
   const navigate = useNavigate();
 
-  const [first_name, setFirstName] = React.useState('');
-  const [last_name, setLastName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [address, setAddress] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setErrorMessage('Passwords do not match.');
+      setOpen(true);
       return;
     }
 
@@ -50,14 +56,12 @@ const RegistrationPage = ({setLoggedIn}) => {
     })
     .then(response => {
       if (!response.ok) {
-        console.log('Response not OK:', response);
         throw new Error('Registration failed');
       }
       return response.json();
     })
     .then(data => {
       if (data.message === 'User Created') {
-        console.log('Registration successful', data);
         setLoggedIn(true);
         navigate('/home');
       } else {
@@ -65,7 +69,8 @@ const RegistrationPage = ({setLoggedIn}) => {
       }
     })
     .catch(error => {
-      console.error('Registration Error:', error);
+      setErrorMessage('Registration failed.');
+      setOpen(true);
     });
   };
 
@@ -163,6 +168,11 @@ const RegistrationPage = ({setLoggedIn}) => {
             </Button>
           </Box>
         </Box>
+          <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+            <Alert onClose={() => setOpen(false)} severity="error" sx={{ width: '100%' }}>
+              {errorMessage}
+            </Alert>
+          </Snackbar>
       </Container>
     </ThemeProvider>
   );

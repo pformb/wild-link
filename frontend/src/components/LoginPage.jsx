@@ -51,7 +51,6 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
         if (data.userType === 'organization') {
           setOrgId(data.orgId);
         }
-        alert(`Welcome back, ${data.first_name}!`);
         navigate('/home');
       } else {
         alert(data.message);
