@@ -7,6 +7,7 @@ import '../styles/UserManagement.scss';
 
 const UserManagement = () => {
   const { userId } = useParams();
+  console.log(`UserManagement component rendered. userId: ${userId}`);
   //Org specific states
   // const [user_name, setOrgName] = useState('');
   console.log('UserManagement:', userId);
@@ -25,10 +26,10 @@ const UserManagement = () => {
 
 //fetch specific user data to render Admin Dashboard
   // useEffect(() => {
-  //   fetch('/api/users/${orgId}')
+  //   fetch(`/api/users/${userId}`)
   //     .then(response => response.json())
   //     .then(data => setUserData(data));
-  // }, []);
+  // }, [userId]);
 
     //handle Edit user Information
     //need to do some reseach on this
@@ -46,15 +47,19 @@ const UserManagement = () => {
         password: data.get('password'),
         confirm_password: data.get('confirm_password')
       };
-      fetch('/api/users/${userId}/profile', {
+      console.log(`userId: ${userId}`);
+      fetch(`/api/users/${userId}/profile`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userData }),
       })
-        .then(response => response.json())
-        .then(data => setUserData(data));
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response data:', data);
+        setUserData(data);
+      });
         };
         return (
           <div className="UserManagement

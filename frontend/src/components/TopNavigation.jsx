@@ -3,7 +3,9 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
+const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId, usersId}) => {
+console.log('topnavigation:', {loggedIn, userType, orgId, usersId});
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,6 +13,11 @@ const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
     navigate('/home');
   };
 
+  console.log('checking if user is logged in:', {loggedIn, userType, usersId, orgId});
+  if (loggedIn && userType === 'user') {
+    console.log(`Creating link to user profile. usersId: ${usersId}`);
+  }
+  
   return (
     <AppBar position="static" style={{ backgroundColor: '#333333', boxShadow: '0 4px 6px -6px #222', height: '72px' }}>
        <Toolbar style={{ padding: 0 }}>
@@ -27,9 +34,35 @@ const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
           </Box>
 
           {loggedIn ? (
+  <Box>
+    <Typography variant="h6">{email}</Typography>
+    {orgId && userType !== 'user' ? (
+      <Button color="inherit"><RouterLink to={`/organizations/${orgId}/profile`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
+    ) : (
+      <Button color="inherit"><RouterLink to={`/users/${usersId}`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
+    )}
+    <Button color="inherit" onClick={handleLogout}>Logout</Button>
+  </Box>
+) : (
+  <Box>
+    <Button color="inherit"><RouterLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</RouterLink></Button>
+    <Button color="inherit"><RouterLink to="/register" style={{ textDecoration: 'none', color: 'white' }}>Register</RouterLink></Button>
+  </Box>
+)}
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default TopNavigation;
+
+//remove orgId === null from line 47
+
+/*          {loggedIn ? (
             <Box>
               <Typography variant="h6">{email}</Typography>
-              {orgId === null ? (
+              {orgId && userType !== 'user' ? (
                 <Button color="inherit"><RouterLink to="/users" style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
               ) : (
                 <Button color="inherit"><RouterLink to={`/organizations/${orgId}/profile`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
@@ -41,14 +74,10 @@ const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId}) => {
               <Button color="inherit"><RouterLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</RouterLink></Button>
               <Button color="inherit"><RouterLink to="/register" style={{ textDecoration: 'none', color: 'white' }}>Register</RouterLink></Button>
             </Box>
-          )}
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
-};
+          )}*/
 
-export default TopNavigation;
+
+
 // import { Link } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 

@@ -31,13 +31,13 @@ function App() {
     
     <div className="App"> 
     <BrowserRouter>
-    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userType={setUserType} orgId={orgId}/>
+    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userType={userType} orgId={orgId} usersId={usersId} setUsersId={setUsersId}/>
 
     <Routes>
       
     <Route index element={<HomeRoute />} />
     <Route path="/home" element={<HomeRoute />} />
-    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} setUserType={setUserType} setOrgId={setOrgId}/>} />
+    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} setUserType={setUserType} setOrgId={setOrgId} setUsersId={setUsersId}/>}/>
     <Route path="/register" element={<RegistrationPage setLoggedIn={setLoggedIn}/>} />
     <Route path="/donate" element={<DonatePage />} />
     <Route path="/patientstories" element={<PatientStoriesPage />} />
@@ -46,7 +46,7 @@ function App() {
     <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
     <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
     <Route path="/organizations/:orgId/profile" element={<OrgManagement setLoggedIn={setLoggedIn} email={email} />} />
-    <Route path="/users/:usersId" element={<UserManagement usersId={usersId} />} />
+    <Route path="/users/:userId" element={<UserManagement usersId={usersId} />} />
 
     </Routes>
     </BrowserRouter>

@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId }) => {
+const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = React.useState('');
@@ -45,6 +45,7 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId }) => {
       if (data.success) {
         setLoggedIn(true);
         setUserType(data.userType);
+        setUsersId(data.usersId);
         if (data.userType === 'organization') {
           setOrgId(data.orgId);
         }

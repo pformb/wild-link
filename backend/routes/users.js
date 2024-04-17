@@ -17,7 +17,7 @@ module.exports = (db) => {
       return res.status(404).json({message: "User Not Found"});
     }
     res.json(userData);
-  });
+  });    
 
   ///POST REQUESTS///
 
