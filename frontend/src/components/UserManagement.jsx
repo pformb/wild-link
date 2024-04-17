@@ -8,11 +8,10 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import DonationsTable from './DonationsTable';
 
-const UserManagement = () => {
+const UserManagement = ( isLoggedIn, userType, usersId ) => {
   const { userId } = useParams();
   console.log(`UserManagement component rendered. userId: ${userId}`);
-  //Org specific states
-  // const [user_name, setOrgName] = useState('');
+
   console.log('UserManagement:', userId);
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -140,7 +139,7 @@ return (
             </Grid>
             <Grid item xs={6}>
               {donation ? (
-                <DonationsTable donation={donation} />
+                <DonationsTable donation={donation} isLoggedIn={isLoggedIn} userType={userType} usersId={usersId} />
               ) : (
                 <CircularProgress />
               )}

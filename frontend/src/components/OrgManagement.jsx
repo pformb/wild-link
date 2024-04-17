@@ -93,7 +93,6 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
     });
   };
 
-  //prevent react from thrown an error due to component control and undefined || ''
   return (
     <div className="OrgManagement">
       <h1 display="flex" justify-content="center">Organization Admin Dashboard</h1>
@@ -188,7 +187,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
             </Grid>
             <Grid item xs={6}>
               {donation ? (
-                <DonationsTable donation={donation} />
+                <DonationsTable donation={donation} orgId={orgId} isLoggedIn={isLoggedIn} userType={userType} />
               ) : (
                 <CircularProgress />
               )}
