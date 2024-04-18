@@ -1,6 +1,8 @@
 import React from "react";
 import Select from 'react-select'
+import { Navigate } from "react-router-dom";
 import { usePatientForm } from "../hooks/usePatientForm";
+import { useAuth } from "../contexts/AuthContext";
 import {TextField, Checkbox, Grid, Box, Button, Typography } from "@mui/material"
 import makeAnimated from 'react-select/animated';
 import customSelectStyles from "../styles/selectStyles";
@@ -8,6 +10,12 @@ import customSelectStyles from "../styles/selectStyles";
 const PatientForm = () => {
   const { editForm, formData, handleSubmit, handleInputChange, handleCheckboxChange, handleSelectChange, handleMultiSelectChange, handleGenerateStory, isLoading, options } = usePatientForm();
   const animatedComponents = makeAnimated();
+  const { user } = useAuth();
+
+  if (!user || user.role !== "organizations") {
+    // Redirect them to the home page, or render an access denied message
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
