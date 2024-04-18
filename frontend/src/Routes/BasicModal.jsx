@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DateTime from 'date-and-time';
+import { useNavigate } from 'react-router-dom';
+
 
 const style = {
   position: 'absolute',
@@ -20,15 +22,23 @@ const style = {
 };
 
 
-export default function BasicModal({patient}) {
-  console.log('patient data modal:', patient);
+export default function BasicModal({ patient, orgId }) {
+
   const [open, setOpen] = React.useState(false);
+
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const navigate = useNavigate();
+  const handleDonate = () => {
+    console.log('Patient data handle donate:', patient);
+  navigate('/donate', { state: { patient, orgId } });
+    };
+
   return (
     <div>
-      <Button onClick={handleOpen}>View More</Button>
+      <Button variant="outlined" onClick={handleOpen}>View More</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -36,69 +46,65 @@ export default function BasicModal({patient}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-
           <div style={{ 
             display: 'flex', 
             flexDirection: 'column', 
             justifyContent: 'space-between', 
             height: '100%' 
-            }}>
-              
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '50px', }}>
-        <div style={{ float: 'left' }}>
-          <Typography id="modal-modal-case" variant="h6" component="h2">
-                <strong>Case Number:</strong> {patient.patient_case}
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '50px' }}>
+              <div style={{ float: 'left' }}>
+                <Typography id="modal-modal-case" variant="h6" component="h2">
+                  <strong>Case Number:</strong> {patient.patient_case}
                 </Typography>
-              <Typography id="modal-modal-species" variant="h6" component="h2">
-                <strong>Species:</strong> {patient.species}
+                <Typography id="modal-modal-species" variant="h6" component="h2">
+                  <strong>Species:</strong> {patient.species}
                 </Typography>
-              <Typography id="modal-modal-date" variant="h6" component="h2">
-                <strong>Date Admitted:</strong> {DateTime.format(new Date(patient.date_admitted), 'dddd, MMMM DD YYYY')}
+                <Typography id="modal-modal-date" variant="h6" component="h2">
+                  <strong>Date Admitted:</strong> {DateTime.format(new Date(patient.date_admitted), 'dddd, MMMM DD YYYY')}
                 </Typography>
-              <Typography id="modal-modal-location" variant="h6" component="h2">
-                <strong>Location Found:</strong> {patient.location_found}
+                <Typography id="modal-modal-location" variant="h6" component="h2">
+                  <strong>Location Found:</strong> {patient.location_found}
                 </Typography>
-        </div>
-        <img 
-          src={patient.image} 
-          alt="Patient" 
-          height= '150'
-          width= 'auto'
-          style={{ 
-            marginRight: '50px', 
-            marginLeft: '10px', 
-            borderRadius: '20px'
-          }} />
-      </div>
-      {patient.is_released && (
-  <div 
-    style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      height: '50px', 
-      color: 'green',
-    }}
-  >
-    <Typography id="modal-modal-release" variant="h5" component="h5">
-      <strong>Released On:</strong> {DateTime.format(new Date(patient.release_date), 'dddd, MMMM DD YYYY')}
-    </Typography>
-    
-  </div>
-)}
-  <div>
-        <Typography id="modal-modal-description" sx={{ mt: 1, fontSize: '14px' }}>
-          <strong>{patient.story}</strong>
+              </div>
+              <img 
+                src={patient.image} 
+                alt="Patient" 
+                height= '150'
+                width= 'auto'
+                style={{ 
+                  marginRight: '50px', 
+                  marginLeft: '10px', 
+                  borderRadius: '20px'
+                }} 
+              />
+            </div>
+            {patient.is_released && (
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                height: '50px', 
+                color: 'green',
+              }}>
+                <Typography id="modal-modal-release" variant="h5" component="h5">
+                  <strong>Released On:</strong> {DateTime.format(new Date(patient.release_date), 'dddd, MMMM DD YYYY')}
+                </Typography>
+              </div>
+            )}
+            <div>
+              <Typography id="modal-modal-description" sx={{ mt: 1, fontSize: '14px' }}>
+                <strong>{patient.story}</strong>
               </Typography>
-        </div>
-      <div style={{ alignSelf: 'center', marginTop: '10px' }}>
-        <Button variant="contained" color="primary">
-          Donate
-          </Button>
-        </div>
-      </div>
-    </Box>   
-  </Modal>
-  </div>
+            </div>
+            <div style={{ alignSelf: 'center', marginTop: '10px' }}>
+              <Button variant="contained" color="primary" onClick={handleDonate} patient={patient}>
+                Donate
+              </Button>
+            </div>
+          </div>
+        </Box>   
+      </Modal>
+    </div>
   );
 }

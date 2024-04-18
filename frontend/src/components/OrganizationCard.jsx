@@ -1,8 +1,9 @@
 import '../styles/OrganizationCard.scss';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const OrganizationCard = (orgData) => {
-  console.log(`orgData:`, orgData);
+
   return (
     <div className="organization-card">
       <img 
@@ -15,7 +16,7 @@ const OrganizationCard = (orgData) => {
       <p className="organization-website">{orgData.website_url}</p> 
       <p className="organization-phone">{orgData.phone_number}</p> 
       <Link to={`/${orgData.id}/patients`}>
-        <button className="btn-view-org">View</button>
+      <Button variant="outlined">View More</Button>
       </Link>
     </div>
   );

@@ -6,7 +6,6 @@ function useAllPatientsByOrg(orgId) {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`on Hook orgId:`, orgId);
       const endpoint = `/api/organizations/${orgId}/patients`;
       try {
         const response = await fetch(endpoint);
