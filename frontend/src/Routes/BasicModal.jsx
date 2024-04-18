@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import DateTime from 'date-and-time';
 import { useNavigate } from 'react-router-dom';
 
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -20,7 +21,8 @@ const style = {
   borderRadius: 12,
 };
 
-export default function BasicModal({ patient }) {
+
+export default function BasicModal({ patient, orgId }) {
 
   const [open, setOpen] = React.useState(false);
 
@@ -31,7 +33,7 @@ export default function BasicModal({ patient }) {
   const navigate = useNavigate();
   const handleDonate = () => {
     console.log('Patient data handle donate:', patient);
-  navigate('/donate', { state: { patient } });
+  navigate('/donate', { state: { patient, orgId } });
     };
 
   return (
@@ -96,7 +98,7 @@ export default function BasicModal({ patient }) {
               </Typography>
             </div>
             <div style={{ alignSelf: 'center', marginTop: '10px' }}>
-              <Button variant="contained" color="primary" onClick={handleDonate}>
+              <Button variant="contained" color="primary" onClick={handleDonate} patient={patient}>
                 Donate
               </Button>
             </div>

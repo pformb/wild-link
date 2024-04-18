@@ -10,7 +10,7 @@ const PatientsListPage = () => {
     <div className="patients-list">
       <div className="patients-list-page">
         {patData && patData.map((pat, index) => (
-          <PatientCard key={index} pat={pat} />
+          <PatientCard key={index} pat={pat} orgId={orgId} />
         ))}
       </div>
     </div>
