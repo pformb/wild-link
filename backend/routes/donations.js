@@ -1,13 +1,13 @@
 // Donations routes
-
 const router = require("express").Router();
 const donations = require("../models/donations");
+const { authToken } = require("../middleware/authToken");
 
 module.exports = (db) => {
   ///GET REQUESTS///
 
   //GET ALL DONATIONS BY USER
-  router.get("/users/:userId/donations", async (req, res) => {
+  router.get("/users/:userId/donations", authToken, async (req, res) => {
     const userId = req.params.userId;
     const userDonations = await donations.getAllDonationsByUser(db, userId);
     if (userDonations.length === 0) {
@@ -17,7 +17,7 @@ module.exports = (db) => {
   });
 
   //GET ALL DONATIONS BY ORGANIZATION
-  router.get("/organizations/:orgId/donations", async (req, res) => {
+  router.get("/organizations/:orgId/donations", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     const orgDonations = await donations.getAllDonationsByOrg(db, orgId);
     if (orgDonations.length === 0) {
@@ -27,7 +27,7 @@ module.exports = (db) => {
   });
 
   //GET SINGLE DONATION
-  router.get("/donations/:donationId", async (req, res) => {
+  router.get("/donations/:donationId", authToken, async (req, res) => {
     const donationId = req.params.donationId;
     const donation = await donations.getDonationById(db, donationId);
     if (donation.length === 0) {
@@ -39,7 +39,7 @@ module.exports = (db) => {
   ///POST REQUESTS///
 
   //Create Donation
-  router.post("/users/:userId/donations/new", async (req, res) => {
+  router.post("/users/:userId/donations/new", authToken, async (req, res) => {
     const userId = req.params.userId;
     const { donation } = req.body
     try {

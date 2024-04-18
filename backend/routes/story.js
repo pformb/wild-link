@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { generateStory, createPrompt } = require("../models/generateStory");
+const { authToken } = require("../middleware/authToken");
 
 module.exports = () => {
-  router.post("/generate-story", async (req, res) => {
+  router.post("/generate-story", authToken, async (req, res) => {
     const { patientDetails, patientConditions, patientTreatments } = req.body;
 
     try {

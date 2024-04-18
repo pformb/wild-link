@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 const login = require("../models/login");
 const { validatePassword } = require("../models/validatePassword");
 
@@ -11,10 +12,22 @@ module.exports = db => {
       if (account) {
         const passwordCheck = await validatePassword(db, account.role, account.id, req.body.password);
         if (passwordCheck) {
-          req.session.userId = account.id;
-          req.session.name = account.first_name;
-          req.session.role = account.role;
-          return res.status(200).json({ success: true, message: "login successful", first_name: account.first_name})
+          const token = jwt.sign(
+            {
+              userId: account.id,
+              role: account.role,
+              first_name: account.first_name,
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "24h" }
+          );
+          res.cookie('token', token, { httpOnly: true, secure: false, maxAge: 86400000 });
+          return res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token: token,
+            first_name: account.first_name,
+          });
         }
       }
       // Account not found or password incorrect
@@ -22,7 +35,7 @@ module.exports = db => {
     });
   
   router.post("/logout", async (req, res) => {
-    req.session = null
+    res.cookie("token", "", { expires: new Date(0) });
     res.status(200).json({success: true, message: "Logout successful"});
   });
   return router;

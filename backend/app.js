@@ -3,7 +3,6 @@ require('dotenv').config({ path: '.env.development' });
 const db = require("./db");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
 
 // Routes
 const login = require("./routes/login");
@@ -12,7 +11,6 @@ const patients = require("./routes/patients");
 const donations = require("./routes/donations");
 const users = require("./routes/users");
 const story = require("./routes/story");
-const authentication = require("./routes/authentication");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,21 +19,12 @@ const server = require("http").Server(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(cookieParser());
-app.use(
-  session({
-    secret: "wildLinkSecretKey",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      sameSite: "strict",
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
-);
+
 
 app.get('/api', (req, res) => {
   res.send('Welcome to the Wild Link API!');
@@ -47,6 +36,5 @@ app.use("/api", patients(db));
 app.use("/api", donations(db));
 app.use("/api", users(db));
 app.use("/api", story());
-app.use("/api", authentication());
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

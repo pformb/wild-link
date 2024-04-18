@@ -8,26 +8,27 @@ import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
 import PatientForm from './components/PatientForm.jsx';
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
   // const { orgData } = useApplicationData();
   // orgData={orgData} Pass to PatientStoriesPage
 
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn); 
+  // console.log(loggedIn); 
   const [email, setEmail] = useState('');
-
+  const { user, logout } = useAuth();
+  console.log(user);
 
   return (
     
     <div className="App"> 
-    <BrowserRouter>
-    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+    <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
 
     <Routes>
       
@@ -43,7 +44,6 @@ function App() {
     <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
 
     </Routes>
-    </BrowserRouter>
     </div>
    
   );
