@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import Typography from "@mui/material/Typography";
 
 const DonationForm = () => {
   const [donationAmount, setDonationAmount] = useState('');
@@ -33,29 +34,80 @@ const DonationForm = () => {
     setCVV('');
   };
 
+  const amountButton = (event) => {
+    const {value} = event.target;
+    setDonationAmount(value);
+  }
+
+
   return (
     <Box sx={{ width: "80%", mx: "auto", boxShadow: 3, p: 3, mt: 10 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <p><strong>Case Number:</strong> xxxx</p>
-          <p><strong>Species:</strong> xxxx</p>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ width: "100%", maxWidth: 360 }}>
+            <Grid container spacing={3} justifyContent="center">
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="2" onClick={amountButton}>
+                  $2
+                </Button>
+              </Grid>
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="5" onClick={amountButton}>
+                  $5
+                </Button>
+              </Grid>
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="10" onClick={amountButton}>
+                  $10
+                </Button>
+              </Grid>
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="20" onClick={amountButton}>
+                  $20
+                </Button>
+              </Grid>
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="50" onClick={amountButton}>
+                  $50
+                </Button>
+              </Grid>
+              <Grid item xs={4} sx={{ mb: 2 }}>
+                <Button variant="contained" value="100" onClick={amountButton}>
+                  $100
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
         </Grid>
-
+        <Grid item xs={12} md={6}>
+          <Box sx={{ pl: 3, width: "100%" }}>
+            <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
+              <strong>Case Number:</strong> xxxx
+            </Typography>
+            <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+              <strong>Species:</strong> xxxx
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-        <FormControl fullWidth variant="filled">
-          <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
-          <FilledInput
-            id="filled-adornment-amount"
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            label="Donation Amount"
-            variant="outlined"
-            value={donationAmount}
-            onChange={(e) => setDonationAmount(e.target.value)}
-          />
-        </FormControl>
+          <FormControl fullWidth variant="filled">
+            <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
+            <FilledInput
+              id="filled-adornment-amount"
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+              label="Donation Amount"
+              variant="outlined"
+              value={donationAmount}
+              onChange={(e) => setDonationAmount(e.target.value)}
+            />
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Box sx={{ textAlign: 'right' }}>
+          <Box sx={{ textAlign: "right" }}>
             <TextField
               label="Credit Card Number"
               variant="outlined"
@@ -75,7 +127,7 @@ const DonationForm = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Box sx={{ textAlign: 'right' }}>
+          <Box sx={{ textAlign: "right" }}>
             <TextField
               label="Expiration Date MM/YY"
               variant="outlined"
@@ -95,7 +147,7 @@ const DonationForm = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Box sx={{ textAlign: 'right' }}>
+          <Box sx={{ textAlign: "right" }}>
             <TextField
               label="CVV"
               variant="outlined"
@@ -107,7 +159,12 @@ const DonationForm = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleDonation} fullWidth>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleDonation}
+            fullWidth
+          >
             Confirm Donation
           </Button>
         </Grid>
