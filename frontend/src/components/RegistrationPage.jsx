@@ -55,7 +55,6 @@ const RegistrationPage = ({setLoggedIn}) => {
       body: JSON.stringify(userData),
       credentials: "include",
     })
-<<<<<<< HEAD
     .then(response => {
       if (!response.ok) {
         throw new Error('Registration failed');
@@ -75,28 +74,6 @@ const RegistrationPage = ({setLoggedIn}) => {
       setOpen(true);
     });
   };
-=======
-      .then((response) => {
-        if (!response.ok) {
-          console.log("Response not OK:", response);
-          throw new Error("Registration failed");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.message === "User Created") {
-          console.log("Registration successful", data);
-          setLoggedIn(true);
-          navigate("/home");
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Registration Error:", error);
-      });
-};
->>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
 
   return (
     <ThemeProvider theme={defaultTheme}>
