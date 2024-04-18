@@ -27,6 +27,13 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
   const [password, setPassword] = useState('');
   const { setAuthData } = useAuth();
 
+  const handleSubmit = async (e) => { 
+    e.preventDefault();
+    const loginData = {
+      email,
+      password
+  };
+
     try {
       const response = await fetch('http://localhost:3001/api/login', {
         method: 'POST',

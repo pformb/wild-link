@@ -3,16 +3,9 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-<<<<<<< HEAD
-const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId, usersId}) => {
-console.log('topnavigation:', {loggedIn, userType, orgId, usersId});
-
-  const navigate = useNavigate();
-=======
 const TopNavigation = ({loggedIn, logout, name}) => {
   const navigate = useNavigate();
   console.log('TopNavigation:', loggedIn, name);
->>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
 
   // const handleLogout = () => {
 
@@ -28,38 +21,9 @@ const TopNavigation = ({loggedIn, logout, name}) => {
     <AppBar position="static" style={{ backgroundColor: '#333333', boxShadow: '0 4px 6px -6px #222', height: '72px' }}>
        <Toolbar style={{ padding: 0 }}>
         <Typography variant="h6" style={{ flexGrow: 3, fontFamily: "'Luckiest Guy', cursive", fontSize: '38px' }}>
-          <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>
+        <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>
         </Typography>
 
-<<<<<<< HEAD
-        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
-          <Box>
-            <Button color="inherit"><RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white' }}>Patient Stories</RouterLink></Button>
-            <Button color="inherit">About Us</Button>
-            <Button color="inherit"><RouterLink to="/donate" style={{ textDecoration: 'none', color: 'white' }}>Donate</RouterLink></Button>
-            <Button color="inherit"><RouterLink to="/contactus" style={{ textDecoration: 'none', color: 'white' }}>Contact Us</RouterLink></Button>
-          </Box>
-
-          {loggedIn ? (
-  <Box>
-    <Typography variant="h6">{email}</Typography>
-    {orgId && userType !== 'user' ? (
-      <Button color="inherit"><RouterLink to={`/organizations/${orgId}/profile`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
-    ) : (
-      <Button color="inherit"><RouterLink to={`/users/${usersId}`} style={{ textDecoration: 'none', color: 'white' }}>View Profile</RouterLink></Button>
-    )}
-    <Button color="inherit" onClick={handleLogout}>Logout</Button>
-  </Box>
-) : (
-  <Box>
-    <Button color="inherit"><RouterLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</RouterLink></Button>
-    <Button color="inherit"><RouterLink to="/register" style={{ textDecoration: 'none', color: 'white' }}>Register</RouterLink></Button>
-  </Box>
-)}
-        </Box>
-      </Toolbar>
-    </AppBar>
-=======
         <div className="top-nav-bar__login-register">
         {loggedIn ? (
           <>
@@ -68,13 +32,13 @@ const TopNavigation = ({loggedIn, logout, name}) => {
           </>
         ) : (
           <>
-            <Link to="/login" className="top-nav-bar__login">Login</Link>
-            <Link to="/register" className="top-nav-bar__register">Register</Link>
+             <RouterLink to="/login" className="top-nav-bar__login">Login</RouterLink>
+            <RouterLink to="/register" className="top-nav-bar__register">Register</RouterLink>
           </>
         )}
       </div>
-    </div>
->>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
+      </Toolbar>
+    </AppBar>
   );
 };
 
@@ -97,7 +61,8 @@ export default TopNavigation;
               <Button color="inherit"><RouterLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</RouterLink></Button>
               <Button color="inherit"><RouterLink to="/register" style={{ textDecoration: 'none', color: 'white' }}>Register</RouterLink></Button>
             </Box>
-          )}*/
+          )}
+          */
 
 
 
