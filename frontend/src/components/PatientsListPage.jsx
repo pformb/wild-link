@@ -6,8 +6,6 @@ import { useParams } from 'react-router-dom';
 const PatientsListPage = () => {
   const { orgId } = useParams(); // Get orgId from URL params
   const patData = useAllPatientsByOrg(orgId); // Pass orgId to the hook
-  console.log('patdata on page:', patData);
-  
   return (
     <div className="patients-list">
       <div className="patients-list-page">

@@ -6,7 +6,6 @@ const PatientStoriesPage = () => {
   
   const orgData = useAllOrganizations();
   
-  console.log(orgData);
 
   return (
     <div className="patient-stories">

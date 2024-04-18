@@ -4,7 +4,6 @@ import BasicModal from '../routes/BasicModal';
 
 const PatientCard = ({ pat }) => {
 
-  console.log(`patData on card:`, pat);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,12 +18,11 @@ const PatientCard = ({ pat }) => {
           className="patient-prof-pic" 
           src={pat.image} 
           alt={pat.name} />
-          <h2 className="patient-name">{pat.species}</h2>
+          <p className="patient-name"><strong>{pat.species}</strong></p>
         <div className="patient-details">
 
-          <h3 className="patient-status">Status: {pat.is_released ? 'Released' : 'Admitted'}</h3>
+          <p className="patient-status"><strong>Status:</strong> {pat.is_released ? 'Released' : 'Admitted'}</p>
           <BasicModal patient={pat} open={isModalOpen} onClose={handleCloseModal} />
-          
         </div>
       </div>
     </div>
