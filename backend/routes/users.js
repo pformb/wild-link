@@ -3,6 +3,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const users = require("../models/users");
+const { authToken } = require("../middleware/authToken");
 
 const saltRounds = 10;
 
@@ -10,7 +11,7 @@ module.exports = (db) => {
   ///GET REQUESTS///
 
   //GET USER BY ID
-  router.get("/users/:userId", async (req, res) => {
+  router.get("/users/:userId", authToken, async (req, res) => {
     const userId = req.params.userId;
     console.log('userId:', userId);
     const userData = await users.getUser(db, userId);
@@ -50,7 +51,7 @@ router.post("/register", async (req, res) => {
 });
 
   //Edit USER
-  router.patch("/users/:userId", async (req, res) => {
+  router.patch("/users/:userId", authToken, async (req, res) => {
     const userId = req.params.userId;
     let { userData } = req.body;
     let password = userData.password;

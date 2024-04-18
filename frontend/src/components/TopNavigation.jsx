@@ -3,15 +3,21 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+<<<<<<< HEAD
 const TopNavigation = ({loggedIn, setLoggedIn, email, userType, orgId, usersId}) => {
 console.log('topnavigation:', {loggedIn, userType, orgId, usersId});
 
   const navigate = useNavigate();
+=======
+const TopNavigation = ({loggedIn, logout, name}) => {
+  const navigate = useNavigate();
+  console.log('TopNavigation:', loggedIn, name);
+>>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
 
-  const handleLogout = () => {
-    setLoggedIn(false);
-    navigate('/home');
-  };
+  // const handleLogout = () => {
+
+  //   navigate('/home');
+  // };
 
   console.log('checking if user is logged in:', {loggedIn, userType, usersId, orgId});
   if (loggedIn && userType === 'user') {
@@ -25,6 +31,7 @@ console.log('topnavigation:', {loggedIn, userType, orgId, usersId});
           <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>
         </Typography>
 
+<<<<<<< HEAD
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
           <Box>
             <Button color="inherit"><RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white' }}>Patient Stories</RouterLink></Button>
@@ -52,6 +59,22 @@ console.log('topnavigation:', {loggedIn, userType, orgId, usersId});
         </Box>
       </Toolbar>
     </AppBar>
+=======
+        <div className="top-nav-bar__login-register">
+        {loggedIn ? (
+          <>
+            <span className="top-nav-bar__login-message">Hello, {name}!</span>
+            <button onClick={logout} className="top-nav-bar__logout">Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="top-nav-bar__login">Login</Link>
+            <Link to="/register" className="top-nav-bar__register">Register</Link>
+          </>
+        )}
+      </div>
+    </div>
+>>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
   );
 };
 

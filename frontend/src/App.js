@@ -10,28 +10,27 @@ import TopNavigation from './components/TopNavigation.jsx';
 import OrgManagement from './components/OrgManagement.jsx';
 import UserManagement from './components/UserManagement.jsx';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
 import PatientForm from './components/PatientForm.jsx';
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
   // const { orgData } = useApplicationData();
   // orgData={orgData} Pass to PatientStoriesPage
 
   const [loggedIn, setLoggedIn] = useState(false);
+  // console.log(loggedIn); 
   const [email, setEmail] = useState('');
-
-  const [userType, setUserType] = useState(''); // 'user' or 'organization'
-  const [orgId, setOrgId] = useState('');
-  const [usersId, setUsersId] = useState('');
+  const { user, logout } = useAuth();
+  console.log(user);
 
   return (
     
     <div className="App"> 
-    <BrowserRouter>
-    < TopNavigation email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userType={userType} orgId={orgId} usersId={usersId} setUsersId={setUsersId}/>
+    <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
 
     <Routes>
       
@@ -49,7 +48,6 @@ function App() {
     <Route path="/users/:userId" element={<UserManagement usersId={usersId} />} />
 
     </Routes>
-    </BrowserRouter>
     </div>
    
   );

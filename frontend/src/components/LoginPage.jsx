@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../contexts/AuthContext";
 
 const defaultTheme = createTheme();
 
@@ -23,12 +25,16 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+<<<<<<< HEAD
   const [open, setOpen] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const loginData = { email, password };
+=======
+  const { setAuthData } = useAuth();
+>>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
 
     try {
       const response = await fetch('http://localhost:3001/api/login', {
@@ -37,11 +43,16 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
+<<<<<<< HEAD
+=======
+        credentials: 'include'
+>>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
       });
 
       if (!response.ok) {
         throw new Error('Invalid email or password');
       }
+<<<<<<< HEAD
 
       const data = await response.json();
       if (data.success) {
@@ -60,6 +71,35 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
     }
   };
 
+=======
+  
+// Check if the response is JSON
+const contentType = response.headers.get('content-type');
+if (contentType && contentType.indexOf('application/json') !== -1) {
+  const data = await response.json();
+  console.log('Received:', data);
+  if (data.success) {
+    // Login successful
+    setLoggedIn(true);
+    alert(`Welcome back, ${data.first_name}!`);
+      localStorage.setItem("token", data.token); // Save the token in localStorage
+      setAuthData(data.token);
+    navigate('/home');
+  } else {
+    // Login failed
+    alert(data.message);
+  }
+} else {
+  const data = await response.text();
+  alert(data);
+  navigate('/home');
+}
+} catch (error) {
+console.error('Error:', error);
+alert('Invalid email or password');
+}
+};
+>>>>>>> 182bcbd61bb71d3a5ef9454983ce1e16c4f76ab4
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
