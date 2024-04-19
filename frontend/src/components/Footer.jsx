@@ -1,32 +1,48 @@
-import '../styles/Footer.scss';
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import '../styles/Footer.scss';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  footerLogo: {
+    textDecoration: 'none',
+    fontWeight: 500,
+    fontSize: '38px',
+    color: '#ffffff',
+    cursor: 'pointer',
+    fontFamily: 'Luckiest Guy, cursive',
+    marginTop: '30px',
+    '&:hover': {
+      color: 'transparent',
+      background: 'linear-gradient(90deg, rgb(12, 67, 1) 0%, rgba(56, 120, 3, 0.894) 49%, rgb(58, 158, 1) 100%)',
+      backgroundClip: 'text',
+      WebkitBackgroundClip: 'text',
+    },
+  },
+});
 
 function Footer() {
-  const [value, setValue] = React.useState(0);
+  const classes = useStyles();
 
   return (
-    <Box sx={{ width: 'auto', color: 'white', backgroundColor: 'black', height: 150 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+    <Box sx={{ 
+      width: '100%', 
+      color: 'white', 
+      backgroundColor: 'black', 
+      height: 100 
+      }}
       >
-        
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
+      <Grid container alignItems="center" spacing={0}>
+        <Grid item xs={3}>
+          <Typography variant="h6" gutterBottom className={classes.footerLogo}>
+            Wild Link
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
-};
+}
 
 export default Footer;
-
