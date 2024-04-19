@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-const RegistrationPage = ({setLoggedIn}) => {
+const RegistrationPage = () => {
   const navigate = useNavigate();
 
   const [first_name, setFirstName] = useState('');
@@ -63,7 +63,6 @@ const RegistrationPage = ({setLoggedIn}) => {
     })
     .then(data => {
       if (data.message === 'User Created') {
-        setLoggedIn(true);
         navigate('/home');
       } else {
         alert(data.message);

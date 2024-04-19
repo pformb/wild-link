@@ -2,19 +2,15 @@
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContext";
 
-const TopNavigation = ({loggedIn, logout, name}) => {
+const TopNavigation = () => {
   const navigate = useNavigate();
-  console.log('TopNavigation:', loggedIn, name);
+  const { user, logout } = useAuth();
 
-  // const handleLogout = () => {
-
-  //   navigate('/home');
-  // };
-
-  console.log('checking if user is logged in:', {loggedIn, userType, usersId, orgId});
-  if (loggedIn && userType === 'user') {
-    console.log(`Creating link to user profile. usersId: ${usersId}`);
+  console.log('checking if user is logged in:');
+  if (user) {
+    console.log(`Creating link to user profile. usersId: ${user.userId}`);
   }
   
   return (
@@ -25,9 +21,9 @@ const TopNavigation = ({loggedIn, logout, name}) => {
         </Typography>
 
         <div className="top-nav-bar__login-register">
-        {loggedIn ? (
+        {user ? (
           <>
-            <span className="top-nav-bar__login-message">Hello, {name}!</span>
+            <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
             <button onClick={logout} className="top-nav-bar__logout">Logout</button>
           </>
         ) : (

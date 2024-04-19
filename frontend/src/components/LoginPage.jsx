@@ -36,6 +36,7 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
   };
 
     try {
+      console.log("login data is:", loginData)
       const response = await fetch('http://localhost:3001/api/login', {
         method: 'POST',
         headers: {
@@ -53,7 +54,6 @@ const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) =>
       console.log('Received:', data);
       if (data.success) {
         // Login successful
-        setLoggedIn(true);
         alert(`Welcome back, ${data.first_name}!`);
         localStorage.setItem("token", data.token); // Save the token in localStorage for other pages
         setAuthData(data.token);

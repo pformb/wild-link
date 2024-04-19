@@ -8,8 +8,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import DonationsTable from './DonationsTable';
+import { useAuth } from "../contexts/AuthContext";
 
-const OrgManagement = ( isLoggedIn, usersId, userType ) => {
+const OrgManagement = () => {
+  const { user } = useAuth();
+  const token = localStorage.getItem("token");
   const [donation, setDonation] = useState([]);
   const { orgId } = useParams();
   console.log('orgId:', orgId);
@@ -29,7 +32,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
   useEffect(() => {
     const fetchOrgProfile = async () => {
       try {
-        const response = await fetch(`/api/organizations/${orgId}/profile`);
+        const response = await fetch(`/api/organizations/${orgId}/profile`, { headers: { 'Authorization': `Bearer ${token}` }});
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -45,19 +48,20 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
   }, [orgId]);
 
   //no userId in the response
-  useEffect(() => {
-    const fetchSession = async () => {
-      const response = await fetch('/api/session');
-      if (!response.ok) {
-        console.error('Not logged in');
-      }
-    }
-    fetchSession();
-  }, []);
+  // useEffect(() => {
+  //   const fetchSession = async () => {
+  //     const response = await fetch('/api/session');
+  //     if (!response.ok) {
+  //       console.error('Not logged in');
+  //     }
+  //   }
+  //   fetchSession();
+  // }, []);
 
   //fetch donations table
   useEffect(() => {
-    fetch(`/organizations/${orgId}/donations`)
+    console.log("Org donations orgId", orgId)
+    fetch(`/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
       .then(response => response.json())
       .then(data => setDonation(data))
       .catch(error => console.error('Error fetching donation:', error));
@@ -69,20 +73,23 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
     console.log('Submitting form with data:', orgData);
     //submit the form data
     fetch(`/api/organizations/${orgId}/profile`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify(orgData),
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => setOrgData(data[0]))
-    .catch(error => console.error('Error updating organization profile:', error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setOrgData(data[0]))
+      .catch((error) =>
+        console.error("Error updating organization profile:", error)
+      );
   };
 
   //handle Edit Organization Information
@@ -187,7 +194,7 @@ const OrgManagement = ( isLoggedIn, usersId, userType ) => {
             </Grid>
             <Grid item xs={6}>
               {donation ? (
-                <DonationsTable donation={donation} orgId={orgId} isLoggedIn={isLoggedIn} userType={userType} />
+                <DonationsTable donation={donation} orgId={orgId} />
               ) : (
                 <CircularProgress />
               )}
