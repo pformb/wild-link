@@ -1,5 +1,5 @@
 
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
@@ -7,7 +7,6 @@ const TopNavigation = () => {
   const { user, logout } = useAuth();
 
   // Access roles and orgId from user
-const roles = user?.roles;
 const orgId = user?.orgId;
 
 
@@ -25,21 +24,21 @@ const orgId = user?.orgId;
 
         <div className="top-nav-bar__login-register">
         {user ? (
-          <>
-            <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
-            {roles === 'users' && !('orgId' in user) ? (
-              <RouterLink to={`/users/${user.userId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
-            ) : (
-              <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
-            )}
-            <button onClick={logout} className="top-nav-bar__logout">Logout</button>
-          </>
-        ) : (
-          <>
-             <RouterLink to="/login" className="top-nav-bar__login" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Login</RouterLink>
-            <RouterLink to="/register" className="top-nav-bar__register" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Register</RouterLink>
-          </>
-        )}
+  <>
+    <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
+    {user.orgId ? (
+      <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
+    ) : (
+      <RouterLink to={`/users/${user.userId}`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
+    )}
+    <button onClick={logout} className="top-nav-bar__logout">Logout</button>
+  </>
+) : (
+  <>
+     <RouterLink to="/login" className="top-nav-bar__login" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Login</RouterLink>
+    <RouterLink to="/register" className="top-nav-bar__register" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Register</RouterLink>
+  </>
+)}
       </div>
       </Toolbar>
     </AppBar>
