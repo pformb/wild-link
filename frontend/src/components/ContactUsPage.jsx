@@ -5,7 +5,7 @@ function ContactUsPage() {
     return (
         <div className="container">
             <div className="help">
-                <h2>Help</h2>
+                <h2>Contact Us</h2>
                 <p>If you need assistance, please contact the following:</p>
             </div>
             <div className="boxes-container">
