@@ -1,4 +1,3 @@
-//Try 2 
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';

@@ -32,28 +32,53 @@ const UserManagement = () => {
   console.log('userData:', userData);
 
   useEffect(() => {
-    const fetchOrgProfile = async () => {
+    const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`/api/users/${userId}/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch(`/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         console.log('Fetched users data:', data);
-        setUserData(data[0]); //maybe send send this as the 1st object of the array in the fetch request?
+        if (data.length > 0) {
+          setUserData(data[0]); // Access the first object in the array
+        } else {
+          console.error('No user data returned from API');
+        }
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
-    fetchOrgProfile();
+    fetchUserProfile();
   }, [userId, token]);
+
+  // useEffect(() => {
+  //   const fetchUserProfile = async () => {
+  //     try {
+  //       const response = await fetch(`/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const data = await response.json();
+  //       console.log('Fetched users data:', data);
+  //       setUserData(data); //maybe send send this as the 1st object of the array in the fetch request?
+  //     } catch (error) {
+  //       console.error('Error fetching user profile:', error);
+  //     }
+  //   };
+  //   fetchUserProfile();
+  // }, [userId, token]);
 
   //fetch donations table
   useEffect(() => {
     console.log("Org donations userId", userId);
     fetch(`api/users/${userId}/donations`, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(response => response.json())
-      .then(data => setDonation(data))
+      // .then(data => setDonation(data))
+      .then(data => {
+        console.log(data);
+        setDonation(data);
+      })
       .catch(error => console.error('Error fetching donation:', error));
   }, [userId, token]);
 
@@ -68,7 +93,7 @@ const UserManagement = () => {
 
     delete userData.confirm_password;
     //submit the form data
-    fetch(`/api/users/${userId}/profile`, {
+    fetch(`/api/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
