@@ -10,8 +10,8 @@ const DonationsTable = ({ isLoggedIn, usersId, orgId, donation, userType }) => {
     if (isLoggedIn) {
       console.log('Fetching donations urls...');
       const url = userType === 'user'
-        ? `/users/${usersId}/donations`
-        : `/organizations/${orgId}/donations`;
+        ? `api/users/${usersId}/donations`
+        : `api/organizations/${orgId}/donations`;
 
         console.log('Fetching from URL:', url);
 

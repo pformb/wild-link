@@ -8,11 +8,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import DonationsTable from './DonationsTable';
+import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
 
 const OrgManagement = () => {
   const { user } = useAuth();
   const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
   const [donation, setDonation] = useState([]);
   const { orgId } = useParams();
   console.log('orgId:', orgId);
@@ -37,35 +39,23 @@ const OrgManagement = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('data:', data);
-        setOrgData(data);
+        console.log('Fetched organization data:', data);
+        setOrgData(data[0]); //maybe send send this as the 1st object of the array in the fetch request?
       } catch (error) {
         console.error('Error fetching organization profile:', error);
       }
     };
     fetchOrgProfile();
-    // console.log('orgData:', orgData);
-  }, [orgId]);
-
-  //no userId in the response
-  // useEffect(() => {
-  //   const fetchSession = async () => {
-  //     const response = await fetch('/api/session');
-  //     if (!response.ok) {
-  //       console.error('Not logged in');
-  //     }
-  //   }
-  //   fetchSession();
-  // }, []);
+  }, [orgId, token]);
 
   //fetch donations table
   useEffect(() => {
     console.log("Org donations orgId", orgId)
-    fetch(`/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
+    fetch(`api/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
       .then(response => response.json())
       .then(data => setDonation(data))
       .catch(error => console.error('Error fetching donation:', error));
-  }, [orgId]);
+  }, [orgId, token]);
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
