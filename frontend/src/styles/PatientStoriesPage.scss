@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .organization-card-list{
@@ -11,4 +12,5 @@
   margin-top: 50px;
   margin-left: 205px;
   margin-right: 50px;
+  
 }

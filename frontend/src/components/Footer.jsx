@@ -1,16 +1,32 @@
-import '../styles/Footer.css';
+import '../styles/Footer.scss';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-const Footer = () => {
+function Footer() {
+  const [value, setValue] = React.useState(0);
+
   return (
-    <div className="footer">
-      <p>Footer</p>
-    </div>
+    <Box sx={{ width: 'auto', color: 'white', backgroundColor: 'black', height: 150 }}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        
+        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      </BottomNavigation>
+    </Box>
   );
-}
+};
 
 export default Footer;
 
-// need to add links to the footer
-// such as Patient Stories, About Us, Contact Us
-//-----------
-// WildLink with the copyright logo.

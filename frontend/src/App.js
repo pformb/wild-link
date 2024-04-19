@@ -7,6 +7,7 @@ import PatientStoriesPage from './components/PatientStoriesPage.jsx'
 import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
+import Footer from './components/Footer.jsx';
 
 import { Route, Routes } from 'react-router-dom';
 import React, {useState} from 'react';
@@ -42,9 +43,9 @@ function App() {
     <Route path="/:orgId/patients" element={<PatientsListPage />} />
     <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
     <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
-   
-
     </Routes>
+
+    <Footer />
     </div>
    
   );
