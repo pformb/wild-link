@@ -45,8 +45,7 @@ if (contentType && contentType.indexOf('application/json') !== -1) {
   const data = await response.json();
   console.log('Received:', data);
   if (data.success) {
-    // Login successful
-    setLoggedIn(true);
+
     alert(`Welcome back, ${data.first_name}!`);
       localStorage.setItem("token", data.token); // Save the token in localStorage
       setAuthData(data.token);

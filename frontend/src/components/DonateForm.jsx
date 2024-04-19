@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -8,12 +8,14 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from "@mui/material/Typography";
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
 const DonationForm = () => {
 
   const location = useLocation();
+  const { user } = useAuth();
+  const { patient, orgId } = location.state;
 
   const [formData, setFormData] = useState({
     donationAmount: "",
@@ -27,19 +29,9 @@ const DonationForm = () => {
     return <Navigate to="/home" replace />;
   }
 
-  const { patient, orgId } = location.state;
-  const { user } = useAuth();
   console.log(`org id on donation form:`, orgId);
   console.log(`patient data on donation form`, patient);
 
-  const [formData, setFormData] = useState({
-    donationAmount: '',
-    fullName: '',
-    email: '',
-    creditCardNumber: '',
-    expirationDate: '',
-    cvv: '',
-  });
 
 const handleDonation = async (event) => {
     event.preventDefault();
