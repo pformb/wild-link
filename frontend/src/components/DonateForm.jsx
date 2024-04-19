@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -14,6 +14,19 @@ import { useAuth } from "../contexts/AuthContext";
 const DonationForm = () => {
 
   const location = useLocation();
+
+  const [formData, setFormData] = useState({
+    donationAmount: "",
+    fullName: "",
+    email: "",
+    creditCardNumber: "",
+    expirationDate: "",
+    cvv: "",
+  });
+  if (!location.state) {
+    return <Navigate to="/home" replace />;
+  }
+
   const { patient, orgId } = location.state;
   const { user } = useAuth();
   console.log(`org id on donation form:`, orgId);

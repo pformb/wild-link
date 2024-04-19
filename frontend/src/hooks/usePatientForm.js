@@ -33,6 +33,7 @@ export const usePatientForm = () => {
 
   //useEffect to populate data
   useEffect(() => {
+    const token = localStorage.getItem("token");
     //Checks which form to make correct api data request
     const endpoint = editForm
       ? `/api/organizations/${orgId}/patients/${patientId}/edit`
@@ -40,7 +41,7 @@ export const usePatientForm = () => {
 
     async function fetchData() {
       try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, { headers: { 'Authorization': `Bearer ${token}` }});
         const data = await response.json();
         //create select options
         setOptions({
@@ -141,6 +142,7 @@ export const usePatientForm = () => {
 
   //handles story generation request
   const handleGenerateStory = async () => {
+    const token = localStorage.getItem("token");
     if (!validateForm()) {
       alert('Please fill in all required fields and select at least one condition and one treatment.');
       return;
@@ -171,10 +173,13 @@ export const usePatientForm = () => {
       patientTreatments: treatmentNames,
     };
     try {
-        const response = await fetch('/api/generate-story', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(storyRequestData)
+        const response = await fetch("/api/generate-story", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify(storyRequestData),
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || "Failed to generate story");
@@ -199,6 +204,7 @@ export const usePatientForm = () => {
   //submits form to database
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("token");
     if (!validateForm() || formData.patientDetails.story === "") {
       alert('Please fill in all required fields and select at least one condition and one treatment.');
       return;
@@ -208,10 +214,11 @@ export const usePatientForm = () => {
       : `/api/organizations/${orgId}/patients/new`;
     const method = editForm ? "PATCH" : "POST";
 
-    const { release_date, ...otherDetails } = formData.patientDetails;
+    const { release_date, image, ...otherDetails } = formData.patientDetails;
     const updatedPatientDetails = {
       ...otherDetails,
       release_date: release_date === "" ? null : release_date, // Convert empty string to null
+      image: image === "" ? null : image, // Convert empty string to null
     };
   
     const submittedData = {
@@ -219,7 +226,7 @@ export const usePatientForm = () => {
       patientConditions: formData.patientConditions,
       patientTreatments: formData.patientTreatments,
     };
-    
+
     if (
       Object.keys(submittedData.patientDetails).length === 0 &&
       submittedData.patientConditions.length === 0 &&
@@ -230,7 +237,7 @@ export const usePatientForm = () => {
     try {
       const response = await fetch(endpoint, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(submittedData),
       });
 
@@ -248,6 +255,7 @@ export const usePatientForm = () => {
   };
 
   return {
+    editForm,
     formData,
     setFormData,
     handleSubmit,

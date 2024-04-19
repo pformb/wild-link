@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import  '../styles/LoginPage.scss';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../contexts/AuthContext";
 
 //https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430#:~:text=It%20provides%20a%20declarative%20API,the%20useHistory%20and%20useLocation%20hooks.
 
@@ -14,6 +16,7 @@ const navigate = useNavigate();
   //manage user data in state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setAuthData } = useAuth();
 
   //form submission
   const handleSubmit =  async(e) => {
@@ -27,7 +30,8 @@ const navigate = useNavigate();
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(loginData)
+        body: JSON.stringify(loginData),
+        credentials: 'include'
       });
   
       if (!response.ok) {
@@ -44,6 +48,8 @@ if (contentType && contentType.indexOf('application/json') !== -1) {
     // Login successful
     setLoggedIn(true);
     alert(`Welcome back, ${data.first_name}!`);
+      localStorage.setItem("token", data.token); // Save the token in localStorage
+      setAuthData(data.token);
     navigate('/home');
   } else {
     // Login failed
@@ -51,7 +57,6 @@ if (contentType && contentType.indexOf('application/json') !== -1) {
   }
 } else {
   const data = await response.text();
-  console.log('Received:', data);
   alert(data);
   navigate('/home');
 }

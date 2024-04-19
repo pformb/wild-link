@@ -2,9 +2,6 @@ import '../styles/HomePage.scss';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
-  
-  // const { 
-  // } = props;
 
   return (
     <div className="home-page">

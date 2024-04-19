@@ -2,6 +2,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const organizations = require("../models/organizations")
+const { authToken } = require("../middleware/authToken");
 
 const saltRounds = 10;
 
@@ -26,7 +27,7 @@ module.exports = (db) => {
   });
 
   //GET ORGANIZATION PROFILE
-  router.get("/organizations/:orgId/profile", async (req, res) => {
+  router.get("/organizations/:orgId/profile", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     const orgProfile = await organizations.getOrganizationProfile(db, orgId);
     if (orgProfile.length === 0) {
@@ -36,7 +37,7 @@ module.exports = (db) => {
   });
 
   //UPDATE ORGANIZATION PROFILE
-  router.patch("/organizations/:orgId/profile", async (req, res) => {
+  router.patch("/organizations/:orgId/profile", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     let { orgData } = req.body;
     let password = orgData.password;

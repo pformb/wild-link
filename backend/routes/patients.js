@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const patients = require("../models/patients");
+const { authToken } = require("../middleware/authToken");
 
 module.exports = (db) => {
   ///GET REQUESTS///
 
   //GET ALL DATA FOR CREATE PATIENT FORM DROPDOWN/SELECTS
-  router.get("/organizations/:orgId/patients/new", async (req, res) => {
+  router.get("/organizations/:orgId/patients/new", authToken, async (req, res) => {
     try {
       const [allSpecies, allConditions, allTreatments, allAgeRanges] =
         await Promise.all([
@@ -67,7 +68,7 @@ module.exports = (db) => {
   });
 
   //GET ALL PATIENT DATA AND CONDITION/TREATMENT DATA FOR EDIT FORM
-  router.get("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
+  router.get("/organizations/:orgId/patients/:patientId/edit", authToken, async (req, res) => {
       const patientId = req.params.patientId;
       try {
         const [
@@ -120,7 +121,7 @@ module.exports = (db) => {
   ///POST & PATCH REQUESTS///
 
   //POST CREATE PATIENT
-  router.post("/organizations/:orgId/patients/new", async (req, res) => {
+  router.post("/organizations/:orgId/patients/new", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     const {
       patientDetails,
@@ -149,7 +150,7 @@ module.exports = (db) => {
   });
 
   //PATCH EDIT PATIENT DATA
-  router.patch("/organizations/:orgId/patients/:patientId/edit", async (req, res) => {
+  router.patch("/organizations/:orgId/patients/:patientId/edit", authToken, async (req, res) => {
       const patientId = req.params.patientId;
       const {
         patientDetails,
@@ -174,9 +175,7 @@ module.exports = (db) => {
   );
 
   //PATCH DELETE/ACHIVE PATIENT
-  router.patch(
-    "/organizations/:orgId/patients/:patientId",
-    async (req, res) => {
+  router.patch("/organizations/:orgId/patients/:patientId", authToken, async (req, res) => {
       const patientId = req.params.patientId;
       try {
         await patients.archivePatient(db, patientId);
