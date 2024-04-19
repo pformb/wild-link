@@ -59,8 +59,14 @@ const OrgManagement = () => {
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
-  
+  //password check
+  if (orgData.password !== orgData.confirm_password) {
+    alert('Passwords do not match');
+    return;
+  }
     console.log('Submitting form with data:', orgData);
+
+    delete orgData.confirm_password;
     //submit the form data
     fetch(`/api/organizations/${orgId}/profile`, {
       method: "PATCH",
@@ -76,7 +82,7 @@ const OrgManagement = () => {
         }
         return response.json();
       })
-      .then((data) => setOrgData(data[0]))
+      .then((data) => setOrgData(data))
       .catch((error) =>
         console.error("Error updating organization profile:", error)
       );
