@@ -24,6 +24,11 @@ const TopNavigation = () => {
         {user ? (
           <>
             <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
+            {user.roles === 'users' ? (
+              <RouterLink to={`/users/${user.userId}/profile`} className="top-nav-bar__profile">View Profile</RouterLink>
+            ) : (
+              <RouterLink to={`/organizations/${user.userId}/profile`} className="top-nav-bar__profile">View Profile</RouterLink>
+            )}
             <button onClick={logout} className="top-nav-bar__logout">Logout</button>
           </>
         ) : (

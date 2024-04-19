@@ -20,7 +20,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const defaultTheme = createTheme();
 
-const LoginPage = ({ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }) => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -171,3 +171,5 @@ export default LoginPage;
 // alert('Invalid email or password');
 // }
 // };
+
+//{ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }
