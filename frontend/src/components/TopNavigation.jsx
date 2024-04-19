@@ -1,12 +1,15 @@
 
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
 const TopNavigation = () => {
-  const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  // Access roles and orgId from user
+const roles = user?.roles;
+const orgId = user?.orgId;
+
 
   console.log('checking if user is logged in:');
   if (user) {
@@ -24,17 +27,17 @@ const TopNavigation = () => {
         {user ? (
           <>
             <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
-            {user.roles === 'users' ? (
-              <RouterLink to={`/users/${user.userId}/profile`} className="top-nav-bar__profile">View Profile</RouterLink>
+            {roles === 'users' && !('orgId' in user) ? (
+              <RouterLink to={`/users/${user.userId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
             ) : (
-              <RouterLink to={`/organizations/${user.userId}/profile`} className="top-nav-bar__profile">View Profile</RouterLink>
+              <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px' }}>View Profile</RouterLink>
             )}
             <button onClick={logout} className="top-nav-bar__logout">Logout</button>
           </>
         ) : (
           <>
-             <RouterLink to="/login" className="top-nav-bar__login">Login</RouterLink>
-            <RouterLink to="/register" className="top-nav-bar__register">Register</RouterLink>
+             <RouterLink to="/login" className="top-nav-bar__login" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Login</RouterLink>
+            <RouterLink to="/register" className="top-nav-bar__register" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Register</RouterLink>
           </>
         )}
       </div>

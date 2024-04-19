@@ -6,150 +6,190 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../contexts/AuthContext";
 import DonationsTable from './DonationsTable';
 
-const UserManagement = ( isLoggedIn, userType, usersId ) => {
+const UserManagement = () => {
+  const { user } = useAuth();
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  const [donation, setDonation] = useState([]);
   const { userId } = useParams();
   console.log(`UserManagement component rendered. userId: ${userId}`);
 
-  console.log('UserManagement:', userId);
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone_number, setPhoneNumber] = useState('');
-  const [image, setImage] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirm_password, setConfirmPassword] = useState('');
-  const [userData, setUserData] = useState([]); //unsure yet if this is needed
-  const [donation, setDonation] = useState([]);
+  const [userData, setUserData] = useState({ //maybe send send this as the 1st object of the array in the fetch request
+    user_name: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    address: '',
+    phone_number: '',
+    password: '',
+    confirm_password: ''
+  });
 
-    //fetch donations table
-    useEffect(() => {
-      fetch(`/organizations/${userId}/donations`)
-        .then(response => response.json())
-        .then(data => setDonation(data))
-        .catch(error => console.error('Error fetching donation:', error));
-    }, [userId]);
+  console.log('userData:', userData);
 
-  //handle Edit user Information
-  //need to do some reseach on this
+  useEffect(() => {
+    const fetchOrgProfile = async () => {
+      try {
+        const response = await fetch(`/api/users/${userId}/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Fetched users data:', data);
+        setUserData(data[0]); //maybe send send this as the 1st object of the array in the fetch request?
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+    fetchOrgProfile();
+  }, [userId, token]);
+
+  //fetch donations table
+  useEffect(() => {
+    console.log("Org donations userId", userId);
+    fetch(`api/users/${userId}/donations`, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(response => response.json())
+      .then(data => setDonation(data))
+      .catch(error => console.error('Error fetching donation:', error));
+  }, [userId, token]);
+
   const onHandleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    const userData = {
-      first_name: data.get('first_name'),
-      last_name: data.get('last_name'),
-      email: data.get('email'),
-      address: data.get('address'),
-      phone_number: data.get('phone_number'),
-      image: data.get('image'),
-      password: data.get('password'),
-      confirm_password: data.get('confirm_password')
-    };
-    console.log(`userId: ${userId}`);
-    fetch(`/api/users/${userId}/profile`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userData }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Response data:', data);
-        setUserData(data);
-      });
-    };
+    //password check
+    if (userData.password !== userData.confirm_password) {
+      alert('Passwords do not match');
+      return;
+    }
+    console.log('Submitting form with data:', userData);
 
-return (
-  <div className="UserManagement">
-    <div className="user-mgmt">
-      <div className="user-mgmt__content">
-        <Box display="flex" justifyContent="center">
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <form onSubmit={onHandleSubmit}>
-                <Grid item xs={6}>
-                  First Name:
-                  <TextField
-                    type="text"
-                    name="first_name"
-                    value={first_name} onChange={e => setFirstName(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Last Name:
-                  <TextField
-                    type="text"
-                    name="last_name"
-                    value={last_name} onChange={e => setLastName(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Email:
-                  <TextField
-                    type="email"
-                    name="email"
-                    value={email} onChange={e => setEmail(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Address:
-                  <TextField
-                    type="text"
-                    name="address"
-                    value={address} onChange={e => setAddress(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Phone:
-                  <TextField
-                    type="text"
-                    name="phone"
-                    value={phone_number} onChange={e => setPhoneNumber(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Image:
-                  <TextField
-                    type="text"
-                    name="image"
-                    value={image}
-                    onChange={e => setImage(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Password:
-                  <TextField
-                    type="text"
-                    name="password"
-                    value={password} onChange={e => setPassword(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  Confirm Password:
-                  <TextField
-                    type="text"
-                    name="confirm_password"
-                    value={confirm_password}
-                    onChange={e => setConfirmPassword(e.target.value)} />
-                </Grid>
-                <Grid item xs={6}>
-                  <Box display="flex" justifyContent="center" mt={2}>
-                    <Button type="submit" variant="contained" color="primary">
-                      Edit
-                    </Button>
-                  </Box>
-                </Grid>
-              </form>
+    delete userData.confirm_password;
+    //submit the form data
+    fetch(`/api/users/${userId}/profile`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setUserData(data))
+      .catch((error) =>
+        console.error("Error updating user profile:", error)
+      );
+  };
+
+  //handle Edit user Information
+  const onHandleChange = (event) => {
+    setUserData({
+      ...userData,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  return (
+    <div className="UserManagement">
+      <div className="user-mgmt">
+        <div className="user-mgmt__content">
+          <Box display="flex" justifyContent="center">
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <form onSubmit={onHandleSubmit}>
+                  <Grid item xs={6}>
+                    First Name:
+                    <TextField
+                      type="text"
+                      name="first_name"
+                      value={userData.first_name || ''}
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Last Name:
+                    <TextField
+                      type="text"
+                      name="last_name"
+                      value={userData.last_name || ''} 
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Email:
+                    <TextField
+                      type="email"
+                      name="email"
+                      value={userData.email || ''} 
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Address:
+                    <TextField
+                      type="text"
+                      name="address"
+                      value={userData.address}
+                       onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Phone:
+                    <TextField
+                      type="text"
+                      name="phone"
+                      value={userData.phone_number}
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Image:
+                    <TextField
+                      type="text"
+                      name="image"
+                      value={userData.image}
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Password:
+                    <TextField
+                      type="text"
+                      name="password"
+                      value={userData.password} 
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    Confirm Password:
+                    <TextField
+                      type="text"
+                      name="confirm_password"
+                      value={userData.confirm_password}
+                      onChange={onHandleChange} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box display="flex" justifyContent="center" mt={2}>
+                      <Button type="submit" variant="contained" color="primary">
+                        Edit
+                      </Button>
+                    </Box>
+                  </Grid>
+                </form>
+              </Grid>
+              <Grid item xs={6}>
+                {donation ? (
+                  <DonationsTable donation={donation}  userId={userId} />
+                ) : (
+                  <CircularProgress />
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              {donation ? (
-                <DonationsTable donation={donation} isLoggedIn={isLoggedIn} userType={userType} usersId={usersId} />
-              ) : (
-                <CircularProgress />
-              )}
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default UserManagement;
