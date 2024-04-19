@@ -9,21 +9,15 @@ import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from "@mui/material/Typography";
 import { useLocation } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContext";
 
 const DonationForm = () => {
 
   const location = useLocation();
   const { patient, orgId } = location.state;
-  console.log(orgId);
-
-  // {
-  //   donation: {
-  //   organizationId: orgID,
-  //   patientId: patientId,
-  //   donationInCents: donationAmount, 
-  // }
-  //   }
-
+  const { user } = useAuth();
+  console.log(`org id on donation form:`, orgId);
+  console.log(`patient data on donation form`, patient);
 
   const [formData, setFormData] = useState({
     donationAmount: '',
@@ -34,14 +28,36 @@ const DonationForm = () => {
     cvv: '',
   });
 
-  const handleDonation = (event) => {
+const handleDonation = async (event) => {
     event.preventDefault();
-    console.log(`Donation Amount: ${formData.donationAmount}`);
-    console.log(`Donation Amount: ${formData.fullName}`);
-    console.log(`Donation Amount: ${formData.email}`);
-    console.log(`Donation Amount: ${formData.creditCardNumber}`);
-    console.log(`Donation Amount: ${formData.expirationDate}`);
-    console.log(`Donation Amount: ${formData.cvv}`);
+    const token = localStorage.getItem("token");
+    const amountInCents = Math.round(Number(formData.donationAmount) * 100);
+    const donationData = {
+      donation: {
+        organizationId: orgId,
+        patientId: patient.id,
+        donationInCents: amountInCents,
+      },
+    };
+    try {
+      const response = await fetch(`/api/users/${user.userId}/donations/new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(donationData),
+      });
+
+      if (response.ok) {
+        alert("Donation submitted successfully!");
+      } else {
+        throw new Error("Failed to submit donation");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to submit donation");
+    }
   };
 
   const amountButton = (event) => {
