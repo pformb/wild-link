@@ -6,7 +6,7 @@ const getAllPatientsByOrg = async (db, orgId) => {
     `SELECT patients.story, patients.location_found, patients.id, patients.patient_case, patients.date_admitted, patients.release_date, patients.is_released, patients.is_archived, patients.created_at, species.name AS species, COALESCE(patients.image, species.image) AS image FROM patients 
     JOIN species ON patients.species_id = species.id
     WHERE organization_id = $1 AND patients.is_archived = false
-    ORDER BY patients.date_admitted`,
+    ORDER BY patients.date_admitted DESC`,
     [orgId]
   );
   return rows;
@@ -143,6 +143,7 @@ const createPatientDetails = async (db, orgId, patientDetails) => {
 /// ADD & DELETE PATIENT CONDITIONS
 
 const addPatientConditions = async (db, patientId, conditionIds) => {
+  console.log("model:", conditionIds)
   try {
     for (const conditionId of conditionIds) {
       await db.query(
@@ -174,6 +175,7 @@ const deletePatientConditions = async (db, patientId, conditionIds) => {
 
 /// ADD & DELETE PATIENT TREATMENTS
 const addPatientTreatments = async (db, patientId, treatmentIds) => {
+    console.log("model:", treatmentIds);
   try {
     for (const treatmentId of treatmentIds) {
       await db.query(

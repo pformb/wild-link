@@ -128,20 +128,13 @@ module.exports = (db) => {
       patientConditions = [],
       patientTreatments = [],
     } = req.body;
-    // CONVERT EXTRACT FROM NESTED OBJECTS TO MAKE ARRAYS
-    const conditionIds = patientConditions.map(
-      (condition) => condition.condition_id
-    );
-    const treatmentIds = patientTreatments.map(
-      (treatment) => treatment.treatment_id
-    );
     try {
       await patients.createPatient(
         db,
         orgId,
         patientDetails,
-        conditionIds,
-        treatmentIds
+        patientConditions,
+        patientTreatments
       );
       res.status(200).json({ message: "Patient Created" });
     } catch {
@@ -175,7 +168,7 @@ module.exports = (db) => {
   );
 
   //PATCH DELETE/ACHIVE PATIENT
-  router.patch("/organizations/:orgId/patients/:patientId", authToken, async (req, res) => {
+  router.patch("/organizations/:orgId/patients/:patientId/archive", authToken, async (req, res) => {
       const patientId = req.params.patientId;
       try {
         await patients.archivePatient(db, patientId);
