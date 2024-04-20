@@ -150,14 +150,13 @@ const UserManagement = () => {
 
     return (
       <div className="UserManagement">
-        <h1 display="flex" justify-content="center">User Admin Dashboard</h1>
         <div className="user-mgmt">
           <div className="user-mgmt__content">
             <Box display="flex" justifyContent="center">
               <Grid container spacing={3}>
                 <Grid item xs={6}>
                   <form onSubmit={onHandleSubmit}>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="first_name"
                         label="First Name"
@@ -166,7 +165,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="last_name"
                         label="Last Name"
@@ -175,7 +174,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="email"
                         label="Email"
@@ -184,7 +183,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="address"
                         label="Address"
@@ -193,7 +192,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="phone"
                         label="Phone"
@@ -213,7 +212,7 @@ const UserManagement = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <form onSubmit={handlePasswordChange}>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="password"
                         label="New Password"
@@ -222,7 +221,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <TextField
                         name="confirm_password"
                         label="Confirm New Password"
@@ -231,7 +230,7 @@ const UserManagement = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sx={{ p: 2 }}>
                       <Box display="flex" justifyContent="center" mt={2}>
                         <Button type="submit" variant="contained" color="primary">
                           Save
@@ -242,11 +241,13 @@ const UserManagement = () => {
                 </Grid>
               </Grid>
             </Box>
+            <Box p={2}>
             {donation ? (
               <DonationsTable donation={donation} userId={userId} isOrg={false} />
             ) : (
               <CircularProgress />
             )}
+            </Box>
           </div>
         </div>
       </div>

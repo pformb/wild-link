@@ -130,14 +130,13 @@ const OrgManagement = () => {
 
   return (
     <div className="OrgManagement">
-      <h1 display="flex" justify-content="center">Organization Admin Dashboard</h1>
       <div className="org-mgmt">
         <div className="org-mgmt__content">
           <Box display="flex" justifyContent="center">
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <form onSubmit={onHandleSubmit}>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ p: 2 }}>
                 <TextField
                   name="organization_name"
                   label="Organization Name"
@@ -146,7 +145,7 @@ const OrgManagement = () => {
                   fullWidth
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{ p: 2 }}>
               <TextField
                 name="first_name"
                 label="First Name"
@@ -155,7 +154,7 @@ const OrgManagement = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{ p: 2 }}>
               <TextField
                 name="last_name"
                 label="Last Name"
@@ -164,7 +163,7 @@ const OrgManagement = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{ p: 2 }}>
               <TextField
                 name="email"
                 label="email"
@@ -173,7 +172,7 @@ const OrgManagement = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{ p: 2 }}>
               <TextField
                 name="address"
                 label="address"
@@ -182,7 +181,7 @@ const OrgManagement = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{ p: 2 }}>
               <TextField
                 name="phone"
                 label="phone"
@@ -194,7 +193,7 @@ const OrgManagement = () => {
                 <Grid item xs={6}>
                   <Box display="flex" justifyContent="center" mt={2}>
                     <Button type="submit" variant="contained" color="primary">
-                      Edit
+                      Save
                     </Button>
                   </Box>
                 </Grid>
@@ -202,7 +201,7 @@ const OrgManagement = () => {
             </Grid>
             <Grid item xs={6}>
               <form onSubmit={handlePasswordChange}>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ p: 2 }}>
                   <TextField
                     name="password"
                     label="New Password"
@@ -211,7 +210,7 @@ const OrgManagement = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ p: 2 }}>
                   <TextField
                     name="confirm_password"
                     label="Confirm New Password"
@@ -231,11 +230,13 @@ const OrgManagement = () => {
             </Grid>
           </Grid>
         </Box>
+        <Box p={2}>
         {donation ? (
           <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
         ) : (
           <CircularProgress />
         )}
+        </Box>
         </div>
       </div>
     </div>
