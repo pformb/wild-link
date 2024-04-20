@@ -8,8 +8,9 @@ import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
 import AboutUsPage from './components/AboutUsPage.jsx';
+import OrgPatientList from "./components/OrgPatientList.jsx";
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import React, {useState} from 'react';
 // import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
@@ -27,28 +28,46 @@ function App() {
   console.log(user);
 
   return (
-    
-    <div className="App"> 
-    <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
+    <div className="App">
+      <TopNavigation
+        name={user?.first_name}
+        loggedIn={!!user}
+        logout={logout}
+      />
 
-    <Routes>
-      
-    <Route index element={<HomeRoute />} />
-    <Route path="/home" element={<HomeRoute />} />
-    <Route path="/login" element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} />} />
-    <Route path="/register" element={<RegistrationPage setLoggedIn={setLoggedIn}/>} />
-    <Route path="/donate" element={<DonateForm/>} />
-    <Route path="/patientstories" element={<PatientStoriesPage />} />
-    <Route path="/contactus" element={<ContactUsPage />} />
-    <Route path="/aboutus" element={<AboutUsPage />} />
-    <Route path="/:orgId/patients" element={<PatientsListPage />} />
-    <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
-    <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
-   
-
-    </Routes>
-    </div> 
-   
+      <Routes>
+        <Route index element={<HomeRoute />} />
+        <Route path="/home" element={<HomeRoute />} />
+        <Route
+          path="/login"
+          element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} />}
+        />
+        <Route
+          path="/register"
+          element={<RegistrationPage setLoggedIn={setLoggedIn} />}
+        />
+        <Route path="/donate" element={<DonateForm />} />
+        <Route path="/patientstories" element={<PatientStoriesPage />} />
+        <Route path="/contactus" element={<ContactUsPage />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
+        <Route
+          path="/:orgId/patients"
+          element={<PatientsListPage key={useParams().orgId} />}
+        />
+        <Route
+          path="/organizations/:orgId/patients/new"
+          element={<PatientForm />}
+        />
+        <Route
+          path="/organizations/:orgId/patients/:patientId/edit"
+          element={<PatientForm />}
+        />
+        <Route
+          path="/organizations/:orgId/patients"
+          element={<OrgPatientList key={useParams().orgId} />}
+        />
+      </Routes>
+    </div>
   );
 }
 
