@@ -7,18 +7,16 @@ module.exports = db => {
      router.post("/login", async (req, res) => {
       let account = await login.findByEmail(db, "users", req.body.email);
       let userType = 'user';
-      let orgId = null;
       if (!account) {
         account = await login.findByEmail(db, "organizations", req.body.email);
         userType = 'organization';
-        orgId = account.id;
       }
       if (account) {
         const passwordCheck = await validatePassword(db, account.role, account.id, req.body.password);
         if (passwordCheck) {
           const token = jwt.sign(
             {
-              userId: account.id,
+              [userType === 'organization' ? 'orgId' : 'userId' ]: account.id,
               role: account.role,
               first_name: account.first_name,
             },

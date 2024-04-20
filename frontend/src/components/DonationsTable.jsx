@@ -78,27 +78,27 @@ const DonationsTable = ({ donation }) => {
             <>
              <TableRow>
             <TableCell>First Name</TableCell>
-            <TableCell>{data.first_name}</TableCell>
+            <TableCell>{orgData.first_name}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Last Name</TableCell>
-            <TableCell>{data.last_name}</TableCell>
+            <TableCell>{orgData.last_name}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Email</TableCell>
-            <TableCell>{data.email}</TableCell>
+            <TableCell>{orgData.email}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Phone Number</TableCell>
-            <TableCell>{data.phone_number}</TableCell>
+            <TableCell>{orgData.phone_number}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Address</TableCell>
-            <TableCell>{data.address}</TableCell>
+            <TableCell>{orgData.address}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Image</TableCell>
-            <TableCell><img src={data.image} alt="User" /></TableCell>
+            <TableCell><img src={orgData.image} alt="User" /></TableCell>
           </TableRow>
             </>
           )}
