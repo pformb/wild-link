@@ -28,13 +28,14 @@ const LoginPage = () => {
   const [open, setOpen] = useState(false);
   const { setAuthData } = useAuth();
 
+
   const handleSubmit = async (e) => { 
     e.preventDefault();
     const loginData = {
       email,
       password
-  };
-
+    };
+  
     try {
       console.log("login data is:", loginData)
       const response = await fetch('http://localhost:3001/api/login', {
@@ -45,38 +46,84 @@ const LoginPage = () => {
         body: JSON.stringify(loginData),
         credentials: 'include'
       });
-
-      if (!response.ok) {
-        throw new Error('Invalid email or password');
-      }
-
+  
       const data = await response.json();
-      console.log('Received:', data);
-      if (data.success) {
+  
+      if (response.ok && data.success) {
         // Login successful
         alert(`Welcome back, ${data.first_name}!`);
-        localStorage.setItem("token", data.token); // Save the token in localStorage for other pages
+        localStorage.setItem("token", data.token); // Save the token in localStorage
         setAuthData(data.token);
-
+  
         //decoding the token
         const decodedToken = jwtDecode(data.token);
         console.log('Decoded',decodedToken);
-
+  
         //accessing userID, role, first_name from the token
         console.log('User ID:', decodedToken.userId);
         console.log('Role:', decodedToken.role);
         console.log('First name:', decodedToken.first_name);
-
+  
         navigate('/home');
       } else {
         // Login failed
-        setOpen(true);
+        throw new Error(data.message || 'Invalid email or password');
       }
     } catch (error) {
       console.error('Error:', error);
       setOpen(true);
     }
   };
+
+  // const handleSubmit = async (e) => { 
+  //   e.preventDefault();
+  //   const loginData = {
+  //     email,
+  //     password
+  // };
+
+  //   try {
+  //     console.log("login data is:", loginData)
+  //     const response = await fetch('http://localhost:3001/api/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(loginData),
+  //       credentials: 'include'
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Invalid email or password');
+  //     }
+
+  //     const data = await response.json();
+  //     console.log('Received:', data);
+  //     if (data.success) {
+  //       // Login successful
+  //       alert(`Welcome back, ${data.first_name}!`);
+  //       localStorage.setItem("token", data.token); // Save the token in localStorage for other pages
+  //       setAuthData(data.token);
+
+  //       //decoding the token
+  //       const decodedToken = jwtDecode(data.token);
+  //       console.log('Decoded',decodedToken);
+
+  //       //accessing userID, role, first_name from the token
+  //       console.log('User ID:', decodedToken.userId);
+  //       console.log('Role:', decodedToken.role);
+  //       console.log('First name:', decodedToken.first_name);
+
+  //       navigate('/home');
+  //     } else {
+  //       // Login failed
+  //       setOpen(true);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     setOpen(true);
+  //   }
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>

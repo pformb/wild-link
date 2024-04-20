@@ -48,6 +48,38 @@ const OrgManagement = () => {
     fetchOrgProfile();
   }, [orgId, token]);
 
+  //edit the organization profile
+  const onHandleSubmit = (event) => {
+    event.preventDefault();
+  
+    // Remove the password and confirm_password fields from the data to be sent
+    const { password, confirm_password, ...data } = orgData;
+  
+    // Send the PATCH request
+    fetch(`/api/organizations/${orgId}/profile`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Update the state with the updated data
+        setOrgData(data);
+        alert('Organization information updated successfully');
+      })
+      .catch((error) =>
+        console.error("Error updating organization information:", error)
+      );
+  };
+
   //fetch donations table
   useEffect(() => {
     console.log("Org donations orgId", orgId)
@@ -57,7 +89,7 @@ const OrgManagement = () => {
       .catch(error => console.error('Error fetching donation:', error));
   }, [orgId, token]);
 
-  const onHandleSubmit = (event) => {
+  const handlePasswordChange = (event) => {
     event.preventDefault();
   //password check
   if (orgData.password !== orgData.confirm_password) {
@@ -105,8 +137,7 @@ const OrgManagement = () => {
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <form onSubmit={onHandleSubmit}>
-                  <Grid container spacing={3}>
-              <Grid item xs={6}>
+                <Grid item xs={6}>
                 <TextField
                   name="organization_name"
                   label="Organization Name"
@@ -160,46 +191,54 @@ const OrgManagement = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                name="password"
-                label="password"
-                value={orgData.password || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                name="confirm_password"
-                label="confrim password"
-                value={orgData.confirm_password || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-                    <Box display="flex" justifyContent="center" mt={2}>
-                      <Button type="submit" variant="contained" color="primary">
-                        Edit
-                      </Button>
-                    </Box>
-                  </Grid>
+                <Grid item xs={6}>
+                  <Box display="flex" justifyContent="center" mt={2}>
+                    <Button type="submit" variant="contained" color="primary">
+                      Edit
+                    </Button>
+                  </Box>
                 </Grid>
               </form>
             </Grid>
             <Grid item xs={6}>
-              {donation ? (
-                <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
-              ) : (
-                <CircularProgress />
-              )}
+              <form onSubmit={handlePasswordChange}>
+                <Grid item xs={6}>
+                  <TextField
+                    name="password"
+                    label="New Password"
+                    value={orgData.password || ''}
+                    onChange={onHandleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    name="confirm_password"
+                    label="Confirm New Password"
+                    value={orgData.confirm_password || ''}
+                    onChange={onHandleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Box display="flex" justifyContent="center" mt={2}>
+                    <Button type="submit" variant="contained" color="primary">
+                      Save
+                    </Button>
+                  </Box>
+                </Grid>
+              </form>
             </Grid>
           </Grid>
         </Box>
+        {donation ? (
+          <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
+        ) : (
+          <CircularProgress />
+        )}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 
