@@ -17,6 +17,7 @@ const OrgManagement = () => {
   const [donation, setDonation] = useState([]);
   const { orgId } = useParams();
   console.log('orgId:', orgId);
+
   const [orgData, setOrgData] = useState({ //maybe send send this as the 1st object of the array in the fetch request
     organization_name: '',
     first_name: '',
@@ -50,7 +51,7 @@ const OrgManagement = () => {
   //fetch donations table
   useEffect(() => {
     console.log("Org donations orgId", orgId)
-    fetch(`api/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
+    fetch(`/api/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
       .then(response => response.json())
       .then(data => setDonation(data))
       .catch(error => console.error('Error fetching donation:', error));
@@ -189,7 +190,7 @@ const OrgManagement = () => {
             </Grid>
             <Grid item xs={6}>
               {donation ? (
-                <DonationsTable donation={donation} orgId={orgId} />
+                <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
               ) : (
                 <CircularProgress />
               )}

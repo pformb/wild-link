@@ -238,7 +238,7 @@ const UserManagement = () => {
 
         <Grid item xs={12}>
           {donation ? (
-            <DonationsTable donation={donation} userId={userId} />
+            <DonationsTable donation={donation} userId={userId} isOrg={false} />
           ) : (
             <CircularProgress />
           )}
