@@ -26,9 +26,11 @@ const DonationsTable = ({ donation }) => {
       }
     })
       .then(response => response.json())
-      .then(data => setOrgData(data[0]))
+      .then(data => setOrgData(data))
       .catch(error => console.error('Error:', error));
   }, [token, orgId]);
+
+  console.log(orgData);
 
 //nothing found 
   // if (!data) {

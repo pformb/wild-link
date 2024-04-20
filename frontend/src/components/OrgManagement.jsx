@@ -154,7 +154,7 @@ const OrgManagement = () => {
               <TextField
                 name="phone"
                 label="phone"
-                value={orgData.phone || ''}
+                value={orgData.phone_number || ''}
                 onChange={onHandleChange}
                 fullWidth
               />
