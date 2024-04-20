@@ -1,0 +1,43 @@
+.team-members {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.dev-team {
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.about-app {
+  margin-top: 50px;
+  margin-left: 75px;
+  width: 50%;
+  text-align: left;
+
+}
+
+.team-member {
+  margin: 20px;
+  width: 300px;
+  padding: 10px;
+}
+
+.team-member img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.member-info {
+  margin-top: 10px;
+}
+
+.member-info h3 {
+  margin-bottom: 5px;
+}
+
+.member-info p {
+  font-size: 14px;
+}
