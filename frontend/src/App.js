@@ -11,8 +11,6 @@ import OrgManagement from './components/OrgManagement.jsx';
 import UserManagement from './components/UserManagement.jsx';
 
 import { Route, Routes } from 'react-router-dom';
-import React, {useState} from 'react';
-// import { useApplicationData } from './hooks/useApplicationData';
 import './App.css';
 import PatientForm from './components/PatientForm.jsx';
 import { useAuth } from "./contexts/AuthContext";
