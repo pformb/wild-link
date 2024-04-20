@@ -80,10 +80,10 @@ const UserManagement = () => {
   //   fetchUserProfile();
   // }, [userId, token]);
 
-  //fetch donations table
+  //fetch donations table without api prefix
   useEffect(() => {
-    console.log("Org donations userId", userId);
-    fetch(`api/users/${userId}/donations`, { headers: { 'Authorization': `Bearer ${token}` } })
+    console.log("user donations userId", userId);
+    fetch(`/api/users/${userId}/donations`, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(response => response.json())
       // .then(data => setDonation(data))
       .then(data => {
