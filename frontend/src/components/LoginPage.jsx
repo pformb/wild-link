@@ -51,7 +51,6 @@ const LoginPage = () => {
   
       if (response.ok && data.success) {
         // Login successful
-        alert(`Welcome back, ${data.first_name}!`);
         localStorage.setItem("token", data.token); // Save the token in localStorage
         setAuthData(data.token);
   
@@ -74,56 +73,6 @@ const LoginPage = () => {
       setOpen(true);
     }
   };
-
-  // const handleSubmit = async (e) => { 
-  //   e.preventDefault();
-  //   const loginData = {
-  //     email,
-  //     password
-  // };
-
-  //   try {
-  //     console.log("login data is:", loginData)
-  //     const response = await fetch('http://localhost:3001/api/login', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(loginData),
-  //       credentials: 'include'
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Invalid email or password');
-  //     }
-
-  //     const data = await response.json();
-  //     console.log('Received:', data);
-  //     if (data.success) {
-  //       // Login successful
-  //       alert(`Welcome back, ${data.first_name}!`);
-  //       localStorage.setItem("token", data.token); // Save the token in localStorage for other pages
-  //       setAuthData(data.token);
-
-  //       //decoding the token
-  //       const decodedToken = jwtDecode(data.token);
-  //       console.log('Decoded',decodedToken);
-
-  //       //accessing userID, role, first_name from the token
-  //       console.log('User ID:', decodedToken.userId);
-  //       console.log('Role:', decodedToken.role);
-  //       console.log('First name:', decodedToken.first_name);
-
-  //       navigate('/home');
-  //     } else {
-  //       // Login failed
-  //       setOpen(true);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     setOpen(true);
-  //   }
-  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -192,31 +141,3 @@ const LoginPage = () => {
 }
 
 export default LoginPage;
-// Check if the response is JSON
-// const contentType = response.headers.get('content-type');
-// if (contentType && contentType.indexOf('application/json') !== -1) {
-//   const data = await response.json();
-//   console.log('Received:', data);
-//   if (data.success) {
-//     // Login successful
-//     setLoggedIn(true);
-//     alert(`Welcome back, ${data.first_name}!`);
-//       localStorage.setItem("token", data.token); // Save the token in localStorage
-//       setAuthData(data.token);
-//     navigate('/home');
-//   } else {
-//     // Login failed
-//     alert(data.message);
-//   }
-// } else {
-//   const data = await response.text();
-//   alert(data);
-//   navigate('/home');
-// }
-// } catch (error) {
-// console.error('Error:', error);
-// alert('Invalid email or password');
-// }
-// };
-
-//{ setLoggedIn, setUserType, orgId, setOrgId, setUsersId }

@@ -152,7 +152,7 @@ const UserManagement = () => {
       <div className="UserManagement">
         <div className="user-mgmt">
           <div className="user-mgmt__content">
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" sx={{ border: '1px solid #000', m: 2, p: 2 }}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
                   <form onSubmit={onHandleSubmit}>
@@ -241,7 +241,7 @@ const UserManagement = () => {
                 </Grid>
               </Grid>
             </Box>
-            <Box p={2}>
+            <Box p={2} sx={{ border: '1px solid #000', m: 2, p: 2 }}>
             {donation ? (
               <DonationsTable donation={donation} userId={userId} isOrg={false} />
             ) : (
