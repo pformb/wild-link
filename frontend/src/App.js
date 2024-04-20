@@ -16,13 +16,29 @@ import './App.css';
 import PatientForm from './components/PatientForm.jsx';
 import { useAuth } from "./contexts/AuthContext";
 
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily:
+      'Raleway, Zilla Slab, Arial, sans-serif',
+      h1: {
+        fontFamily: 'Zilla Slab, Arial, sans-serif',
+      },
+      h2: {
+        fontFamily: 'Zilla Slab, Arial, sans-serif',
+      },
+  },
+});
+
+
 function App() {
 
   const { user, logout } = useAuth();
   console.log(user);
 
   return (
-    
+    <ThemeProvider theme={theme}>
     <div className="App"> 
     <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
 
@@ -45,6 +61,7 @@ function App() {
 
     </Routes>
     </div> 
+    </ThemeProvider>
    
   );
 }

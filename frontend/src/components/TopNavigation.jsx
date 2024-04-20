@@ -14,7 +14,7 @@ const TopNavigation = () => {
   }
   
   return (
-    <AppBar position="static" style={{ backgroundColor: '#333333', boxShadow: '0 4px 6px -6px #222', height: '72px' }}>
+    <AppBar position="static" style={{ backgroundColor: '#afd683', boxShadow: '0 4px 6px -6px #222', height: '72px' }}>
        <Toolbar style={{ padding: 0 }}>
        <Typography variant="h6" style={{ flexGrow: 3, fontFamily: "'Luckiest Guy', cursive", fontSize: '38px' }}>
             <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>

@@ -2,6 +2,8 @@ import '../styles/PatientsListPage.scss';
 import PatientCard from '../components/PatientCard';
 import useAllPatientsByOrg from '../hooks/useAllPatientsByOrg';
 import { useParams } from 'react-router-dom'; 
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 
 const PatientsListPage = () => {
   const { orgId } = useParams(); // Get orgId from URL params
@@ -13,6 +15,19 @@ const PatientsListPage = () => {
           <PatientCard key={index} pat={pat} orgId={orgId} />
         ))}
       </div>
+
+        <Box>
+        <Grid container spacing={2}>
+        {patData && patData.map((pat, index) => (
+          <Grid xs={4}>
+          <PatientCard key={index} pat={pat} orgId={orgId} />
+          </Grid>
+        ))}
+        
+          
+         
+        </Grid>
+        </Box>
     </div>
   );
 }
