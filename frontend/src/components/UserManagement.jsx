@@ -9,6 +9,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { makeStyles } from '@mui/styles';
 import { useAuth } from "../contexts/AuthContext";
 import DonationsTable from './DonationsTable';
+import { InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 //adjusts img size
 const useStyles = makeStyles({
@@ -36,12 +38,17 @@ const UserManagement = () => {
     phone_number: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [donation, setDonation] = useState([]);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const [passUpdate, setPassUpdate] = useState({
     password: "",
     confirm_password: "",
   })
-
-  const [donation, setDonation] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -165,7 +172,6 @@ const UserManagement = () => {
           <Box
             display="flex"
             justifyContent="center"
-            sx={{ border: "1px solid #000", m: 2, p: 2 }}
           >
             <Grid container spacing={3}>
               <Grid item xs={6}>
@@ -216,24 +222,50 @@ const UserManagement = () => {
                 </form>
               </Grid>
               <Grid item xs={6}>
-                <form onSubmit={handlePasswordChange}>
-                  <Grid item xs={6} sx={{ p: 2 }}>
-                    <TextField
-                      name="password"
-                      label="New Password"
-                      value={passUpdate.password || ""}
-                      onChange={onPassHandleChange}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={6} sx={{ p: 2 }}>
-                    <TextField
-                      name="confirm_password"
-                      label="Confirm New Password"
-                      value={passUpdate.confirm_password || ""}
-                      onChange={onPassHandleChange}
-                      fullWidth
-                    />
+              <form onSubmit={handlePasswordChange}>
+                <Grid item xs={6} sx={{ p: 2 }}>
+                  <TextField
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    label="New Password"
+                    value={passUpdate.password || ''}
+                    onChange={onPassHandleChange}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={(event) => event.preventDefault()}
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={6} sx={{ p: 2 }}>
+                  <TextField
+                    type={showPassword ? 'text' : 'password'}
+                    name="confirm_password"
+                    label="Confirm New Password"
+                    value={passUpdate.confirm_password || ''}
+                    onChange={onPassHandleChange}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={(event) => event.preventDefault()}
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                   </Grid>
                   <Grid item xs={6} sx={{ p: 2 }}>
                     <Box display="flex" justifyContent="center" mt={2}>
@@ -246,7 +278,7 @@ const UserManagement = () => {
               </Grid>
             </Grid>
           </Box>
-          <Box p={2} sx={{ border: "1px solid #000", m: 2, p: 2 }}>
+          <Box p={2}>
             {donation ? (
               <DonationsTable
                 donation={donation}
