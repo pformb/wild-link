@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
+import FullLogo_Transparent from "../FullLogo_Transparent.png";
 
 const TopNavigation = () => {
   const { user, logout } = useAuth();
@@ -20,9 +21,11 @@ const TopNavigation = () => {
       height: '72px'
     }}>
       <Toolbar style={{ padding: 0 }}>
-        <Box display="flex" justifyContent="flex-start" style={{ flexGrow: 3 }}>
+        <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" style={{ flexGrow: 3 }}>
           <Typography variant="h6" style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '38px' }}>
-            <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px' }}>Home </RouterLink>
+            <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px' }}>
+            <img src={FullLogo_Transparent} alt="Home" style={{ width: '100px', height: '100px' }} />
+            </RouterLink>
           </Typography>
         </Box>
 

@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <Grid container className="home-page" spacing={3} style={{ width: 'auto' }}>
       <Grid item xs={12} md={6}>
-        <img src={FullLogo_Transparent} alt="Logo" style={{ width: '100%', height: 'auto', paddingTop: '50px' }} />
+        <img className="marmot" src="/marmot.png" alt="eagle" style={{ paddingTop: '50px', width: '500px', height: '500px'}}/>
       </Grid>
       <Grid item xs={12} md={6}>
         <Typography variant="h1" >Who We Are</Typography>
