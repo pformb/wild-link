@@ -39,7 +39,6 @@ module.exports = (db) => {
   //UPDATE ORGANIZATION PROFILE
   router.patch("/organizations/:orgId/profile", authToken, async (req, res) => {
     const orgId = req.params.orgId;
-    // let { orgData } = req.body;
     let orgData = req.body;
     let password = orgData.password;
     try {

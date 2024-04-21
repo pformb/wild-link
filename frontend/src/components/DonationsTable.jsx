@@ -4,7 +4,6 @@ import React from 'react';
 import { Container, Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@mui/material';
 
 const DonationsTable = ({ donation, isOrg }) => {
-
   return (
     <Container align="center">
       <TableContainer component={Paper} sx={{ width: '80vw', maxWidth: '100%' }}>

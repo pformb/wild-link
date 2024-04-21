@@ -35,7 +35,6 @@ const registerUser = async (db, userData, hashedPassword) => {
 const updateUser = async (db, userId, userData) => {
   const values = [];
   const columns = [];
-
   for (const [key, value] of Object.entries(userData)) {
     columns.push(key);
     values.push(value);

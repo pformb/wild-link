@@ -13,13 +13,10 @@ module.exports = (db) => {
   //GET USER BY ID
   router.get("/users/:userId", authToken, async (req, res) => {
     const userId = req.params.userId;
-    console.log('userId:', userId);
     const userData = await users.getUser(db, userId);
-    console.log('userData:', userData);
     if (userData.length === 0) {
       return res.status(404).json({message: "User Not Found"});
     }
-    console.log('userData:', userData);
     res.json(userData); //1st user obj not array of user objs
   });     
 
@@ -44,12 +41,11 @@ router.post("/register", async (req, res) => {
   //Edit USER
   router.patch("/users/:userId", authToken, async (req, res) => {
     const userId = req.params.userId;
-    let { userData } = req.body;
-    let password = userData.password;
+    let userData  = req.body;
     try {
       // If Password is updated
-      if (password) {
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+      if (userData.password) {
+        const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
         userData.password = hashedPassword;
       }
       await users.updateUser(db, userId, userData);
