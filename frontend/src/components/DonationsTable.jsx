@@ -6,7 +6,7 @@ import { withStyles } from '@mui/styles';
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
   },
   body: {
     fontSize: 14,

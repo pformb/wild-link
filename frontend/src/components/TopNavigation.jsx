@@ -16,7 +16,7 @@ const TopNavigation = () => {
 
   return (
     <AppBar position="sticky" style={{
-      background: 'linear-gradient(90deg, rgba(245, 222, 179, 1) 0%, rgba(33,94,33,1) 100%)',
+      background: '#827717',
       boxShadow: '0 4px 6px -6px #222',
       height: '72px'
     }}>
@@ -57,3 +57,7 @@ const TopNavigation = () => {
 };
 
 export default TopNavigation;
+
+/** dead code 
+ * background: 'linear-gradient(90deg, rgba(245, 222, 179, 1) 0%, rgba(33,94,33,1) 100%)',
+ */
