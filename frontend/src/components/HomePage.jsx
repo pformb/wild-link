@@ -1,7 +1,6 @@
 import '../styles/HomePage.scss';
 import { Link } from 'react-router-dom';
 import { Grid, Typography, Button } from '@mui/material';
-import FullLogo_Transparent from "../FullLogo_Transparent.png";
 
 const HomePage = () => {
   return (
