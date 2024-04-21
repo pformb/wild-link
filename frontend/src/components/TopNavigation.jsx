@@ -1,7 +1,6 @@
 import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
-import FullLogo_Transparent from "../FullLogo_Transparent.png";
 
 const TopNavigation = () => {
   const { user, logout } = useAuth();
@@ -22,15 +21,11 @@ const TopNavigation = () => {
 }}>
        <Toolbar style={{ padding: 0 }}>
        <Typography variant="h6" style={{ flexGrow: 3, fontFamily: "'Luckiest Guy', cursive", fontSize: '38px' }}>
-       <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Wild Link</RouterLink>
+       <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white' }}>Home </RouterLink>
           </Typography>
 
         <Box display="flex" justifyContent="flex-start" style={{ padding: '20px' }}>
           <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Patient Stories</RouterLink>
-          <RouterLink to="/aboutus" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>About Us</RouterLink>
-          <RouterLink to="/contactus" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Contact Us</RouterLink>
-        
-
         {user && <RouterLink to="/donate" style={{ textDecoration: 'none', color: 'white', padding: '5px' }}>Donate</RouterLink>}
 
         </Box>
