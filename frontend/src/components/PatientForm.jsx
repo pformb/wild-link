@@ -13,7 +13,7 @@ const PatientForm = () => {
   const { user } = useAuth();
 
   if (!user || user.role !== "organizations") {
-    // Redirect them to the home page, or render an access denied message
+    // Redirect them to the home page
     return <Navigate to="/home" replace />;
   }
 
@@ -184,7 +184,7 @@ const PatientForm = () => {
                   ""
                 }
                 alt="Select Species for Default"
-                style={{ width: "auto", maxHeight: 225 }}
+                style={{ width: "auto", maxHeight: 225, marginBottom: "20px" }}
               />
               <TextField
                 fullWidth
