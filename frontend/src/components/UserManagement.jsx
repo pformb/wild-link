@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { makeStyles } from '@mui/styles';
-import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
 import DonationsTable from './DonationsTable';
 
@@ -24,7 +23,7 @@ const UserManagement = () => {
   const classes = useStyles();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { urlUserId } = useParams();
+  const { userId } = useParams();
   const token = localStorage.getItem("token");
 
   const [userData, setUserData] = useState({
@@ -55,7 +54,7 @@ const UserManagement = () => {
       navigate("/home", { replace: true });
       return;
     }
-    if (user.userId && urlUserId !== user.userId) {
+    if (user.userId && userId !== user.userId) {
       // If they don't match, redirect to the correct user profile path
       navigate(`/users/${user.userId}/`);
     }
@@ -90,19 +89,12 @@ const UserManagement = () => {
         setDonation(data);
       })
       .catch((error) => console.error("Error fetching donation:", error));
-  }, [token, user, urlUserId, navigate]);
+  }, [token, user, userId, navigate]);
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
-    //password check
-    if (userData.password !== userData.confirm_password) {
-      alert("Passwords do not match");
-      return;
-    }
 
-    delete userData.confirm_password;
     //submit the form data
-    console.log(JSON.stringify(userData));
     fetch(`/api/users/${user.userId}`, {
       method: "PATCH",
       headers: {
@@ -147,7 +139,7 @@ const UserManagement = () => {
       })
       .then(() => setPassUpdate({ password: "", confirm_password: "" }))
       .catch((error) =>
-        console.error("Error updating organization profile:", error)
+        console.error("Error updating user password:", error)
       );
   };
 
@@ -258,7 +250,7 @@ const UserManagement = () => {
             {donation ? (
               <DonationsTable
                 donation={donation}
-                userId={urlUserId}
+                userId={userId}
                 isOrg={false}
               />
             ) : (

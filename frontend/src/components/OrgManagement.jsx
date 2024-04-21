@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import DonationsTable from './DonationsTable';
-import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
 
 const OrgManagement = () => {
-  const { user } = useAuth();
-  const token = localStorage.getItem("token");
-  const decodedToken = jwtDecode(token);
-  const [donation, setDonation] = useState([]);
   const { orgId } = useParams();
-  console.log('orgId:', orgId);
+  const token = localStorage.getItem("token");
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [donation, setDonation] = useState([]);
+
 
   const [orgData, setOrgData] = useState({ //maybe send send this as the 1st object of the array in the fetch request
     organization_name: '',
@@ -25,82 +24,66 @@ const OrgManagement = () => {
     email: '',
     address: '',
     phone_number: '',
-    password: '',
-    confirm_password: ''
   });
 
-  console.log('orgData:', orgData);
+  const [passUpdate, setPassUpdate] = useState({
+    password: "",
+    confirm_password: "",
+  })
 
   useEffect(() => {
+    if (!token) {
+      //if no token exists redirect home
+      console.log("no token")
+      navigate("/home", { replace: true });
+      return;
+    }
+    if (user.role !== "organizations") {
+      //if token exists but role is not users redirect home
+      console.log("not an org")
+      navigate("/home", { replace: true });
+      return;
+    }
+    if (user.orgId && Number(orgId) !== Number(user.orgId)) {
+      // If they don't match, redirect to the correct user profile path
+      console.log("user.orgId is:", user.orgId, "Type:", typeof user.orgId);
+      console.log("orgId is:", orgId, "Type:", typeof orgId);
+      console.log("does not match ids")
+      navigate(`/users/${user.orgId}/`);
+    }
+
     const fetchOrgProfile = async () => {
       try {
-        const response = await fetch(`/api/organizations/${orgId}/profile`, { headers: { 'Authorization': `Bearer ${token}` }});
+        const response = await fetch(`/api/organizations/${user.orgId}/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Fetched organization data:', data);
+        console.log("Fetched organization data:", data);
         setOrgData(data[0]); //maybe send send this as the 1st object of the array in the fetch request?
       } catch (error) {
-        console.error('Error fetching organization profile:', error);
+        console.error("Error fetching organization profile:", error);
       }
     };
     fetchOrgProfile();
-  }, [orgId, token]);
+
+    //fetch donations table
+    fetch(`/api/organizations/${user.orgId}/donations`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => setDonation(data))
+      .catch((error) => console.error("Error fetching donation:", error));
+  }, [user, token]);
 
   //edit the organization profile
   const onHandleSubmit = (event) => {
     event.preventDefault();
   
-    // Remove the password and confirm_password fields from the data to be sent
-    const { password, confirm_password, ...data } = orgData;
-  
     // Send the PATCH request
-    fetch(`/api/organizations/${orgId}/profile`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Update the state with the updated data
-        setOrgData(data);
-        alert('Organization information updated successfully');
-      })
-      .catch((error) =>
-        console.error("Error updating organization information:", error)
-      );
-  };
-
-  //fetch donations table
-  useEffect(() => {
-    console.log("Org donations orgId", orgId)
-    fetch(`/api/organizations/${orgId}/donations`, { headers: { 'Authorization': `Bearer ${token}` }})
-      .then(response => response.json())
-      .then(data => setDonation(data))
-      .catch(error => console.error('Error fetching donation:', error));
-  }, [orgId, token]);
-
-  const handlePasswordChange = (event) => {
-    event.preventDefault();
-  //password check
-  if (orgData.password !== orgData.confirm_password) {
-    alert('Passwords do not match');
-    return;
-  }
-    console.log('Submitting form with data:', orgData);
-
-    delete orgData.confirm_password;
-    //submit the form data
-    fetch(`/api/organizations/${orgId}/profile`, {
+    fetch(`/api/organizations/${user.orgId}/profile`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -114,9 +97,41 @@ const OrgManagement = () => {
         }
         return response.json();
       })
-      .then((data) => setOrgData(data))
+      .then(() => {
+        alert('Organization information updated successfully');
+      })
       .catch((error) =>
-        console.error("Error updating organization profile:", error)
+        console.error("Error updating organization information:", error)
+      );
+  };
+
+  const handlePasswordChange = (event) => {
+    event.preventDefault();
+    //password check
+    if (passUpdate.password !== passUpdate.confirm_password) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    delete passUpdate.confirm_password;
+    //submit the form data
+    fetch(`/api/organizations/${user.orgId}/profile`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(passUpdate),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(() => setPassUpdate({ password: "", confirm_password: "" }))
+      .catch((error) =>
+        console.error("Error updating organization Password:", error)
       );
   };
 
@@ -125,6 +140,13 @@ const OrgManagement = () => {
     setOrgData({
       ...orgData,
       [event.target.name]: event.target.value
+    });
+  };
+
+  const onPassHandleChange = (event) => {
+    setPassUpdate({
+      ...passUpdate,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -205,8 +227,8 @@ const OrgManagement = () => {
                   <TextField
                     name="password"
                     label="New Password"
-                    value={orgData.password || ''}
-                    onChange={onHandleChange}
+                    value={passUpdate.password || ''}
+                    onChange={onPassHandleChange}
                     fullWidth
                   />
                 </Grid>
@@ -214,8 +236,8 @@ const OrgManagement = () => {
                   <TextField
                     name="confirm_password"
                     label="Confirm New Password"
-                    value={orgData.confirm_password || ''}
-                    onChange={onHandleChange}
+                    value={passUpdate.confirm_password || ''}
+                    onChange={onPassHandleChange}
                     fullWidth
                   />
                 </Grid>

@@ -40,11 +40,10 @@ module.exports = (db) => {
   router.patch("/organizations/:orgId/profile", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     let orgData = req.body;
-    let password = orgData.password;
     try {
       // If Password is updated
-      if (password) {
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+      if (orgData.password) {
+        const hashedPassword = await bcrypt.hash(orgData.password, saltRounds);
         orgData.password = hashedPassword;
       }
       await organizations.updateOrganizationProfile(db, orgId, orgData);

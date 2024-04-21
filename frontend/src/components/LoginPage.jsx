@@ -54,15 +54,6 @@ const LoginPage = () => {
         localStorage.setItem("token", data.token); // Save the token in localStorage
         setAuthData(data.token);
   
-        //decoding the token
-        const decodedToken = jwtDecode(data.token);
-        console.log('Decoded',decodedToken);
-  
-        //accessing userID, role, first_name from the token
-        console.log('User ID:', decodedToken.userId);
-        console.log('Role:', decodedToken.role);
-        console.log('First name:', decodedToken.first_name);
-  
         navigate('/home');
       } else {
         // Login failed
