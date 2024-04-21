@@ -41,9 +41,6 @@ const HomePage = () => {
           environmental awareness and conservation ethics within the community,
           fostering a deeper connection to nature.
         </Typography>
-        <Button variant="contained" color="primary" component={Link} to="/donate" className="home-page__donate">
-          Donate Now
-        </Button>
       </Grid>
       <Grid item xs={12} md={6}>
         <img className="home-pic2" src="/home-page-pic2.png" alt="home" />
