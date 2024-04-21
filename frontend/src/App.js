@@ -12,13 +12,12 @@ import UserManagement from './components/UserManagement.jsx';
 import AboutUsPage from './components/AboutUsPage.jsx';
 import OrgPatientList from "./components/OrgPatientList.jsx";
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from "react-router-dom";
 import './App.css';
 import PatientForm from './components/PatientForm.jsx';
 import { useAuth } from "./contexts/AuthContext";
 
 function App() {
-
   const { user, logout } = useAuth();
   console.log(user);
 
@@ -42,7 +41,7 @@ function App() {
     <Route path="/aboutus" element={<AboutUsPage />} />
     <Route path="/:orgId/patients" element={<PatientsListPage />} />
     <Route path="/organizations/:orgId/patients" element={<OrgPatientList />} />
-    <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
+    <Route path="organizations/:orgId/patients/new" element={<PatientForm key={useParams().orgId} />} />
     <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
     <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
     <Route path="/users/:userId" element={<UserManagement />} />
