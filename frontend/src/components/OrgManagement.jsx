@@ -154,12 +154,13 @@ const OrgManagement = () => {
     <div className="OrgManagement">
       <div className="org-mgmt">
         <div className="org-mgmt__content">
-          <Box display="flex" justifyContent="center" bgcolor="cream" sx={{ border: '1px solid #000', m: 2, p: 2 }}>
+          <Box display="flex" justifyContent="center" bgcolor="grey" sx={{ border: '1px solid #000', m: 2, p: 2 }}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <form onSubmit={onHandleSubmit}>
                 <Grid item xs={6} sx={{ p: 2 }}>
                 <TextField
+                sx={{ backgroundColor: 'white' }}
                   name="organization_name"
                   label="Organization Name"
                   value={orgData.organization_name || ''}

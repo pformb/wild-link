@@ -10,9 +10,10 @@ const PatientCard = ({ pat, orgId }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  
+
+  //styling with the greet component
   return (
-    <div className="patient-card">
+    <div className="patient-card1">
       <div className="patient-content">
         <img 
           className="patient-prof-pic" 
