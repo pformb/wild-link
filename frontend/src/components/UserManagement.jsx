@@ -215,7 +215,7 @@ const UserManagement = () => {
                   <Grid item xs={6}>
                     <Box display="flex" justifyContent="center" mt={2}>
                       <Button type="submit" variant="contained" color="primary">
-                        Edit
+                        Save
                       </Button>
                     </Box>
                   </Grid>
