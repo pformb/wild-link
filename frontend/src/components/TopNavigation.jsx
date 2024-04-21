@@ -16,7 +16,7 @@ const TopNavigation = () => {
 
   return (
     <AppBar position="sticky" style={{
-      background: '#827717',
+      background: '#A89A1E',
       boxShadow: '0 4px 6px -6px #222',
       height: '72px'
     }}>

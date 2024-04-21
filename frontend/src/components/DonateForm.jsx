@@ -154,7 +154,7 @@ const handleDonation = async (event) => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth variant="filled">
-            <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
+            <InputLabel htmlFor="filled-adornment-amount">Custom Amount</InputLabel>
             <FilledInput
               id="filled-adornment-amount"
               startAdornment={

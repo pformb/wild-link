@@ -33,12 +33,15 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#ffca28',
+      main: '#DBCA2A',
     },
     secondary: {
-      main: '#76ff03',
+      main: '#d0d4ed',
     },
-    contrastThreshold: 3,
+    contrast: {
+      main: '#3800d2',
+    },
+    contrastThreshold: 4.1,
     tonalOffset: 0.2,
   },
 });
