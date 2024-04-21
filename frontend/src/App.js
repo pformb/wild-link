@@ -40,7 +40,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
 
         <Routes>

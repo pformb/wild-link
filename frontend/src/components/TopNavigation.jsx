@@ -28,7 +28,6 @@ const TopNavigation = () => {
 
         <Box display="flex" justifyContent="flex-start" style={{ padding: '20px' }}>
           <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Patient Stories</RouterLink>
-          {user && <RouterLink to="/donate" style={{ textDecoration: 'none', color: 'white', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Donate</RouterLink>}
         </Box>
 
         <div className="top-nav-bar__login-register" style={{ paddingRight: '10px' }}>
