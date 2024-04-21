@@ -7,23 +7,18 @@ import PatientStoriesPage from './components/PatientStoriesPage.jsx'
 import PatientsListPage from './components/PatientsListPage.jsx'
 import ContactUsPage from './components/ContactUsPage.jsx'
 import TopNavigation from './components/TopNavigation.jsx';
+import OrgManagement from './components/OrgManagement.jsx';
+import UserManagement from './components/UserManagement.jsx';
 import AboutUsPage from './components/AboutUsPage.jsx';
 import OrgPatientList from "./components/OrgPatientList.jsx";
 
-import { Route, Routes, useParams } from 'react-router-dom';
-import React, {useState} from 'react';
-// import { useApplicationData } from './hooks/useApplicationData';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import PatientForm from './components/PatientForm.jsx';
 import { useAuth } from "./contexts/AuthContext";
 
 function App() {
-  // const { orgData } = useApplicationData();
-  // orgData={orgData} Pass to PatientStoriesPage
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  // console.log(loggedIn); 
-  const [email, setEmail] = useState('');
   const { user, logout } = useAuth();
   console.log(user);
 
@@ -35,39 +30,27 @@ function App() {
         logout={logout}
       />
 
-      <Routes>
-        <Route index element={<HomeRoute />} />
-        <Route path="/home" element={<HomeRoute />} />
-        <Route
-          path="/login"
-          element={<LoginPage setEmail={setEmail} setLoggedIn={setLoggedIn} />}
-        />
-        <Route
-          path="/register"
-          element={<RegistrationPage setLoggedIn={setLoggedIn} />}
-        />
-        <Route path="/donate" element={<DonateForm />} />
-        <Route path="/patientstories" element={<PatientStoriesPage />} />
-        <Route path="/contactus" element={<ContactUsPage />} />
-        <Route path="/aboutus" element={<AboutUsPage />} />
-        <Route
-          path="/:orgId/patients"
-          element={<PatientsListPage key={useParams().orgId} />}
-        />
-        <Route
-          path="/organizations/:orgId/patients/new"
-          element={<PatientForm />}
-        />
-        <Route
-          path="/organizations/:orgId/patients/:patientId/edit"
-          element={<PatientForm />}
-        />
-        <Route
-          path="/organizations/:orgId/patients"
-          element={<OrgPatientList key={useParams().orgId} />}
-        />
-      </Routes>
-    </div>
+    <Routes>
+      
+    <Route index element={<HomeRoute />} />
+    <Route path="/home" element={<HomeRoute />} />
+    <Route path="/login" element={<LoginPage />}/>
+    <Route path="/register" element={<RegistrationPage />} />
+    <Route path="/donate" element={<DonateForm/>} />
+    <Route path="/patientstories" element={<PatientStoriesPage />} />
+    <Route path="/contactus" element={<ContactUsPage />} />
+    <Route path="/aboutus" element={<AboutUsPage />} />
+    <Route path="/:orgId/patients" element={<PatientsListPage />} />
+    <Route path="/organizations/:orgId/patients" element={<OrgPatientList />} />
+    <Route path="organizations/:orgId/patients/new" element={<PatientForm />} />
+    <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
+    <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
+    <Route path="/users/:userId" element={<UserManagement />} />
+   
+
+    </Routes>
+    </div> 
+   
   );
 }
 

@@ -10,9 +10,11 @@ module.exports = (db) => {
   router.get("/users/:userId/donations", authToken, async (req, res) => {
     const userId = req.params.userId;
     const userDonations = await donations.getAllDonationsByUser(db, userId);
+    console.log('userDonations:', userDonations);
     if (userDonations.length === 0) {
       return res.status(404).json({ message: "No Donations Found"});
     }
+    console.log('userDonations:', userDonations);
     res.json(userDonations);
   });
 
@@ -20,9 +22,11 @@ module.exports = (db) => {
   router.get("/organizations/:orgId/donations", authToken, async (req, res) => {
     const orgId = req.params.orgId;
     const orgDonations = await donations.getAllDonationsByOrg(db, orgId);
+    console.log('orgDonations:', orgDonations);
     if (orgDonations.length === 0) {
       return res.status(404).json({ message: "No Donations Found"});
     }
+    console.log('orgDonations:', orgDonations)
     res.json(orgDonations);
   });
 

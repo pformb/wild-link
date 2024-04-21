@@ -39,7 +39,8 @@ module.exports = (db) => {
   //UPDATE ORGANIZATION PROFILE
   router.patch("/organizations/:orgId/profile", authToken, async (req, res) => {
     const orgId = req.params.orgId;
-    let { orgData } = req.body;
+    // let { orgData } = req.body;
+    let orgData = req.body;
     let password = orgData.password;
     try {
       // If Password is updated
@@ -53,6 +54,5 @@ module.exports = (db) => {
       res.status(500).json({ error: "Server Error: unable to update organization"});
     }
   });
-
-  return router;
+return router;
 };
