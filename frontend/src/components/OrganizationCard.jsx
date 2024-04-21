@@ -12,7 +12,7 @@ const OrganizationCard = (orgData) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 140, objectFit: 'cover' }}
         image={orgData.image}
         title={orgData.name} 
       />
@@ -31,7 +31,7 @@ const OrganizationCard = (orgData) => {
         </Typography>
         
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'center' }}>
       <Link to={`/${orgData.id}/patients`}>
       <Button variant="outlined">View</Button>
       </Link>

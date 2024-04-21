@@ -17,19 +17,27 @@ const PatientCard = ({ pat, orgId }) => {
     setIsModalOpen(false);
   };
 
+  console.log(pat);
+
   //styling with the greet component
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="patient"
-        height="200"
+        height="220"
         image={pat.image}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-        {pat.name}
+        <Box display="flex" alignItems="row" justifyContent="space-between" fontSize={5}>
+        <Typography gutterBottom variant="body2" component="div" sx={{ fontSize: '13px' }}>
+        <strong>Case # </strong>{pat.patient_case   }
         </Typography>
+        <br />
+        <Typography gutterBottom variant="body2" component="div" sx={{ fontSize: '13px' }}>
+        <strong>Species: </strong>{pat.species}
+        </Typography>
+        </Box>
         <Typography variant="body2" color="text.secondary">
         <strong>Status:</strong> {pat.is_released ? 'Released' : 'Admitted'}
         </Typography>
