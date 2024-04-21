@@ -50,7 +50,7 @@ const HomePage = () => {
       </Grid>
 
       <Grid item xs={12} md={6}>
-        <img className="home-cover" src="/home-cover-photo.png" alt="home" />
+        <img className="eagle" src="/eagle.png" alt="eagle" />
       </Grid>
       <Grid item xs={12} md={6} className="content-right">
         <Typography variant="h2">Rehaber Needing Public Support?</Typography>
