@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useAuth } from "../contexts/AuthContext";
+import { useNotification } from "../contexts/NotificationContext";
 import DonationsTable from './DonationsTable';
 import { InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -14,6 +15,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const UserManagement = () => {
   const { user } = useAuth();
+  const { notify } = useNotification();
   const navigate = useNavigate();
   const { userId } = useParams();
   const token = localStorage.getItem("token");
@@ -104,6 +106,10 @@ const UserManagement = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        notify({
+          msg: "Profile information updated successfully",
+          type: "success",
+        });
         return response.json();
       })
       .catch((error) => console.error("Error updating user profile:", error));
@@ -114,7 +120,10 @@ const UserManagement = () => {
     event.preventDefault();
     //password check
     if (passUpdate.password !== passUpdate.confirm_password) {
-      alert("Passwords do not match");
+      notify({
+        msg: "Passwords do not match",
+        type: "error",
+      });
       return;
     }
 

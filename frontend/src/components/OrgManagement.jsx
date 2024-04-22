@@ -11,11 +11,13 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import DonationsTable from './DonationsTable';
 import { useAuth } from "../contexts/AuthContext";
+import { useNotification } from "../contexts/NotificationContext";
 
 const OrgManagement = () => {
   const { orgId } = useParams();
   const token = localStorage.getItem("token");
   const { user } = useAuth();
+  const { notify } = useNotification();
   const navigate = useNavigate();
   const [donation, setDonation] = useState([]);
 
@@ -107,7 +109,10 @@ const handleClickShowPassword = () => {
         return response.json();
       })
       .then(() => {
-        alert('Organization information updated successfully');
+        notify({
+          msg: "Organization information updated successfully",
+          type: "success",
+        });
       })
       .catch((error) =>
         console.error("Error updating organization information:", error)
@@ -118,7 +123,10 @@ const handleClickShowPassword = () => {
     event.preventDefault();
     //password check
     if (passUpdate.password !== passUpdate.confirm_password) {
-      alert('Passwords do not match');
+      notify({
+        msg: "Passwords do not match",
+        type: "error",
+      });
       return;
     }
 

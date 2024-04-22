@@ -11,29 +11,17 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
+import { useNotification } from "../contexts/NotificationContext";
 
 const LoginPage = () => {
-  // const theme = useTheme();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [open, setOpen] = useState(false);
   const { setAuthData } = useAuth();
-
-  // const useStyles = makeStyles({
-  //   root: {
-  //     color: theme.palette.primary.main,
-  //     fontFamily: theme.typography.fontFamily,
-  //     // Add more styles as needed
-  //   },
-  //   // Add more classes as needed
-  // });
+  const { notify } = useNotification();
 
 
   const handleSubmit = async (e) => {
@@ -64,11 +52,14 @@ const LoginPage = () => {
         navigate('/home');
       } else {
         // Login failed
-        throw new Error(data.message || 'Invalid email or password');
+        throw new Error(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-      setOpen(true);
+      notify({
+        msg: "Invalid email or password",
+        type: "error",
+      });
     }
   };
 
@@ -127,11 +118,6 @@ const LoginPage = () => {
           </Button>
         </Box>
       </Box>
-      <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
-        <Alert onClose={() => setOpen(false)} severity="error" sx={{ width: '100%' }}>
-          Invalid email or password. Please try again.
-        </Alert>
-      </Snackbar>
     </Container>
   );
 };
