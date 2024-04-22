@@ -1,25 +1,25 @@
 
 import React from 'react';
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper } from '@mui/material';
-import { withStyles } from '@mui/styles';
+import { styled } from '@mui/system';
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  '&.MuiTableCell-head': {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.black,
   },
-  body: {
+  '&.MuiTableCell-body': {
     fontSize: 14,
   },
-}))(TableCell);
+}));
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&.MuiTableRow-root': {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
   },
-}))(TableRow);
+}));
 
 const DonationsTable = ({ donation, isOrg }) => {
   const [page, setPage] = React.useState(0);

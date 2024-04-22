@@ -6,23 +6,13 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { makeStyles } from '@mui/styles';
 import { useAuth } from "../contexts/AuthContext";
 import DonationsTable from './DonationsTable';
 import { InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-//adjusts img size
-const useStyles = makeStyles({
-  image: {
-    width: '100%', // Adjust as needed
-    height: 'auto', // Keeps the aspect ratio
-    maxWidth: '200px', // Adjust as needed
-  },
-});
 
 const UserManagement = () => {
-  const classes = useStyles();
   const { user } = useAuth();
   const navigate = useNavigate();
   const { userId } = useParams();
