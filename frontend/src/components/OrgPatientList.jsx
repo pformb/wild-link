@@ -2,13 +2,31 @@ import React, { useState, useEffect } from "react";
 import useAllPatientsByOrg from "../hooks/useAllPatientsByOrg";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import {Box, Grid, Card, CardContent, Typography, IconButton, Button, Paper, Tab, Tabs } from "@mui/material"
+import { useNotification } from "../contexts/NotificationContext";
+import {
+  Box,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Button,
+  Paper,
+  Tab,
+  Tabs,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const OrgPatientList = () => {
   const { user } = useAuth();
-  let { orgId } = useParams();
+  const { notify } = useNotification();
+  const { orgId } = useParams();
   const patData = useAllPatientsByOrg(orgId);
   const navigate = useNavigate();
 
@@ -44,19 +62,38 @@ const OrgPatientList = () => {
         const result = await response.json();
         const updatedPatients = patients.filter(patient => patient.id !== patientId);
         setPatients(updatedPatients);
-        alert(`Success: ${result.message}`);
+        notify({
+          msg: "Patient Deleted Successfully",
+          type: "success",
+        });
         console.log(result);
     } catch (error) {
-        console.error("Error submitting form:", error);
-        alert("Failed to archive patient");
+      console.error("Error submitting form:", error);
+      notify({
+        msg: "Failed to archive patient",
+        type: "error",
+      });
     }
   }
+  const [confirm, setConfirm] = useState(null);
 
-  const confirmDelete = (orgId, patientId) => {
-    if (window.confirm("Are you sure you want to delete this patient?")) {
-      deletePatient(orgId, patientId);
-    }
-  }
+  const handleClickOpen = (patientId) => {
+    setConfirm(patientId);
+  };
+
+  const handleClose = () => {
+    setConfirm(null);
+  };
+
+  const handleDelete = (orgId, patientId ) => {
+    deletePatient(orgId, patientId);
+    handleClose();
+  };
+  // const confirmDelete = (orgId, patientId) => {
+  //   if (window.confirm("Are you sure you want to delete this patient?")) {
+  //     deletePatient(orgId, patientId);
+  //   }
+  // }
 
   if (!user || user.role !== "organizations") {
     // Redirect them to the home page
@@ -159,10 +196,38 @@ const OrgPatientList = () => {
                             borderColor: "primary.main",
                             boxShadow: 2,
                           }}
-                          onClick={() => confirmDelete(orgId, patient.id)}
+                          onClick={() => handleClickOpen(patient.id)}
                         >
                           <DeleteIcon />
                         </IconButton>
+
+                        <Dialog
+                          open={confirm === patient.id}
+                          onClose={handleClose}
+                          aria-labelledby="alert-dialog-title"
+                          aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">
+                            {"Confirm Deletion"}
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                              Are you sure you want to delete this patient?
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                              No
+                            </Button>
+                            <Button
+                              onClick={() => handleDelete(orgId, patient.id)}
+                              color="primary"
+                              autoFocus
+                            >
+                              Yes
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
                       </Box>
                     </CardContent>
                   </Card>
