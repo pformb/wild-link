@@ -17,7 +17,7 @@ const TopNavigation = () => {
 
   return (
     <AppBar position="sticky" style={{
-      background: '#A89A1E',
+      background: 'linear-gradient(0deg, white 25%, #A89A1E 25%)',
       boxShadow: '0 4px 6px -6px #222',
       height: '72px'
     }}>
@@ -48,7 +48,7 @@ const TopNavigation = () => {
                 className="top-nav-bar__logout"
                 variant="contained"
                 color="secondary"
-                style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", height: 'calc(100% - 10px)', padding: '5px' }}
+                style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", height: '30px', fontSize: '12px', padding: '5px' }}
               >
                 Logout
               </Button>
