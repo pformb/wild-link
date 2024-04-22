@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+
 import DonationsTable from './DonationsTable';
 import { useAuth } from "../contexts/AuthContext";
 
@@ -30,6 +33,12 @@ const OrgManagement = () => {
     password: "",
     confirm_password: "",
   })
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+const handleClickShowPassword = () => {
+  setShowPassword(!showPassword);
+};
 
   useEffect(() => {
     if (!token) {
@@ -154,92 +163,117 @@ const OrgManagement = () => {
     <div className="OrgManagement">
       <div className="org-mgmt">
         <div className="org-mgmt__content">
-          <Box display="flex" justifyContent="center" bgcolor="grey" sx={{ border: '1px solid #000', m: 2, p: 2 }}>
+          <Box display="flex" justifyContent="center">
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                <form onSubmit={onHandleSubmit}>
-                <Grid item xs={6} sx={{ p: 2 }}>
-                <TextField
-                sx={{ backgroundColor: 'white' }}
-                  name="organization_name"
-                  label="Organization Name"
-                  value={orgData.organization_name || ''}
-                  onChange={onHandleChange}
-                  fullWidth
-                />
-            </Grid>
-            <Grid item xs={6} sx={{ p: 2 }}>
-              <TextField
-                name="first_name"
-                label="First Name"
-                value={orgData.first_name || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ p: 2 }}>
-              <TextField
-                name="last_name"
-                label="Last Name"
-                value={orgData.last_name || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ p: 2 }}>
-              <TextField
-                name="email"
-                label="email"
-                value={orgData.email || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ p: 2 }}>
-              <TextField
-                name="address"
-                label="address"
-                value={orgData.address || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ p: 2 }}>
-              <TextField
-                name="phone"
-                label="phone"
-                value={orgData.phone_number || ''}
-                onChange={onHandleChange}
-                fullWidth
-              />
-            </Grid>
-                <Grid item xs={6}>
-                  <Box display="flex" justifyContent="center" mt={2}>
-                    <Button type="submit" variant="contained" color="primary">
-                      Save
-                    </Button>
-                  </Box>
-                </Grid>
-              </form>
+
+              <form onSubmit={onHandleSubmit}>
+  <Grid container spacing={2} sx={{ p: 2 }}>
+    <Grid item xs={6} sx={{ p: 2}}>
+      <TextField
+        sx={{ p: 2 }}
+        name="organization_name"
+        label="Organization Name"
+        value={orgData.organization_name || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+      <TextField
+        sx={{ p:2}}
+        name="first_name"
+        label="First Name"
+        value={orgData.first_name || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+      <TextField
+        sx={{ p: 2 }}
+        name="email"
+        label="Email"
+        value={orgData.email || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+    </Grid>
+    <Grid item xs={6} sx={{ p: 2, backgroundColor: 'white' }}>
+      <TextField
+        sx={{ p: 2 }}
+        name="last_name"
+        label="Last Name"
+        value={orgData.last_name || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+      <TextField
+        sx={{ p: 2 }}
+        name="address"
+        label="Address"
+        value={orgData.address || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+      <TextField
+        sx={{ p: 2 }}
+        name="phone"
+        label="Phone"
+        value={orgData.phone_number || ''}
+        onChange={onHandleChange}
+        fullWidth
+      />
+    </Grid>
+  </Grid>
+  <Box display="flex" justifyContent="center" mt={2}>
+    <Button type="submit" variant="contained" color="primary">
+      Save
+    </Button>
+  </Box>
+</form>
+
             </Grid>
             <Grid item xs={6}>
               <form onSubmit={handlePasswordChange}>
-                <Grid item xs={6} sx={{ p: 2 }}>
+                <Grid item xs={6} sx={{ p: 4 }}>
                   <TextField
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     label="New Password"
                     value={passUpdate.password || ''}
                     onChange={onPassHandleChange}
                     fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={(event) => event.preventDefault()}
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ p: 2 }}>
                   <TextField
+                    type={showPassword ? 'text' : 'password'}
                     name="confirm_password"
                     label="Confirm New Password"
                     value={passUpdate.confirm_password || ''}
                     onChange={onPassHandleChange}
                     fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={(event) => event.preventDefault()}
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -250,16 +284,17 @@ const OrgManagement = () => {
                   </Box>
                 </Grid>
               </form>
+
             </Grid>
           </Grid>
         </Box>
-        <Box p={2} sx={{ border: '1px solid #000', m: 2, p: 2 }}>
-        {donation ? (
-          <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
-        ) : (
-          <CircularProgress />
-        )}
-        </Box>
+        <Grid item xs={6} p={2}>
+              {donation ? (
+                <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
+              ) : (
+                <CircularProgress />
+              )}
+            </Grid>
         </div>
       </div>
     </div>
@@ -267,3 +302,192 @@ const OrgManagement = () => {
 };
 
 export default OrgManagement;
+
+
+
+{/* <form onSubmit={onHandleSubmit}>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+sx={{ backgroundColor: 'white' }}
+  name="organization_name"
+  label="Organization Name"
+  value={orgData.organization_name || ''}
+  onChange={onHandleChange}
+  fullWidth
+/>
+</Grid>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+name="first_name"
+label="First Name"
+value={orgData.first_name || ''}
+onChange={onHandleChange}
+fullWidth
+/>
+</Grid>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+name="last_name"
+label="Last Name"
+value={orgData.last_name || ''}
+onChange={onHandleChange}
+fullWidth
+/>
+</Grid>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+name="email"
+label="email"
+value={orgData.email || ''}
+onChange={onHandleChange}
+fullWidth
+/>
+</Grid>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+name="address"
+label="address"
+value={orgData.address || ''}
+onChange={onHandleChange}
+fullWidth
+/>
+</Grid>
+<Grid item xs={6} sx={{ p: 2 }}>
+<TextField
+name="phone"
+label="phone"
+value={orgData.phone_number || ''}
+onChange={onHandleChange}
+fullWidth
+/>
+</Grid>
+<Grid item xs={6}>
+  <Box display="flex" justifyContent="center" mt={2}>
+    <Button type="submit" variant="contained" color="primary">
+      Save
+    </Button>
+  </Box>
+</Grid>
+</form> */}
+
+
+
+
+
+// return (
+//   <div className="OrgManagement">
+//     <div className="org-mgmt">
+//       <div className="org-mgmt__content">
+//         <Box display="flex" justifyContent="center">
+//           <Grid container spacing={3}>
+//             <Grid item xs={6}>
+              
+//               <form onSubmit={onHandleSubmit}>
+//               <Grid item xs={6} sx={{ p: 2 }}>
+//               <TextField
+//               sx={{ backgroundColor: 'white' }}
+//                 name="organization_name"
+//                 label="Organization Name"
+//                 value={orgData.organization_name || ''}
+//                 onChange={onHandleChange}
+//                 fullWidth
+//               />
+//           </Grid>
+//           <Grid item xs={6} sx={{ p: 2 }}>
+//             <TextField
+//               name="first_name"
+//               label="First Name"
+//               value={orgData.first_name || ''}
+//               onChange={onHandleChange}
+//               fullWidth
+//             />
+//           </Grid>
+//           <Grid item xs={6} sx={{ p: 2 }}>
+//             <TextField
+//               name="last_name"
+//               label="Last Name"
+//               value={orgData.last_name || ''}
+//               onChange={onHandleChange}
+//               fullWidth
+//             />
+//           </Grid>
+//           <Grid item xs={6} sx={{ p: 2 }}>
+//             <TextField
+//               name="email"
+//               label="email"
+//               value={orgData.email || ''}
+//               onChange={onHandleChange}
+//               fullWidth
+//             />
+//           </Grid>
+//           <Grid item xs={6} sx={{ p: 2 }}>
+//             <TextField
+//               name="address"
+//               label="address"
+//               value={orgData.address || ''}
+//               onChange={onHandleChange}
+//               fullWidth
+//             />
+//           </Grid>
+//           <Grid item xs={6} sx={{ p: 2 }}>
+//             <TextField
+//               name="phone"
+//               label="phone"
+//               value={orgData.phone_number || ''}
+//               onChange={onHandleChange}
+//               fullWidth
+//             />
+//           </Grid>
+//               <Grid item xs={6}>
+//                 <Box display="flex" justifyContent="center" mt={2}>
+//                   <Button type="submit" variant="contained" color="primary">
+//                     Save
+//                   </Button>
+//                 </Box>
+//               </Grid>
+//             </form>
+
+//           </Grid>
+//           <Grid item xs={6}>
+//             <form onSubmit={handlePasswordChange}>
+//               <Grid item xs={6} sx={{ p: 2 }}>
+//                 <TextField
+//                   name="password"
+//                   label="New Password"
+//                   value={passUpdate.password || ''}
+//                   onChange={onPassHandleChange}
+//                   fullWidth
+//                 />
+//               </Grid>
+//               <Grid item xs={6} sx={{ p: 2 }}>
+//                 <TextField
+//                   name="confirm_password"
+//                   label="Confirm New Password"
+//                   value={passUpdate.confirm_password || ''}
+//                   onChange={onPassHandleChange}
+//                   fullWidth
+//                 />
+//               </Grid>
+//               <Grid item xs={6}>
+//                 <Box display="flex" justifyContent="center" mt={2}>
+//                   <Button type="submit" variant="contained" color="primary">
+//                     Save
+//                   </Button>
+//                 </Box>
+//               </Grid>
+//             </form>
+
+//           </Grid>
+//         </Grid>
+//       </Box>
+//       <Box p={2}>
+//       {donation ? (
+//         <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
+//       ) : (
+//         <CircularProgress />
+//       )}
+//       </Box>
+//       </div>
+//     </div>
+//   </div>
+// );

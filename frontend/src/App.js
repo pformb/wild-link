@@ -31,6 +31,19 @@ const theme = createTheme({
       fontFamily: 'Zilla Slab, Arial, sans-serif',
     },
   },
+  palette: {
+    primary: {
+      main: '#DBCA2A',
+    },
+    secondary: {
+      main: '#d0d4ed',
+    },
+    contrast: {
+      main: '#3800d2',
+    },
+    contrastThreshold: 4.1,
+    tonalOffset: 0.2,
+  },
 });
 
 

@@ -1,13 +1,12 @@
 import '../styles/HomePage.scss';
 import { Link } from 'react-router-dom';
 import { Grid, Typography, Button } from '@mui/material';
-import FullLogo_Transparent from "../FullLogo_Transparent.png";
 
 const HomePage = () => {
   return (
     <Grid container className="home-page" spacing={3} style={{ width: 'auto' }}>
       <Grid item xs={12} md={6}>
-        <img src={FullLogo_Transparent} alt="Logo" style={{ width: '100%', height: 'auto', paddingTop: '50px' }} />
+        <img className="marmot" src="/marmot.png" alt="eagle" style={{ paddingTop: '50px', width: '500px', height: '500px'}}/>
       </Grid>
       <Grid item xs={12} md={6}>
         <Typography variant="h1" >Who We Are</Typography>
@@ -41,9 +40,6 @@ const HomePage = () => {
           environmental awareness and conservation ethics within the community,
           fostering a deeper connection to nature.
         </Typography>
-        <Button variant="contained" color="primary" component={Link} to="/donate" className="home-page__donate">
-          Donate Now
-        </Button>
       </Grid>
       <Grid item xs={12} md={6}>
         <img className="home-pic2" src="/home-page-pic2.png" alt="home" />
