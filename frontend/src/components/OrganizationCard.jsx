@@ -8,11 +8,12 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 
 const OrganizationCard = (orgData) => {
+  console.log(orgData);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 475, maxWidth: 475 }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 140, objectFit: 'cover'}}
         image={orgData.image}
         title={orgData.name} 
       />
@@ -21,17 +22,17 @@ const OrganizationCard = (orgData) => {
         <h2 className="organization-name">{orgData.organization_name}</h2>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        <p className="organization-location">{orgData.location}</p>
+        <p className="organization-location"><strong>{orgData.address}</strong></p>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        <p className="organization-location">{orgData.website_url}</p>
+        <p className="organization-location"><strong>{orgData.website_url}</strong></p>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        <p className="organization-location">{orgData.phone_number}</p>
+        <p className="organization-location"><strong>{orgData.phone_number}</strong></p>
         </Typography>
         
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'center' }}>
       <Link to={`/${orgData.id}/patients`}>
       <Button variant="outlined">View</Button>
       </Link>
