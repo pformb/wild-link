@@ -11,6 +11,7 @@ import OrgManagement from './components/OrgManagement.jsx';
 import UserManagement from './components/UserManagement.jsx';
 import AboutUsPage from './components/AboutUsPage.jsx';
 import OrgPatientList from "./components/OrgPatientList.jsx";
+import PrivacyPolicy from './components/PrivacyPolicy.jsx';
 import Footer from './components/Footer.jsx';
 
 import { Route, Routes, useParams } from "react-router-dom";
@@ -70,6 +71,7 @@ function App() {
           <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
           <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
           <Route path="/users/:userId" element={<UserManagement />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
         <Footer />
       </div>

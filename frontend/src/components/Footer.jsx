@@ -22,6 +22,9 @@ const Footer = () => {
           </Typography>
         </Grid>
         <Grid item>
+          <Typography variant="body2" color="textSecondary"><RouterLink to="/privacy" style={{ textDecoration: 'none', color: 'black', padding: '5px' }}>Privacy Policy</RouterLink></Typography>
+          </Grid>
+        <Grid item>
           <Typography variant="body2" color="textSecondary">Follow Us:</Typography>
           <IconButton color="inherit" href="https://www.facebook.com" target="_blank">
             <SvgIcon>

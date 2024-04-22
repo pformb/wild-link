@@ -40,7 +40,7 @@ const DonationsTable = ({ donation, isOrg }) => {
         <Table>
           <TableHead>
             <StyledTableRow>
-              {isOrg && <StyledTableCell>User Full Name</StyledTableCell>}
+              {isOrg && <StyledTableCell>Donor Name</StyledTableCell>}
               <StyledTableCell>Patient Case</StyledTableCell>
               <StyledTableCell>Donation Amount</StyledTableCell>
               <StyledTableCell>Donation Date</StyledTableCell>
