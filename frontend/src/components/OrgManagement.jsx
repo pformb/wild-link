@@ -169,9 +169,9 @@ const handleClickShowPassword = () => {
 
               <form onSubmit={onHandleSubmit}>
   <Grid container spacing={2} sx={{ p: 2 }}>
-    <Grid item xs={6} sx={{ p: 2 }}>
+    <Grid item xs={6} sx={{ p: 2}}>
       <TextField
-        sx={{ backgroundColor: 'white', p: 2  }}
+        sx={{ p: 2 }}
         name="organization_name"
         label="Organization Name"
         value={orgData.organization_name || ''}
@@ -179,7 +179,7 @@ const handleClickShowPassword = () => {
         fullWidth
       />
       <TextField
-        sx={{ p: 2 }}
+        sx={{ p:2}}
         name="first_name"
         label="First Name"
         value={orgData.first_name || ''}
@@ -195,7 +195,7 @@ const handleClickShowPassword = () => {
         fullWidth
       />
     </Grid>
-    <Grid item xs={6} sx={{ p: 1 }}>
+    <Grid item xs={6} sx={{ p: 2, backgroundColor: 'white' }}>
       <TextField
         sx={{ p: 2 }}
         name="last_name"
