@@ -4,7 +4,7 @@ import { Box, Typography, Grid, Avatar } from '@mui/material';
 
 const AboutUsPage = () => {
   return (
-    <Box sx={{ p: 3 }}>
+    <Box  style={{ paddingTop: '100px' }} sx={{ p: 3 }}>
       <Box sx={{ mb: 3 }}>
         <Typography variant="h4" gutterBottom>About Our App</Typography>
         <Typography variant="body1">Wild Link is a groundbreaking web application designed to harness the power of collective goodwill for the conservation of wildlife. Much like popular crowdfunding platforms, Wild Link provides a seamless interface for users to create and support campaigns dedicated solely to wildlife causes.</Typography>

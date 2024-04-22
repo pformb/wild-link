@@ -16,35 +16,33 @@ const TopNavigation = () => {
   }
 
   return (
-    <AppBar position="sticky" style={{
-      background: 'linear-gradient(0deg, white 25%, #A89A1E 25%)',
+    <AppBar position="static" style={{
+      background: 'linear-gradient(to bottom, #A89A1E 0%, #DBCA2A 50%, white 75%, white 100%)',
       boxShadow: '0 4px 6px -6px #222',
-      height: '72px'
+      height: '100px',
     }}>
       <Toolbar style={{ padding: 0 }}>
         <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" style={{ flexGrow: 3 }}>
-          <Typography variant="h6" style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '38px' }}>
-            <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px' }}>
-              <img src={FullLogo_Transparent} alt="Home" style={{ width: '100px', height: '100px' }} />
+            <RouterLink to="/home" style={{ textDecoration: 'none', color: 'black', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px', marginTop: '-15px' }}>
+              <img src={FullLogo_Transparent} alt="Home" style={{ width: '135px', height: '135px' }} />
             </RouterLink>
-          </Typography>
         </Box>
 
         <Box display="flex" justifyContent="flex-start" style={{ padding: '20px' }}>
-          <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'white', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Patient Stories</RouterLink>
-        </Box>
+      <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'black', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '18px', fontWeight: 'italic', transition: 'color 0.3s ease', '&:hover': { color: '#000000' }, borderRight: '1px solid black' }}>Stories By Group</RouterLink>
+    </Box>
 
         <div className="top-nav-bar__login-register" style={{ paddingRight: '10px' }}>
           {user ? (
             <>
-              <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
+              <span className="top-nav-bar__login-message" style={{ fontFamily: 'Zilla Slab'}} >Hello, {user.first_name}!</span>
               {user.orgId ? (
                 <>
-                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
-                <RouterLink to={`/organizations/${orgId}/patients`} className="top-nav-bar__patients" style={{ textDecoration: 'none', color: 'white', padding: '20px', marginRight: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Patient List</RouterLink>
+                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'black', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
+                <RouterLink to={`/organizations/${orgId}/patients`} className="top-nav-bar__patients" style={{ textDecoration: 'none', color: 'black', padding: '20px', marginRight: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Patient List</RouterLink>
                 </>
               ) : (
-                <RouterLink to={`/users/${user.userId}`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
+                <RouterLink to={`/users/${user.userId}`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'black', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
               )}
               <Button
                 onClick={logout}
@@ -58,8 +56,8 @@ const TopNavigation = () => {
             </>
           ) : (
             <>
-              <RouterLink to="/login" className="top-nav-bar__login" style={{ textDecoration: 'none', color: 'white', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Login</RouterLink>
-              <RouterLink to="/register" className="top-nav-bar__register" style={{ textDecoration: 'none', color: 'white', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Register</RouterLink>
+              <RouterLink to="/login" className="top-nav-bar__login" style={{ textDecoration: 'none', color: 'black', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Login</RouterLink>
+              <RouterLink to="/register" className="top-nav-bar__register" style={{ textDecoration: 'none', color: 'black', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Register</RouterLink>
             </>
           )}
         </div>
@@ -69,7 +67,3 @@ const TopNavigation = () => {
 };
 
 export default TopNavigation;
-
-/** dead code 
- * background: 'linear-gradient(90deg, rgba(245, 222, 179, 1) 0%, rgba(33,94,33,1) 100%)',
- */

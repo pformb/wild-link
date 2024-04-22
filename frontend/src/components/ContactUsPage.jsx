@@ -3,7 +3,7 @@ import { Box, Typography, Grid } from '@mui/material';
 
 function ContactUsPage() {
     return (
-        <Box sx={{ p: 3 }}>
+        <Box  style={{ paddingTop: '100px' }} sx={{ p: 3 }}>
             <Box sx={{ mb: 3 }}>
                 <Typography variant="h4" gutterBottom>Contact Us</Typography>
                 <Typography variant="body1">If you need assistance, please contact the following:</Typography>
