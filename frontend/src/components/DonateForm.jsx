@@ -10,11 +10,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Typography from "@mui/material/Typography";
 import { useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
+import { useNotification } from "../contexts/NotificationContext";
 
 const DonationForm = () => {
 
   const location = useLocation();
   const { user } = useAuth();
+  const { notify } = useNotification();
   const { patient, orgId } = location.state;
 
   const [formData, setFormData] = useState({
@@ -28,10 +30,6 @@ const DonationForm = () => {
   if (!location.state) {
     return <Navigate to="/home" replace />;
   }
-
-  console.log(`org id on donation form:`, orgId);
-  console.log(`patient data on donation form`, patient);
-
 
 const handleDonation = async (event) => {
     event.preventDefault();
@@ -55,13 +53,19 @@ const handleDonation = async (event) => {
       });
 
       if (response.ok) {
-        alert("Donation submitted successfully!");
+        notify({
+          msg: "Donation successful!",
+          type: "success",
+        });
       } else {
         throw new Error("Failed to submit donation");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to submit donation");
+      notify({
+        msg: "Failed to submit donation, please check your information",
+        type: "error",
+      });
     }
   };
 
