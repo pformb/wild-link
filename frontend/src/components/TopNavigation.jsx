@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import Button from '@mui/material/Button';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 import FullLogo_Transparent from "../FullLogo_Transparent.png";
@@ -24,7 +25,7 @@ const TopNavigation = () => {
         <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" style={{ flexGrow: 3 }}>
           <Typography variant="h6" style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '38px' }}>
             <RouterLink to="/home" style={{ textDecoration: 'none', color: 'white', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px' }}>
-            <img src={FullLogo_Transparent} alt="Home" style={{ width: '100px', height: '100px' }} />
+              <img src={FullLogo_Transparent} alt="Home" style={{ width: '100px', height: '100px' }} />
             </RouterLink>
           </Typography>
         </Box>
@@ -38,11 +39,19 @@ const TopNavigation = () => {
             <>
               <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
               {user.orgId ? (
-                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
+                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', marginRight: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
               ) : (
                 <RouterLink to={`/users/${user.userId}`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
               )}
-              <button onClick={logout} className="top-nav-bar__logout">Logout</button>
+              <Button
+                onClick={logout}
+                className="top-nav-bar__logout"
+                variant="contained"
+                color="secondary"
+                style={{ fontFamily: "'Zilla Slab', Arial, sans-serif", height: 'calc(100% - 10px)', padding: '5px' }}
+              >
+                Logout
+              </Button>
             </>
           ) : (
             <>
