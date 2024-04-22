@@ -39,7 +39,10 @@ const TopNavigation = () => {
             <>
               <span className="top-nav-bar__login-message">Hello, {user.first_name}!</span>
               {user.orgId ? (
-                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', marginRight: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
+                <>
+                <RouterLink to={`/organizations/${orgId}/profile`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
+                <RouterLink to={`/organizations/${orgId}/patients`} className="top-nav-bar__patients" style={{ textDecoration: 'none', color: 'white', padding: '20px', marginRight: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>Patient List</RouterLink>
+                </>
               ) : (
                 <RouterLink to={`/users/${user.userId}`} className="top-nav-bar__profile" style={{ textDecoration: 'none', color: 'white', padding: '20px', fontFamily: "'Zilla Slab', Arial, sans-serif" }}>View Profile</RouterLink>
               )}

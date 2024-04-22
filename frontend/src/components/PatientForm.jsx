@@ -230,7 +230,7 @@ const PatientForm = () => {
                     inputComponent: "textarea",
                   }}
                 />
-                {isLoading.status && (
+                {isLoading.context === "generating" && (
                   <Box
                     sx={{
                       position: "absolute",
@@ -242,7 +242,7 @@ const PatientForm = () => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      zIndex: 1, // Make sure the spinner is above the text field
+                      zIndex: 1,
                     }}
                   >
                     <CircularProgress color="success" />
