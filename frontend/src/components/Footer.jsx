@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const FooterContainer = styled(Container)(({ theme }) => ({
   padding: theme.spacing(3, 2),
-  marginTop: 'auto',
+  marginTop: '75px',
   background: 'linear-gradient(180deg, white, #9b9245)',
   boxShadow: '0 4px 6px -6px #222',
   height: '90px'
