@@ -243,11 +243,15 @@ export const usePatientForm = () => {
       : `/api/organizations/${orgId}/patients/new`;
     const method = editForm ? "PATCH" : "POST";
 
-    const { release_date, image, ...otherDetails } = formData.patientDetails;
+    const { release_date, image, story, ...otherDetails } = formData.patientDetails;
+    
+    const formattedStory = story.replace(/\n/g, "\\n");
+    
     const updatedPatientDetails = {
       ...otherDetails,
       release_date: release_date === "" ? null : release_date, // Convert empty string to null
       image: image === "" ? null : image, // Convert empty string to null
+      story: formattedStory
     };
   
     const submittedData = {
