@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { Navigate } from "react-router-dom";
 import { usePatientForm } from "../hooks/usePatientForm";
 import { useAuth } from "../contexts/AuthContext";
-import {TextField, Checkbox, Grid, Box, Button, Typography } from "@mui/material"
+import {TextField, Checkbox, Grid, Box, Button, Typography, CircularProgress } from "@mui/material"
 import makeAnimated from 'react-select/animated';
 import customSelectStyles from "../styles/selectStyles";
 
@@ -18,7 +18,13 @@ const PatientForm = () => {
   }
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box
+      sx={{
+        width: "100%",
+        opacity: isLoading.status ? 0.5 : 1,
+        pointerEvents: isLoading.status ? "none" : "auto",
+      }}
+    >
       <Typography variant="h3" align="left" sx={{ mt: 4, mb: 4, ml: 10 }}>
         {editForm ? "Edit Patient" : "Create a new Patient"}
       </Typography>
@@ -201,37 +207,54 @@ const PatientForm = () => {
               <Button
                 type="button"
                 onClick={handleGenerateStory}
-                disabled={isLoading}
+                disabled={isLoading.status}
                 variant="contained"
                 color="secondary"
               >
                 Generate Story
               </Button>
-              <TextField
-                fullWidth
-                type="text"
-                name="story"
-                value={
-                  isLoading
-                    ? "Generating Story... Please Wait"
-                    : formData.patientDetails.story
-                }
-                disabled={isLoading}
-                onChange={handleInputChange}
-                minRows={8}
-                variant="outlined"
-                margin="normal"
-                InputProps={{
-                  rows: 12,
-                  multiline: true,
-                  inputComponent: "textarea",
-                }}
-              />
+              <Box sx={{ position: "relative", mt: 2 }}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  name="story"
+                  value={formData.patientDetails.story}
+                  disabled={isLoading.status}
+                  onChange={handleInputChange}
+                  minRows={8}
+                  variant="outlined"
+                  margin="normal"
+                  InputProps={{
+                    rows: 12,
+                    multiline: true,
+                    inputComponent: "textarea",
+                  }}
+                />
+                {isLoading.status && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background: "rgba(255, 255, 255, 0.8)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 1, // Make sure the spinner is above the text field
+                    }}
+                  >
+                    <CircularProgress color="success" />
+                  </Box>
+                )}
+              </Box>
             </Grid>
             <Grid item xs={12}>
               <Button
                 type="submit"
                 variant="contained"
+                disabled={isLoading.status}
                 color="success"
                 sx={{ mt: 2 }}
               >

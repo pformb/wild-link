@@ -53,6 +53,7 @@ function App() {
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/:orgId/patients" element={<PatientsListPage />} />
+          <Route path="organizations/:orgId/patients" element={<OrgPatientList />} />
           <Route path="organizations/:orgId/patients/new" element={<PatientForm key={useParams().orgId} />} />
           <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
           <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
