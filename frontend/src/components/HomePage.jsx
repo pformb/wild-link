@@ -6,12 +6,12 @@ const HomePage = () => {
   return (
     <Grid container className="home-page" spacing={3} style={{ width: 'auto' }}>
       <Grid item xs={12} md={6}>
-        <img className="marmot" src="/marmot.png" alt="eagle" style={{ paddingTop: '50px', width: '500px', height: '500px'}}/>
+        <img className="marmot" src="/stock-photos/raccoon.jpg" alt="eagle" style={{width: 'auto', height: 'auto'}}/>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Typography variant="h1" >Who We Are</Typography>
+        <Typography variant="h1" style={{ color: '#fff'}} >Who We Are</Typography>
         <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-          <Typography variant="body1" className="description" style={{ width: '100%', height: 'auto', paddingTop: '50px', marginRight: '150px' }}>
+          <Typography variant="body1" className="description" style={{ width: '100%', height: 'auto', paddingTop: '10px', color: '#fff' }}>
             Wild Link is a groundbreaking web application designed to harness the power of
             collective goodwill for the conservation of wildlife.
             Much like popular crowdfunding platforms, Wild Link
