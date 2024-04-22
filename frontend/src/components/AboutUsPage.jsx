@@ -18,9 +18,9 @@ const AboutUsPage = () => {
             <Typography variant="body1">David is our lead developer with years of experience in web development. He is passionate about creating innovative solutions to complex problems.</Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Avatar src="team-member2.jpg" alt="Team Member 2" sx={{ width: 100, height: 100 }} />
+            <Avatar src="team-member-desiree.jpg" alt="Team Member 2" sx={{ width: 100, height: 100 }} />
             <Typography variant="h5" gutterBottom>Desiree Ingram</Typography>
-            <Typography variant="body1">Desiree is our UX/UI designer. They have a keen eye for detail, focused on creating intuitive user interfaces that enhance user experience.</Typography>
+            <Typography variant="body1">Desiree is our UX/UI designer. They have a keen eye for detail, focused on creating intuitive user interfaces that enhance user experience. When not coding, reading new documentation, and then trying new experiments. They can be found out in their vegtable garden, hiking, and knitting on a beautiful Vancouver Island beach.</Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Avatar src="team-member-paul.jpg" alt="Team Member 3" sx={{ width: 100, height: 100 }} />
