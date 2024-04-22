@@ -13,9 +13,9 @@ const AboutUsPage = () => {
         <Typography variant="h4" gutterBottom>Dev Team</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <Avatar src="team-member1.jpg" alt="Team Member 1" sx={{ width: 100, height: 100 }} />
+            <Avatar src="team-member-david.jpg" alt="Team Member 1" sx={{ width: 100, height: 100 }} />
             <Typography variant="h5" gutterBottom>David Carmichael</Typography>
-            <Typography variant="body1">David is our lead developer with years of experience in web development. He is passionate about creating innovative solutions to complex problems.</Typography>
+            <Typography variant="body1">David is our lead student developer. He is passionate about wildlife and volunteers at a local wildlife rehabilitation hospital. He dreams of a future where technology is combined with nature to ensure healthy thriving ecosystems for all living things that call them home. You can often find him exploring the forests, mountains and beaches of Vancouver Island</Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Avatar src="team-member-desiree.jpg" alt="Team Member 2" sx={{ width: 100, height: 100 }} />

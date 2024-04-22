@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
+import { useNotification } from "../contexts/NotificationContext";
 
 export const usePatientForm = () => {
   const { orgId, patientId } = useParams();
+  const { notify } = useNotification();
+  const navigate = useNavigate();
   const editForm = patientId && patientId !== "new";
   //Starting States
   const [formData, setFormData] = useState({
@@ -23,13 +26,24 @@ export const usePatientForm = () => {
     patientTreatments: [],
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({status: false, context: ''});
   const [options, setOptions] = useState({
     speciesOptions: [],
     conditionOptions: [],
     treatmentOptions: [],
     ageRangeOptions: [],
   });
+
+  useEffect(() => {
+    // Only redirect if the context of loading is 'submitting'
+    if (isLoading.status && isLoading.context === "submitting") {
+      const timer = setTimeout(() => {
+        navigate(`/organizations/${orgId}/patients`);
+        setIsLoading({ status: false, context: "" });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, navigate, orgId]);
 
   //useEffect to populate data
   useEffect(() => {
@@ -144,10 +158,13 @@ export const usePatientForm = () => {
   const handleGenerateStory = async () => {
     const token = localStorage.getItem("token");
     if (!validateForm()) {
-      alert('Please fill in all required fields and select at least one condition and one treatment.');
+      notify({
+        msg: "Please fill in all required fields and select at least one condition and one treatment.",
+        type: "error",
+      });
       return;
     }
-    setIsLoading(true);
+    setIsLoading({status: true, context: "generating" });
     const { patientDetails, patientConditions, patientTreatments } = formData;
     //create arrays of patientCondition, patientTreatment, species, and age_range names instead of ids
     const conditionNames = patientConditions.map(id => 
@@ -191,34 +208,50 @@ export const usePatientForm = () => {
                 story: data.story
             }
         }));
-
-        alert('Story generated successfully!');
+      notify({
+        msg: "Story generated successfully!",
+        type: "success",
+      });
     } catch (error) {
         console.error("Error generating story:", error);
-        alert(error.message);
+      notify({
+        msg: error.toString(),
+        type: "error",
+      })
     } finally {
-        setIsLoading(false);
+        setIsLoading({status: false, context: ""});
     }
   }
 
   //submits form to database
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("token");
+
     if (!validateForm() || formData.patientDetails.story === "") {
-      alert('Please fill in all required fields and select at least one condition and one treatment.');
+      notify({
+        msg: "Please fill in all required fields and select at least one condition and one treatment.",
+        type: "error",
+      });
       return;
     }
+
+    setIsLoading({ status: true, context: "submitting" });
+    const token = localStorage.getItem("token");
+
     const endpoint = editForm
       ? `/api/organizations/${orgId}/patients/${patientId}/edit`
       : `/api/organizations/${orgId}/patients/new`;
     const method = editForm ? "PATCH" : "POST";
 
-    const { release_date, image, ...otherDetails } = formData.patientDetails;
+    const { release_date, image, story, ...otherDetails } = formData.patientDetails;
+    
+    const formattedStory = story.replace(/\n/g, "\\n");
+    
     const updatedPatientDetails = {
       ...otherDetails,
       release_date: release_date === "" ? null : release_date, // Convert empty string to null
       image: image === "" ? null : image, // Convert empty string to null
+      story: formattedStory
     };
   
     const submittedData = {
@@ -231,7 +264,6 @@ export const usePatientForm = () => {
       Object.keys(submittedData.patientDetails).length === 0 &&
       submittedData.patientConditions.length === 0 &&
       submittedData.patientTreatments.length === 0) {
-      console.log("No changes detected, no submission needed.");
       return;
     }
     try {
@@ -245,12 +277,16 @@ export const usePatientForm = () => {
         throw new Error("Failed to submit patient data");
       }
 
-      const result = await response.json();
-      alert(`Success: ${result.message}`);
-      console.log(result);
+      notify({ 
+        msg: "Patient Saved!",
+        type: "success",
+    });
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Failed to submit form");
+      notify({
+        msg: `Error: ${error.message}`,
+        type: "error"
+      });
     }
   };
 
