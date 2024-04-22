@@ -18,8 +18,8 @@ const OrganizationCard = (orgData) => {
         title={orgData.name} 
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-        <h2 className="organization-name">{orgData.organization_name}</h2>
+        <Typography gutterBottom variant="h7" component="div">
+        <h3 className="organization-name">{orgData.organization_name}</h3>
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <p className="organization-location"><strong>{orgData.address}</strong></p>
