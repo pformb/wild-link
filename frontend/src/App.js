@@ -56,24 +56,25 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <TopNavigation name={user?.first_name} loggedIn={!!user} logout={logout} />
-
-        <Routes>
-          <Route index element={<HomeRoute />} />
-          <Route path="/home" element={<HomeRoute />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/donate" element={<DonateForm />} />
-          <Route path="/patientstories" element={<PatientStoriesPage />} />
-          <Route path="/contactus" element={<ContactUsPage />} />
-          <Route path="/aboutus" element={<AboutUsPage />} />
-          <Route path="/:orgId/patients" element={<PatientsListPage />} />
-          <Route path="organizations/:orgId/patients" element={<OrgPatientList />} />
-          <Route path="organizations/:orgId/patients/new" element={<PatientForm key={useParams().orgId} />} />
-          <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
-          <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
-          <Route path="/users/:userId" element={<UserManagement />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-        </Routes>
+        <main className="component">
+          <Routes>
+            <Route index element={<HomeRoute />} />
+            <Route path="/home" element={<HomeRoute />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/donate" element={<DonateForm />} />
+            <Route path="/patientstories" element={<PatientStoriesPage />} />
+            <Route path="/contactus" element={<ContactUsPage />} />
+            <Route path="/aboutus" element={<AboutUsPage />} />
+            <Route path="/:orgId/patients" element={<PatientsListPage />} />
+            <Route path="organizations/:orgId/patients" element={<OrgPatientList />} />
+            <Route path="organizations/:orgId/patients/new" element={<PatientForm key={useParams().orgId} />} />
+            <Route path="organizations/:orgId/patients/:patientId/edit" element={<PatientForm />} />
+            <Route path="/organizations/:orgId/profile" element={<OrgManagement />} />
+            <Route path="/users/:userId" element={<UserManagement />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </ThemeProvider>
