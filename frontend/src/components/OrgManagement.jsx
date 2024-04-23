@@ -203,7 +203,7 @@ const handleClickShowPassword = () => {
         fullWidth
       />
     </Grid>
-    <Grid item xs={6} sx={{ p: 2, backgroundColor: 'white' }}>
+    <Grid item xs={6} sx={{ p: 2 }}>
       <TextField
         sx={{ p: 2 }}
         name="last_name"
