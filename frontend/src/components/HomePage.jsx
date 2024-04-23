@@ -4,7 +4,7 @@ import { Grid, Typography, Button } from '@mui/material';
 
 const HomePage = () => {
   return (
-    <Grid container className="home-page" spacing={3} style={{ backgroundImage: `url(/lynx-background.jpg)`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', width: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '20px' }}>
+    <Grid container className="home-page" spacing={3} style={{ backgroundImage: `url(/lynx-background.jpg)`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', width: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '20px', marginTop: '1px' }}>
 
       <Grid item xs={12} md={6} style={{ alignSelf: 'flex-end' }}>
         <Typography variant="h1" style={{ color: '#fff', textAlign: 'center', marginBottom: '10px', marginTop: '10px' }}>Who We Are</Typography>

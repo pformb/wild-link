@@ -19,7 +19,7 @@ const TopNavigation = () => {
     <AppBar position="static" style={{
       background: 'linear-gradient(to bottom, #A89A1E 0%, #DBCA2A 50%, white 75%, white 100%)',
       boxShadow: '0 4px 6px -6px #222',
-      height: '100px',
+      height: '72px',
     }}>
       <Toolbar style={{ padding: 0 }}>
       <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" style={{ flexGrow: 3 }} sm={{ margin: 'auto' }}>
@@ -29,7 +29,7 @@ const TopNavigation = () => {
         </Box>
 
         <Box display="flex" justifyContent="flex-start" style={{ padding: '20px' }} sm={{ margin: 'auto' }}>
-      <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'black', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '18px', fontWeight: 'italic', transition: 'color 0.3s ease', '&:hover': { color: '#000000' }, borderRight: '1px solid black' }} sm={{ margin: 'auto' }}>Stories By Group</RouterLink>
+      <RouterLink to="/patientstories" style={{ textDecoration: 'none', color: 'black', padding: '5px', fontFamily: "'Zilla Slab', Arial, sans-serif", fontSize: '18px', fontWeight: 'italic', transition: 'color 0.3s ease', '&:hover': { color: '#000000' }, borderRight: '1px solid black', paddingRight: '10px' }} sm={{ margin: 'auto' }}>Stories By Group</RouterLink>
     </Box>
 
         <div className="top-nav-bar__login-register" style={{ paddingRight: '10px' }} sm={{ margin: 'auto' }}>
