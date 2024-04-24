@@ -277,7 +277,7 @@ const UserManagement = () => {
               </Grid>
             </Grid>
           </Box>
-          <Box p={2}>
+          <Box p={2} mt={2}>
             {donation ? (
               <DonationsTable
                 donation={donation}

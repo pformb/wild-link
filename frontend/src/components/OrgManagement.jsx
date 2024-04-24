@@ -230,7 +230,7 @@ const handleClickShowPassword = () => {
       />
     </Grid>
   </Grid>
-  <Box display="flex" justifyContent="center" mt={2}>
+  <Box display="flex" justifyContent="center">
     <Button type="submit" variant="contained" color="primary">
       Save
     </Button>
@@ -296,7 +296,7 @@ const handleClickShowPassword = () => {
             </Grid>
           </Grid>
         </Box>
-        <Grid item xs={6} p={2}>
+        <Grid item xs={6} p={2} mt={2}>
               {donation ? (
                 <DonationsTable donation={donation} orgId={orgId} isOrg={true} />
               ) : (

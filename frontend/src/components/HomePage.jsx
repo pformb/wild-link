@@ -9,7 +9,7 @@ const HomePage = () => {
       <Grid item xs={12} md={6} style={{ alignSelf: 'flex-end' }}>
         <Typography variant="h1" style={{ color: '#fff', textAlign: 'center', marginBottom: '10px', marginTop: '10px' }}>Who We Are</Typography>
         <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-          <Typography variant="body1" className="description" style={{ width: '100%', height: 'auto', color: '#fff', textAlign: 'flex-start', marginBottom: '50px' }}>
+          <Typography variant="body1" className="description" style={{ width: '100%', height: 'auto', color: '#fff', textAlign: 'flex-start', marginBottom: '30px' }}>
             Wild Link is a groundbreaking web application designed to harness the power of collective goodwill for the conservation of wildlife.
             Much like popular crowdfunding platforms, Wild Link provides a seamless interface for users to create and support their campaigns dedicated solely to wildlife causes.
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>

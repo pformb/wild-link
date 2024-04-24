@@ -5,8 +5,8 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   return (
-    <div>
-      <Typography variant="h6" gutterBottom>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'felx-center', alignItems: 'felx-start', paddingTop: '20px'}}>
+      <Typography variant="h6" gutterBottom style={{ fontSize: '36px'}}>
          Wild Link's Privacy Policy
       </Typography>
       <Typography variant="body1" gutterBottom>
