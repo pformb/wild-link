@@ -6,12 +6,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
+import { alpha } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
 
 const OrganizationCard = (orgData) => {
   console.log(orgData);
 
+  const theme = useTheme();
+
   return (
-    <Card sx={{ width: 475, maxWidth: 475 }}>
+    <Card sx={{ width: 475, maxWidth: 475, boxShadow: `0 4px 8px 0 ${alpha(theme.palette.primary.main, 0.05)}, 0 6px 20px 0 ` }}>
       <CardMedia
         sx={{ height: 140, objectFit: 'cover'}}
         image={orgData.image}
