@@ -94,7 +94,7 @@ VALUES
   (1, 'CORA 987', 2, 'Sayward', '2023-09-16', FALSE, FALSE, 6, 'In the shadowed underbrush of Sayward, an adult common raven, cloaked in its characteristic black plumage, was found far from its usual dominion in the sky, weakened and grounded by its battles with infection and emaciation. On September 16, 2023, it was admitted to a wildlife rehabilitation hospital under the case number CORA 987, where the rehabilitation staff quickly assessed its dire situation. With a keen understanding of the delicate balance required to nurse such a resilient yet vulnerable creature back to health, they prepared a comprehensive care plan to address its pressing needs.\n\nThe treatment regimen for this intelligent bird was multifaceted, emphasizing the eradication of the infection through antibiotics, and the critical importance of fluid therapy to rehydrate its weakened body. Nutritional support was also a cornerstone of its recovery, carefully designed to meet the specific dietary needs of a raven, aiming to replenish its diminished reserves and restore its vigor. Under the watchful eyes and tender care of the rehabilitation staff, the raven gradually began to reclaim its strength, each day bringing it closer to soaring once again amongst the towering trees of its home. This journey of recovery not only highlighted the resilience inherent within nature but also underscored the compassionate and dedicated efforts of those who work tirelessly to ensure the survival and well-being of its most vulnerable inhabitants.', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (1, 'PRLO 008', 3, 'Comox', '2024-01-04', FALSE, FALSE, 6, 'In the quiet streets of Comox, a tale of resilience is being written as an adult raccoon, bearing the case number PRLO 008, endures the aftermath of a dog attack. This unforeseen confrontation left it in dire need of care, leading to its admission to the wildlife rehabilitation hospital on January 4, 2024. The raccoons situation swiftly captured the attention of the rehabilitation staff, who diligently assessed its injuries and formulated a recovery plan aimed at healing its physical traumas. The spark of survival, evident in its determined gaze, inspired a shared determination among the staff to support its journey back to health.\n\nThe path to recuperation for this tenacious raccoon is characterized by comprehensive trauma care, aimed at mending the wounds inflicted during its ordeal. Nutritional support is also a critical component of its treatment, designed to restore its weakened state to its natural vigor. Under the vigilant care of the rehabilitation staff, each day marks a step forward in its recovery, signifying progress that is both physical and emotional. As the raccoon gradually regains its strength, its ongoing story serves as a testament to the challenges wildlife faces in an increasingly human-dominated landscape, and the invaluable role of compassionate intervention in fostering a bridge towards healing and eventual reintegration into the wild.', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (1, 'SEO 212', 5, 'Victoria, BC', '2024-04-15', TRUE, FALSE, 1, 'On the tranquil shores of Victoria, a baby sea otter,  separated from its mother due to unforeseen circumstances, was found in need of urgent care. Admitted under case number SEO 212, on April 15, 2024, to the wildlife rehabilitation hospital. This young otter faced the challenges of orphanhood, emaciation, and a mild infection. The rehabilitation staff, recognizing the vulnerability of this tiny otter. Immediately initiated a specialized care plan focused on providing round-the-clock nutritional support and fluid therapy to ensure proper hydration. Each day brings new progress and hope for this resilient sea otter, symbolizing the enduring spirit of marine life in the face of adversity.', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(1, 'BAEA 083', 1, 'Campbell River', '2024-03-28', FALSE, FALSE, 5, 'In the serene vicinity of Campbell River, a sub-adult bald eagle, once a sovereign of the skies. Was discovered in a precarious state, burdened by the limitations of a broken wing. Admitted to the wildlife rehabilitation hospital on March 28, 2024, under case number BAEA 083, this noble creature faced a challenging ordeal, contending not only with the physical hindrances of its injury. But, also with infection and emaciation, a trio of hardships that severely tested its fortitude. The rehabilitation staff, aware of the critical care required, promptly devised a comprehensive treatment regimen. With the aim of mending its body and spirit.', 'bald-eagle.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(1, 'RELK 084', 1, 'Campbell River', '2024-03-28', FALSE, FALSE, 5, 'In the serene vicinity of Campbell River, a sub-adult Roosevelt Elk, once a sovereign of the forests. Was discovered in a precarious state, burdened by the limitations of a broken leg. Admitted to the wildlife rehabilitation hospital on March 28, 2024, under case number RELK 084, this noble creature faced a challenging ordeal, contending not only with the physical hindrances of its injury. But, also with infection and emaciation, a trio of hardships that severely tested its fortitude. The rehabilitation staff, aware of the critical care required, promptly devised a comprehensive treatment regimen. With the aim of mending its body and spirit.', 'roosevelt-elk.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (1, 'VASH 1223', 7, 'Vancouver Island', '2022-05-10', FALSE, FALSE, 1, 'A Baby Seal was rescued from after a Boat Strike in the tranquil waters of Vancouver Island. The baby harbor seal, bearing the case number VASH 1223, bears testament to the harsh reality of human maritime activities, when it fell victim to a boat strike. Admitted to the MARS Wildlife Rescue Centre on May 10, 2022, this tiny seal pup faced a perilous journey to recovery while fighting to survive  head trauma and a fractured flipper. The dedicated team at the rescue center swiftly mobilized the seal pup. Employing a combination of trauma therapy, fluid therapy, and nutritional support to address the seals critical condition. With each passing day, the seals playful spirit is beginning to resurface.', 'harbour-seal.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (1, 'BEAG 017', 1, 'Merville', '2021-07-05', FALSE, FALSE, 6, 'This adult Bald Eagle was rescued from a Power Line along the rugged cliffs of Merville. After finding itself tangled in the perils of modern infrastructure, and suffering a debilitating injury from a power line collision. The eagle was transported to the MARS Wildlife Rescue Centre on July 5, 2021. This majestic raptor bore the brunt of a broken wing and electrocution, necessitating immediate intervention. The skilled rehabilitation team orchestrated a comprehensive treatment plan encompassing: physiotherapy, antibiotics, and wing wrapping techniques to facilitate healing. As the eagles strength gradually returned, so did its ability to soar.', 'bald-eagle.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (1, 'RORO 202', 6, 'Comox Lake', '2023-06-18', FALSE, FALSE, 6, 'This River Otter is recovering from a car strike along-side the serene waters of Comox Lake. The resilient river otter, identified as RORO 202, sustained multiple injuries in a car strike. And was admitted to the MARS Wildlife Rescue Centre on June 18, 2023, battling head trauma and emaciation, which challenges its survival in the wild. The rehabilitation team at MARS sprang into action, implementing trauma therapy, fluid therapy, and orphan care to nurse the otter back to health. With dedicated care and perseverance, RORO 202 embarked on a remarkable journey of recovery, embodying the indomitable spirit of wildlife in the face of urban perils.', 'river-otter.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -115,16 +115,15 @@ VALUES
   (4, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (5, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (2, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  (6, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+  (6, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (6, 12, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
 
 INSERT INTO patient_treatments (treatment_id, patient_id, created_at, updated_at)
 VALUES
@@ -139,12 +138,12 @@ VALUES
   (5, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (6, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (5, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  (6, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-  (6, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+  (6, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  (6, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (6, 12, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
