@@ -40,7 +40,7 @@ export const usePatientForm = () => {
       const timer = setTimeout(() => {
         navigate(`/organizations/${orgId}/patients`);
         setIsLoading({ status: false, context: "" });
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [isLoading, navigate, orgId]);
@@ -80,7 +80,8 @@ export const usePatientForm = () => {
 
         if (editForm && data.patientDetails && data.patientDetails.length > 0) {
           const patient = data.patientDetails[0];
-          //IF EDIT FORM POPULATE INPUTS WITH PATIENT DATA
+          const editStory = patient.story.replace(/\\n/g, "\n");
+          //IF EDIT FORM: POPULATE INPUTS WITH PATIENT DATA
           setFormData({
             patientDetails: {
             organization_id: orgId,
@@ -91,7 +92,7 @@ export const usePatientForm = () => {
             date_admitted: patient.date_admitted,
             release_date: patient.release_date || "",
             is_released: patient.is_released,
-            story: patient.story,
+            story: editStory,
             image: patient.image || "",
             },
             patientConditions: data.patientConditions.map(cond => cond.condition_id),

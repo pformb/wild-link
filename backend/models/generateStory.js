@@ -48,7 +48,9 @@ const createPrompt = (patientDetails, patientConditions, patientTreatments) => {
   - Age Range: ${patientDetails.age_range}
   - Conditions: ${conditionList}
   - Required Treatments: ${treatmentList}
-  Emphasize the dedicated care by our rehabilitation staff and volunteers. The story should inspire support through its focus on the animal's recovery process. 
+  Emphasize the dedicated care by our rehabilitation staff and volunteers using general terms like "team members". 
+  Ensure realistic timelines based on the admission date for treatments immediate and future.
+  The story should inspire support through its focus on the animal's recovery process. 
   Avoid using specific names or locations beyond what is listed here
   `;
 };

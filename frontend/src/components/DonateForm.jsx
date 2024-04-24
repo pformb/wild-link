@@ -8,16 +8,18 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from "@mui/material/Typography";
-import { useLocation, Navigate } from 'react-router-dom';
+import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 import { useNotification } from "../contexts/NotificationContext";
 
 const DonationForm = () => {
 
   const location = useLocation();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { notify } = useNotification();
   const { patient, orgId } = location.state;
+  const [isLoading, setIsLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     donationAmount: "",
@@ -33,6 +35,7 @@ const DonationForm = () => {
 
 const handleDonation = async (event) => {
     event.preventDefault();
+    setIsLoading(true)
     const token = localStorage.getItem("token");
     const amountInCents = Math.round(Number(formData.donationAmount) * 100);
     const donationData = {
@@ -53,6 +56,10 @@ const handleDonation = async (event) => {
       });
 
       if (response.ok) {
+        setTimeout(() => {
+          navigate(`/users/${user.userId}`);
+          setIsLoading(false);
+        }, 2000);
         notify({
           msg: "Donation successful!",
           type: "success",
@@ -126,39 +133,39 @@ const handleDonation = async (event) => {
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Box sx={{ pl: 0, width: "100%"}}>
-            <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              <strong>Case Number:</strong> {patient.patient_case}
-            </Typography>
-            <Typography variant="h6" align="left" sx={{ mb: 2 }}>
-              <strong>Species:</strong> {patient.species}
-            </Typography>
+          <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box sx={{ pl: 0, width: "100%" }}>
+              <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
+                <strong>Case Number:</strong> {patient.patient_case}
+              </Typography>
+              <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                <strong>Species:</strong> {patient.species}
+              </Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <img 
-        src={patient.image} 
-        alt="Patient" 
-        height= '150'
-        width= 'auto'
-        style={{ 
-          borderRadius: '20px',
-          marginBottom: '20px',
-          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',
-          marginRight: '10px'
-        }} 
-      />
-      </Box>
-            
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <img
+                src={patient.image}
+                alt="Patient"
+                height="150"
+                width="auto"
+                style={{
+                  borderRadius: "20px",
+                  marginBottom: "20px",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+                  marginRight: "10px",
+                }}
+              />
+            </Box>
           </Box>
         </Grid>
-   
       </Grid>
-      
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth variant="filled">
-            <InputLabel htmlFor="filled-adornment-amount">Custom Amount</InputLabel>
+            <InputLabel htmlFor="filled-adornment-amount">
+              Custom Amount
+            </InputLabel>
             <FilledInput
               id="filled-adornment-amount"
               startAdornment={
@@ -224,7 +231,6 @@ const handleDonation = async (event) => {
               name="cvv"
               value={formData.cvv}
               onChange={(e) => handleInputChange(e)}
-              
               fullWidth
             />
           </Box>
@@ -234,6 +240,7 @@ const handleDonation = async (event) => {
           <Button
             variant="contained"
             color="primary"
+            disabled={isLoading}
             onClick={handleDonation}
             fullWidth
           >

@@ -88,7 +88,6 @@ module.exports = (db) => {
           patients.getAllTreatments(db),
           patients.getAllAgeRanges(db),
         ]);
-
         if (
           patientDetails.length === 0 ||
           patientConditions.length === 0 ||
