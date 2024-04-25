@@ -19,12 +19,12 @@ const TopNavigation = () => {
     <AppBar position="static" style={{
       background: 'linear-gradient(to bottom, #A89A1E 0%, #DBCA2A 50%, white 75%, white 100%)',
       boxShadow: '0 4px 6px -6px #222',
-      height: '72px',
+      height: '80px',
     }}>
       <Toolbar style={{ padding: 0 }}>
-      <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" style={{ flexGrow: 3 }} sm={{ margin: 'auto' }}>
-            <RouterLink to="/home" style={{ textDecoration: 'none', color: 'black', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px', marginTop: '-15px' }}>
-              <img src={FullLogo_Transparent} alt="Home" style={{ width: '135px', height: '135px' }} sm={{ margin: 'auto' }} />
+      <Box display="flex" justifyContent="flex-start" alignItems="flex-end" alignSelf="flex-start" sx={{ flexGrow: 3, paddingLeft: '10px', mt: "-10px", mb: "1px", sm: { margin: 'auto' } }}>
+            <RouterLink to="/home" sx={{ textDecoration: 'none', color: 'black', fontFamily: "'Zilla Slab', Arial, sans-serif", paddingLeft: '10px' }}>
+              <img src={FullLogo_Transparent} alt="Home" width= "135px" height= "135px" />
             </RouterLink>
         </Box>
 
