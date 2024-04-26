@@ -3,25 +3,40 @@ Wild Link is a groundbreaking web application designed to harness the power of c
 
 Wild Link is a groundbreaking web application designed to harness the power of collective goodwill for the conservation of wildlife. Much like popular crowdfunding platforms, Wild Link provides a seamless interface for users to create and support campaigns dedicated solely to wildlife causes. Whether it's protecting endangered species, preserving vital habitats, or funding research initiatives, Wild Link empowers users to directly contribute to the well-being of our planet's diverse flora and fauna. With its intuitive design and robust features, Wild Link serves as a virtual hub where passionate individuals, organizations, and wildlife enthusiasts unite to make a tangible difference in the conservation efforts worldwide. Join the Wild Link community today and be a part of the movement to safeguard our planet's natural treasures for generations to come.
 
-!["Home Page"]()
+## Our Dev Team 
 
-!["Organizations Page "]()
+### David Charmicheal
+David is our lead student developer. He is passionate about wildlife and volunteers at a local wildlife rehabilitation hospital. He dreams of a future where technology is combined with nature to ensure healthy thriving ecosystems for all living things that call them home. You can often find him exploring the forests, mountains and beaches of Vancouver Island
 
-!["Patients Page"]()
+David can be reached at LinkedIn (https://www.linkedin.com/in/davidb-carmichael/)
 
-!["Users Dashboard"]()
+### Desiree Ingram 
+Desiree is our UX/UI designer. They have a keen eye for detail, focused on creating intuitive user interfaces that enhance user experience. When not coding, reading new documentation, and then trying new experiments. They can be found out in their vegtable garden, hiking, and knitting on a beautiful Vancouver Island beach. 
 
-!["Admin Dashboard"]()
+Desiree can be reached at Github (https://github.com/Kershia1), LinkedIn (www.linkedin.com/in/desiree-ingram-0b32b0282) and via email at (dmi.bedard@outlook.com)
 
-!["Donation Page"]()
+### Paul Fromby
+A web development student at LightHouse Labs bootcamp. I'm passionate about coding and enjoy crafting immersive web experiences. I thrive on challenges and believe in the power of collaboration. Outside of coding, I love exploring new technologies and the outdoors.
 
-!["Organizations Patients List"]()
+Paul can be reached at on Gitbub at (https://github.com/pformb) and via email at (paulformby@icloud.com)
 
-!["Patients List "]()
+!["Home Page"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-Home.png?raw=true)
 
-!["Adding a New Patient and Generating a Story "]()
+!["Organizations Page "](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-Orgs.png?raw=true)
 
+!["Patients Page"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-OrgPatients.png?raw=true)
 
+!["Users Dashboard"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-UserDashboard.png?raw=true)
+
+!["Admin Dashboard"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-AdminDashboard.png?raw=true)
+
+!["Donation Page"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-Donation.png?raw=true)
+
+!["Patients List "](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-AdminPatientList.png?raw=true)
+
+!["Patients Story"](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-PatientModal.png?raw=true)
+
+!["Adding a New Patient and Generating a Story "](https://github.com/pformb/wild-link/blob/master/frontend/public/WL-NewPatient.png?raw=true)
 
 ## Setup
 
@@ -61,3 +76,11 @@ Running the server so it returns an error when saving/deleting for testing the c
 ```sh
 npm run error
 ```
+
+## User and Admin Crednetials
+
+User: emily@email.com
+Password: password
+
+Admin: gyl@marswildliferescue.com
+Password: password
