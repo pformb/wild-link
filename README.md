@@ -8,7 +8,7 @@ Wild Link is a groundbreaking web application designed to harness the power of c
 ### David Charmicheal
 David is our lead student developer. He is passionate about wildlife and volunteers at a local wildlife rehabilitation hospital. He dreams of a future where technology is combined with nature to ensure healthy thriving ecosystems for all living things that call them home. You can often find him exploring the forests, mountains and beaches of Vancouver Island
 
-David can be reached at LinkedIn (https://www.linkedin.com/in/davidb-carmichael/)
+David can be reached at LinkedIn (https://www.linkedin.com/in/davidb-carmichael/), Github (https://github.com/Carmichaeldb/), and via email at (carmichael.db88@gmail.com)
 
 ### Desiree Ingram 
 Desiree is our UX/UI designer. They have a keen eye for detail, focused on creating intuitive user interfaces that enhance user experience. When not coding, reading new documentation, and then trying new experiments. They can be found out in their vegtable garden, hiking, and knitting on a beautiful Vancouver Island beach. 
@@ -48,7 +48,7 @@ Use the `psql -U linker` command to login to the PostgreSQL server with the user
 
 Create a database with the command `CREATE DATABASE wildlink_development;`.
 
-Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. 
+Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. To be able to use the OPEN AI story generation you must supply an OPEN AI API Key.
 
 ```
 PGHOST=localhost
@@ -56,31 +56,36 @@ PGUSER=linker
 PGDATABASE=wildlink_development
 PGPASSWORD=linker
 PGPORT=5432
+
+ACCESS_TOKEN_SECRET=supersecrettoken
+OPENAI_API_KEY= *INSERT OPEN AI API KEY HERE*
 ```
 
 ## Seeding
 
-Run a the development server with `npm start` in the Host environment.
+Ensure database wildlife_development is set up with the correct user and the .env.development file is created. From the wildlink directory enter `cd backend` in terminal to navigate into the backend directory. Use `npm run dbreset` to seed and reseed the database.
 
-- Make a `GET` request to `/api/debug/reset` with `curl http://localhost:8001/api/debug/reset`.
-- Use the browser to navigate to `http://localhost:8001/api/debug/reset`.
 
-## Run The Server
+## Run The Servers
 
-Running the server normally
+Ensure both servers are running by following these instructions.
+
+Run the backend server in terminal by navigating to the backend directory using `cd backend` from the wildlife directory and enter:
 ```sh
 npm start
 ```
 
-Running the server so it returns an error when saving/deleting for testing the client's error handling capabilities
+Run the frontend server in another terminal tab or window by navigating to the frontend directory using `cd frontend` from the wildlife directory and enter:
 ```sh
-npm run error
+npm start
 ```
+
+Once both servers are running navigate to `localhost:3000` in your browser and you are up and running! 
 
 ## User and Admin Crednetials
 
 User: emily@email.com
 Password: password
 
-Admin: gyl@marswildliferescue.com
+Admin: mars@marswildlife.com
 Password: password
